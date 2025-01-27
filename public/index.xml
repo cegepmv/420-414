@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Infonuagique</title>
+    <link>http://localhost:1313/420-414/index.html</link>
+    <description></description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <atom:link href="http://localhost:1313/420-414/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction</title>
+      <link>http://localhost:1313/420-414/1-introduction/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/1-introduction/index.html</guid>
+      <description>Qu’est-ce que le Cloud ? En général, quand on pense “Cloud”, on pense surtout aux services de stockage, comme Dropbox, iCloud, Google Drive, ou OneDrive.&#xA;Mais le Cloud, c’est bien plus que ça : Il offre des services pour vos besoins informatiques, réseaux, base de données, et même ce que qu’on considère généralement comme le “Cloud” : le stockage de fichiers.&#xA;Quelques-uns de ces outils que nous utilisons tous les jours et dont nous ne savions pas qu’ils faisaient partie du cloud :</description>
+    </item>
+  </channel>
+</rss>

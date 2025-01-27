@@ -1,0 +1,11 @@
+theme = 'hugo-theme-relearn'
+baseURL = 'https://cegepmv.github.io/420-414'
+languageCode = 'fr-fr'
+title = 'Infonuagique'
+
+[params]
+    linkTitle = 'Infonuagique'
+    collapsibleMenu = true
+    disableLandingPageButton = true
+    themeVariant = ['auto', 'zen-light', 'zen-dark']
+    disableInlineCopyToClipBoard = true

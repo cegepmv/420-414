@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr-fr" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/420-414/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=420-414/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.133.1">
+    <meta name="generator" content="Relearn 7.3.1">
+    <meta name="description" content="AWS possède une infrastructure immense, avec des centres de données (data centers) déployés sur les quatre coins du globe. AWS a une façon spécifique de séparer logiquement et physiquement son infrastructure pour permettre une disponibilité et une redondance optimale.
+Régions Une région AWS est un emplacement physique. AWS regroupe ses régions par emplacement géographique et peuvent inclure plusieurs régions au sein de chaque emplacement. Par exemple, la région Ohio et Virginie du Nord se trouvent toutes les deux dans l’emplacement géographique “US-East”.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Infrastructure AWS :: Infonuagique">
+    <meta name="twitter:description" content="AWS possède une infrastructure immense, avec des centres de données (data centers) déployés sur les quatre coins du globe. AWS a une façon spécifique de séparer logiquement et physiquement son infrastructure pour permettre une disponibilité et une redondance optimale.
+Régions Une région AWS est un emplacement physique. AWS regroupe ses régions par emplacement géographique et peuvent inclure plusieurs régions au sein de chaque emplacement. Par exemple, la région Ohio et Virginie du Nord se trouvent toutes les deux dans l’emplacement géographique “US-East”.">
+    <meta property="og:url" content="http://localhost:1313/420-414/1-introduction/2-infrastructure-aws/index.html">
+    <meta property="og:site_name" content="Infonuagique">
+    <meta property="og:title" content="Infrastructure AWS :: Infonuagique">
+    <meta property="og:description" content="AWS possède une infrastructure immense, avec des centres de données (data centers) déployés sur les quatre coins du globe. AWS a une façon spécifique de séparer logiquement et physiquement son infrastructure pour permettre une disponibilité et une redondance optimale.
+Régions Une région AWS est un emplacement physique. AWS regroupe ses régions par emplacement géographique et peuvent inclure plusieurs régions au sein de chaque emplacement. Par exemple, la région Ohio et Virginie du Nord se trouvent toutes les deux dans l’emplacement géographique “US-East”.">
+    <meta property="og:locale" content="fr_fr">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Infrastructure AWS :: Infonuagique">
+    <meta itemprop="description" content="AWS possède une infrastructure immense, avec des centres de données (data centers) déployés sur les quatre coins du globe. AWS a une façon spécifique de séparer logiquement et physiquement son infrastructure pour permettre une disponibilité et une redondance optimale.
+Régions Une région AWS est un emplacement physique. AWS regroupe ses régions par emplacement géographique et peuvent inclure plusieurs régions au sein de chaque emplacement. Par exemple, la région Ohio et Virginie du Nord se trouvent toutes les deux dans l’emplacement géographique “US-East”.">
+    <meta itemprop="wordCount" content="290">
+    <title>Infrastructure AWS :: Infonuagique</title>
+    <link href="/420-414/1-introduction/2-infrastructure-aws/index.xml" rel="alternate" type="application/rss+xml" title="Infrastructure AWS :: Infonuagique"><link rel="icon" href="/images/react-logo.png" type="image/png">
+
+
+    <link href="/420-414/css/fontawesome-all.min.css?1738004548" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/fontawesome-all.min.css?1738004548" rel="stylesheet"></noscript>
+    <link href="/420-414/css/auto-complete.css?1738004548" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/auto-complete.css?1738004548" rel="stylesheet"></noscript>
+    <link href="/420-414/css/perfect-scrollbar.min.css?1738004548" rel="stylesheet">
+    <link href="/420-414/css/theme.css?1738004548" rel="stylesheet">
+    <link href="/420-414/css/format-html.css?1738004548" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/420-414';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'auto', 'zen-light', 'zen-dark' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/420-414/1-introduction/2-infrastructure-aws/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#régions">Régions</a></li>
+        <li><a href="#zones-de-disponibilité-az">Zones de disponibilité (<em>AZ</em>)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/420-414/1-introduction/index.html"><span itemprop="name">Introduction</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Infrastructure AWS</span><meta itemprop="position" content="2"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/420-414/1-introduction/1-modeles/index.html" title="Modèles Infonuagiques (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><span class="topbar-control"><i class="fa-fw fas fa-chevron-right"></i></span>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable 1-introduction" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="infrastructure-aws">Infrastructure AWS</h1>
+
+<p>AWS possède une infrastructure immense, avec des centres de données (<em>data centers</em>) déployés sur les quatre coins du globe. AWS a une façon spécifique de séparer logiquement et physiquement son infrastructure pour permettre une disponibilité et une redondance optimale.</p>
+<h3 id="régions">Régions</h3>
+<p><strong>Une région</strong> AWS est un emplacement physique. AWS regroupe ses régions par emplacement géographique et peuvent inclure plusieurs régions au sein de chaque emplacement. Par exemple, la région Ohio et Virginie du Nord se trouvent toutes les deux dans l&rsquo;emplacement géographique &ldquo;US-East&rdquo;.</p>
+<p>Les régions sont :</p>
+<ul>
+<li><strong>Indépendantes et isolées :</strong> si une région est touchée par un tremblement de terre par exemple, les autres ne le seront pas.</li>
+<li><strong>Spécifiques en termes de ressources et de services :</strong> Les ressources d&rsquo;une région sont isolées et ne sont pas automatiquement répliquées dans d&rsquo;autres régions.</li>
+</ul>
+
+<details open class=" box cstyle notices info">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-info-circle"></i> 
+    Note
+  </summary>
+  <div class="box-content">
+<p>AWS a lancé 36 régions jusque là !</p>
+  </div>
+</details>
+<h3 id="zones-de-disponibilité-az">Zones de disponibilité (<em>AZ</em>)</h3>
+<p>Les régions AWS se composent de plusieurs <strong>zones de disponibilités</strong> (<em>Availability Zones</em> ou <em>AZ</em>). Les zones de disponibilité sont composées d&rsquo;un ou de plusieurs centres de données physiquement séparés.</p>
+<p>Bien qu&rsquo;elles soient toutes hébergées séparément et disposent de leurs propres sources d&rsquo;alimentation, les AZs sont toutes connectées par des liens à faible latence.</p>
+<ul>
+<li>Elles sont <strong>tolérantes aux pannes</strong> : Si l&rsquo;une d&rsquo;entre elles tombe en panne, les autres ne devraient pas être affectées.</li>
+<li>Elles permettent la <strong>haute disponibilité</strong> (<em>High Availability</em>)</li>
+</ul>
+<p><a href="#R-image-6955198930ce80edb28b3bec5df9f03d" class="lightbox-link"><img alt="Exemple Régions et Zones de disponibilité" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/1-introduction/1-07-aws-regions-az.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6955198930ce80edb28b3bec5df9f03d"><img alt="Exemple Régions et Zones de disponibilité" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/1-introduction/1-07-aws-regions-az.png"></a></p>
+
+<details open class=" box cstyle notices info">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-info-circle"></i> 
+    Note
+  </summary>
+  <div class="box-content">
+<p>AWS a lancé 114 zones de disponibilité jusque là !</p>
+  </div>
+</details>
+<p><strong>Exemple</strong></p>
+<ul>
+<li>La région Virginie du Nord possède 6 AZs : <em>us-east-1a</em>, <em>us-east-1b</em>, <em>us-east-1c</em>, <em>us-east-1d</em>, <em>us-east-1e</em>, <em>us-east-1f</em></li>
+<li>Une application s&rsquo;exécute sur plusieurs AZ : 1a, 1b, 1c, mais 1a tombe en panne =&gt; votre application fonctionnera toujours dans les zones 1b et 1c.</li>
+</ul>
+
+<details open class=" box cstyle notices debug">
+  <summary class="box-label" tabindex="-1">
+    Références
+  </summary>
+  <div class="box-content">
+<ul>
+<li><a href="https://apps.kaonadn.net/5181491956940800/index.html" rel="external" target="_blank">Carte interactive de l&rsquo;infrastructure mondiale de AWS</a></li>
+<li><a href="https://aws.amazon.com/fr/about-aws/global-infrastructure/" rel="external" target="_blank">Documentation Infrastructure mondiale AWS</a></li>
+</ul>
+  </div>
+</details>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<a id="R-logo" href="/420-414/index.html">
+    <img style="vertical-align: middle;" src="/420-414/images/cloud-logo.png" width="15%" alt="logo">
+    <span style="vertical-align: middle; padding-left: 4%; font-size: 160%">Infonuagique</span>
+</a>
+        </div>
+        <script>
+          window.index_js_url="/420-414/searchindex.en.js?1738004548";
+        </script>
+        <search><form action="/420-414/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/420-414/js/auto-complete.js?1738004548" defer></script>
+        <script src="/420-414/js/lunr/lunr.min.js?1738004548" defer></script>
+        <script src="/420-414/js/lunr/lunr.stemmer.support.min.js?1738004548" defer></script>
+        <script src="/420-414/js/lunr/lunr.multi.min.js?1738004548" defer></script>
+        <script src="/420-414/js/lunr/lunr.fr.min.js?1738004548" defer></script>
+        <script src="/420-414/js/search.js?1738004548" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="parent " data-nav-id="/420-414/1-introduction/index.html"><input type="checkbox" id="R-section-1c923956455691612f1dbcc6d951d5eb" aria-controls="R-subsections-1c923956455691612f1dbcc6d951d5eb" checked><label for="R-section-1c923956455691612f1dbcc6d951d5eb"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Introduction</span></label><a class="padding" href="/420-414/1-introduction/index.html"><b>1. </b>Introduction</a><ul id="R-subsections-1c923956455691612f1dbcc6d951d5eb" class="collapsible-menu">
+            <li class="" data-nav-id="/420-414/1-introduction/1-modeles/index.html"><a class="padding" href="/420-414/1-introduction/1-modeles/index.html"><b>1. </b>Modèles Infonuagiques</a></li>
+            <li class="active " data-nav-id="/420-414/1-introduction/2-infrastructure-aws/index.html"><a class="padding" href="/420-414/1-introduction/2-infrastructure-aws/index.html"><b>2. </b>Infrastructure AWS</a></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/420-414/1-introduction/2-infrastructure-aws/index.html" lang="fr-fr" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter">
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/420-414/js/clipboard.min.js?1738004548" defer></script>
+    <script src="/420-414/js/perfect-scrollbar.min.js?1738004548" defer></script>
+    <script src="/420-414/js/theme.js?1738004548" defer></script>
+  </body>
+</html>
