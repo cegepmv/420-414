@@ -3,7 +3,7 @@
   <channel>
     <title>Réseau Infonuagique :: Infonuagique</title>
     <link>http://localhost:1313/420-414/2-reseau/index.html</link>
-    <description>VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS : “Amazon Virtual Private Cloud vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.</description>
+    <description></description>
     <generator>Hugo</generator>
     <language>fr-fr</language>
     <atom:link href="http://localhost:1313/420-414/2-reseau/index.xml" rel="self" type="application/rss+xml" />
@@ -12,7 +12,7 @@
       <link>http://localhost:1313/420-414/2-reseau/1-notions/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/420-414/2-reseau/1-notions/index.html</guid>
-      <description>VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC.&#xA;Définition d’AWS : “Amazon Virtual Private Cloud (VPC) vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.</description>
+      <description></description>
     </item>
     <item>
       <title>Laboratoire</title>

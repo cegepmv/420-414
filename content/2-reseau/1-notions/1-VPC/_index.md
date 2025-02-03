@@ -19,7 +19,7 @@ weight = "211"
 + Amazon VPC vous permet de **contrôler vos ressources de réseau virtuel**, notamment : 
     + la sélection d'une plage d'adresses IP
     + la création de **sous-réseaux**
-    + la configuration de **tables de routage** et de **passerelles réseau**."
+    + la configuration de **tables de routage** et de **passerelles réseau**.
 
 + Vous permet de **personnaliser la configuration réseau** de votre VPC.
 

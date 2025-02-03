@@ -4,7 +4,7 @@ title = 'Réseau Infonuagique'
 draft = false
 weight = "200"
 +++
-
+<!-- 
 ### VPC
 + **Définition simplifiée :** Un VPC (Virtual Private Cloud) est une sous-section privée d'AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un **contrôle total** sur l'accès aux ressources AWS que vous déployez dans votre VPC.
 + **Définition d'AWS :** "Amazon Virtual Private Cloud vous permet de provisionner une section **logiquement isolée** du cloud AWS où vous pouvez lancer des ressources dans un **réseau virtuel** que **vous** définissez. **Vous avez un contrôle total sur votre environnement réseau virtuel**, y compris la sélection de votre propre plage d'adresses IP, la création de **sous-réseaux** et la configuration de **tables de routage** et de **passerelles réseau**."
@@ -18,7 +18,7 @@ weight = "200"
 
 <!-- 
 (toutes les maisons situées dans la même rue d'un quartier constitueraient un sous-réseau. les maisons représentent les ordinateurs) 
--->
+
 
 #### Laboratoire
 
@@ -80,8 +80,8 @@ weight = "200"
 + **Exemple :** Si un *NACL* et un *SG* sont configurés pour autoriser le trafic web (HTTP), les requêtes HTTP seront autorisées dans le *subnet* et ensuite dans l'instance EC2. S'ils sont configurés pour refuser le trafic FTP, toute requête FTP sera bloquée.
 
 ![NACLs et SG](/420-414/images/2-reseau/2-09.png)
-<!-- THINK ABOUT A BOUNCER -->
+<!-- THINK ABOUT A BOUNCER
 
 ![NACLs et SG exemple](/420-414/images/2-reseau/2-10.png)
 
-![exemple](/420-414/images/2-reseau/2-13.png)
+![exemple](/420-414/images/2-reseau/2-13.png) -->

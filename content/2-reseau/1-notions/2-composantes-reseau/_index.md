@@ -8,7 +8,8 @@ weight = "212"
 
 <!-- ![IGW](/420-414/images/2-reseau/2-05.png) -->
 
-**Définition simplifiée :** Une combinaison de matériel et de logiciel qui fournit à votre *VPC* une **route** vers le monde extérieur (c'est-à-dire l'Internet).
+**Définition simplifiée** 
++ Une combinaison de matériel et de logiciel qui fournit à votre *VPC* une **route** vers le monde extérieur (c'est-à-dire l'Internet).
 
 **Définition AWS** 
 + *"Une passerelle Internet est un composant VPC **redondant** et **hautement disponible**, mis à l'echelle horizontalement, qui permet la **communication entre les instances de votre VPC et Internet**. Elle n'impose donc aucun risque de disponibilité ni aucune contrainte de bande passante à votre trafic réseau.*

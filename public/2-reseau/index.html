@@ -5,29 +5,25 @@
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.133.1">
     <meta name="generator" content="Relearn 7.3.1">
-    <meta name="description" content="VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS : “Amazon Virtual Private Cloud vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
+    <meta name="description" content="">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Réseau Infonuagique :: Infonuagique">
-    <meta name="twitter:description" content="VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS : “Amazon Virtual Private Cloud vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
     <meta property="og:url" content="http://localhost:1313/420-414/2-reseau/index.html">
     <meta property="og:site_name" content="Infonuagique">
     <meta property="og:title" content="Réseau Infonuagique :: Infonuagique">
-    <meta property="og:description" content="VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS : “Amazon Virtual Private Cloud vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
     <meta property="og:locale" content="fr_fr">
     <meta property="og:type" content="website">
     <meta itemprop="name" content="Réseau Infonuagique :: Infonuagique">
-    <meta itemprop="description" content="VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS : “Amazon Virtual Private Cloud vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
-    <meta itemprop="wordCount" content="515">
     <title>Réseau Infonuagique :: Infonuagique</title>
     <link href="/420-414/2-reseau/index.xml" rel="alternate" type="application/rss+xml" title="Réseau Infonuagique :: Infonuagique"><link rel="icon" href="/images/react-logo.png" type="image/png">
 
 
-    <link href="/420-414/css/fontawesome-all.min.css?1738611471" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/fontawesome-all.min.css?1738611471" rel="stylesheet"></noscript>
-    <link href="/420-414/css/auto-complete.css?1738611471" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/auto-complete.css?1738611471" rel="stylesheet"></noscript>
-    <link href="/420-414/css/perfect-scrollbar.min.css?1738611471" rel="stylesheet">
-    <link href="/420-414/css/theme.css?1738611471" rel="stylesheet">
-    <link href="/420-414/css/format-html.css?1738611471" rel="stylesheet" id="R-format-style">
+    <link href="/420-414/css/fontawesome-all.min.css?1738612927" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/fontawesome-all.min.css?1738612927" rel="stylesheet"></noscript>
+    <link href="/420-414/css/auto-complete.css?1738612927" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/auto-complete.css?1738612927" rel="stylesheet"></noscript>
+    <link href="/420-414/css/perfect-scrollbar.min.css?1738612927" rel="stylesheet">
+    <link href="/420-414/css/theme.css?1738612927" rel="stylesheet">
+    <link href="/420-414/css/format-html.css?1738612927" rel="stylesheet" id="R-format-style">
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..';
@@ -87,19 +83,7 @@
             </div>
             <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
               <div class="topbar-content">
-                <div class="topbar-content-wrapper">
-<nav class="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#vpc">VPC</a></li>
-        <li><a href="#passerelle-internet-internet-gateway-ou-igw">Passerelle Internet (<em>Internet Gateway</em> ou <em>IGW</em>)</a></li>
-        <li><a href="#table-de-routage-routing-table">Table de routage (<em>Routing Table</em>)</a></li>
-        <li><a href="#sécurité-réseau">Sécurité réseau</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+                <div class="topbar-content-wrapper"> 
                 </div>
               </div>
             </div>
@@ -132,122 +116,8 @@
 
 <h1 id="réseau-infonuagique">Réseau Infonuagique</h1>
 
-<h3 id="vpc">VPC</h3>
-<ul>
-<li><strong>Définition simplifiée :</strong> Un VPC (Virtual Private Cloud) est une sous-section privée d&rsquo;AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un <strong>contrôle total</strong> sur l&rsquo;accès aux ressources AWS que vous déployez dans votre VPC.</li>
-<li><strong>Définition d&rsquo;AWS :</strong> &ldquo;Amazon Virtual Private Cloud vous permet de provisionner une section <strong>logiquement isolée</strong> du cloud AWS où vous pouvez lancer des ressources dans un <strong>réseau virtuel</strong> que <strong>vous</strong> définissez. <strong>Vous avez un contrôle total sur votre environnement réseau virtuel</strong>, y compris la sélection de votre propre plage d&rsquo;adresses IP, la création de <strong>sous-réseaux</strong> et la configuration de <strong>tables de routage</strong> et de <strong>passerelles réseau</strong>.&rdquo;</li>
-</ul>
-<p><a href="#R-image-005ef43220b93923aa00da224263434c" class="lightbox-link"><img alt="VPC-analogie" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-01.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-005ef43220b93923aa00da224263434c"><img alt="VPC-analogie" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-01.png"></a></p>
-
-<details open class=" box cstyle notices info">
-  <summary class="box-label" tabindex="-1">
-    <i class="fa-fw fas fa-info-circle"></i> 
-    Note
-  </summary>
-  <div class="box-content">
-<ul>
-<li>Lorsque vous créez un compte AWS, un VPC &ldquo;par défaut&rdquo; est créé pour vous.</li>
-<li>Chaque VPC a une plage d&rsquo;adresse définie. Chaque sous-réseau ou instance déployée dans le VPC aura une adresse IP incluse dans cette plage.</li>
-</ul>
-  </div>
-</details>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
-<h4 id="laboratoire">Laboratoire</h4>
-<h3 id="passerelle-internet-internet-gateway-ou-igw">Passerelle Internet (<em>Internet Gateway</em> ou <em>IGW</em>)</h3>
-<p><a href="#R-image-7009d4fd915f40391339eeadf32982cc" class="lightbox-link"><img alt="IGW" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-05.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7009d4fd915f40391339eeadf32982cc"><img alt="IGW" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-05.png"></a></p>
-<ul>
-<li><strong>Définition simplifiée :</strong> Une combinaison de matériel et de logiciel qui fournit à votre réseau privé une <strong>route</strong> vers le monde extérieur (c&rsquo;est-à-dire l&rsquo;Internet) du VPC.</li>
-<li><strong>Définition d&rsquo;AWS :</strong> &ldquo;Une passerelle Internet est un composant VPC <strong>redondant</strong> et <strong>hautement disponible</strong>, mis à l&rsquo;echelle horizontalement, qui permet la <strong>communication entre les instances de votre VPC et Internet</strong>. Elle n&rsquo;impose donc aucun risque de disponibilité ni aucune contrainte de bande passante à votre trafic réseau.</li>
-</ul>
-
-<details open class=" box cstyle notices info">
-  <summary class="box-label" tabindex="-1">
-    <i class="fa-fw fas fa-info-circle"></i> 
-    Note
-  </summary>
-  <div class="box-content">
-<ul>
-<li>Votre VPC <strong>par défaut</strong> a déjà une passerelle internet <strong>attachée</strong>.</li>
-<li><strong>On ne peut attacher qu&rsquo;un IGW par VPC</strong>.</li>
-</ul>
-  </div>
-</details>
-<p><a href="#R-image-bbe29270fb4b4cabfe5fdbed5a51dea6" class="lightbox-link"><img alt="IGW" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-06.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-bbe29270fb4b4cabfe5fdbed5a51dea6"><img alt="IGW" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-06.png"></a></p>
-<h3 id="table-de-routage-routing-table">Table de routage (<em>Routing Table</em>)</h3>
-<p><a href="#R-image-560922d92b44ef72ffcff8c30fca9ee5" class="lightbox-link"><img alt="Table de routage" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-07.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-560922d92b44ef72ffcff8c30fca9ee5"><img alt="Table de routage" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-07.png"></a></p>
-<ul>
-<li><strong>Définition d&rsquo;AWS :</strong> &ldquo;Une table de routage contient un <strong>ensemble de règles</strong>, appelées <strong>routes</strong>, qui sont utilisées pour <strong>déterminer où le trafic du réseau est dirigé</strong>.&rdquo;</li>
-</ul>
-
-<details open class=" box cstyle notices info">
-  <summary class="box-label" tabindex="-1">
-    <i class="fa-fw fas fa-info-circle"></i> 
-    Note
-  </summary>
-  <div class="box-content">
-<ul>
-<li>Pensez une table de routage comme un <strong>GPS</strong> : Elle redirige la &ldquo;data&rdquo; vers la destination.</li>
-<li>Votre VPC <strong>par défaut</strong> a déjà une table de routage <strong>principale</strong>.</li>
-</ul>
-  </div>
-</details>
-<p><a href="#R-image-300b7f10a7816c97d20298290228a068" class="lightbox-link"><img alt="Table de routage exemple" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-08.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-300b7f10a7816c97d20298290228a068"><img alt="Table de routage exemple" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-08.png"></a></p>
-<h4 id="sous-réseaux">Sous-réseaux</h4>
-<ul>
-<li>
-<p><strong>Définition simplifiée :</strong> un <em>subnet</em> (abréviation de <em>subnetwork</em>) est une sous-section d&rsquo;un réseau.</p>
-</li>
-<li>
-<p><strong>Définition AWS :</strong> Lorsque vous créez un VPC, il s&rsquo;étend sur toutes les zones de disponibilité d&rsquo;une région. Après avoir créé un VPC, <strong>vous pouvez ajouter un ou plusieurs sous-réseaux dans chaque zone de disponibilité</strong> disponible dans cette région. Chaque sous-réseau doit résider entièrement dans une zone de disponibilité et ne peut pas s&rsquo;étendre à d&rsquo;autres zones&rdquo;.</p>
-</li>
-<li>
-<p>Nos services sont déployés (VMs, Bases de données etc&hellip;) <strong>à l&rsquo;intérieur de <em>subnets</em></strong> :</p>
-</li>
-</ul>
-<p><a href="#R-image-61c9e9639fdf6de246c87e72a7e4ecb9" class="lightbox-link"><img alt="Services dans un sous-réseau" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-03.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-61c9e9639fdf6de246c87e72a7e4ecb9"><img alt="Services dans un sous-réseau" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-03.png"></a></p>
-
-<details open class=" box cstyle notices info">
-  <summary class="box-label" tabindex="-1">
-    <i class="fa-fw fas fa-info-circle"></i> 
-    Note
-  </summary>
-  <div class="box-content">
-<ul>
-<li>Votre VPC <strong>par défaut</strong> a déjà un <em>subnet</em> par zone de disponibilité crées par défaut.</li>
-</ul>
-  </div>
-</details>
-<p><a href="#R-image-cd0f87cb8811e579d06e6a81de08beba" class="lightbox-link"><img alt="Communication" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-11.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-cd0f87cb8811e579d06e6a81de08beba"><img alt="Communication" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-11.png"></a></p>
-<h4 id="privé-private-subnet-vs-publique-public-subnet">Privé (<em>Private Subnet</em>) vs publique (<em>Public Subnet</em>)</h4>
-<p><a href="#R-image-1df9ce63a2bdf95a9bf4ea9e4c586d99" class="lightbox-link"><img alt="Subnet privé vs publique" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-12.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-1df9ce63a2bdf95a9bf4ea9e4c586d99"><img alt="Subnet privé vs publique" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-12.png"></a></p>
-<h3 id="sécurité-réseau">Sécurité réseau</h3>
-<ul>
-<li>
-<p><strong>Liste de contrôle d&rsquo;accès (<em>Network ACLs</em> ou <em>NACL</em>) :</strong> Un pare-feu/une couche de sécurité qui contrôle le trafic entrant (<em>inbound</em>) et sortant (<em>outbound</em>) pour un ou plusieurs <em>subnet</em> (<strong>au niveau du <em>subnet</em></strong>).</p>
-</li>
-<li>
-<p><strong>Groupe de sécurité (<em>Security Group</em> ou <em>SG</em>) :</strong> Un pare-feu/une couche de sécurité <strong>au niveau d&rsquo;une/d&rsquo;un serveur</strong></p>
-</li>
-<li>
-<p><strong>Exemple :</strong> Si un <em>NACL</em> et un <em>SG</em> sont configurés pour autoriser le trafic web (HTTP), les requêtes HTTP seront autorisées dans le <em>subnet</em> et ensuite dans l&rsquo;instance EC2. S&rsquo;ils sont configurés pour refuser le trafic FTP, toute requête FTP sera bloquée.</p>
-</li>
-</ul>
-<p><a href="#R-image-977145a5e0e3ce642dcff8ead5f74b1c" class="lightbox-link"><img alt="NACLs et SG" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-09.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-977145a5e0e3ce642dcff8ead5f74b1c"><img alt="NACLs et SG" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-09.png"></a></p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-cf88b4106d77871c9f75b5a89a997898" class="lightbox-link"><img alt="NACLs et SG exemple" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-10.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-cf88b4106d77871c9f75b5a89a997898"><img alt="NACLs et SG exemple" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-10.png"></a></p>
-<p><a href="#R-image-e50b9a19e9dc05e9bf266aa72801584c" class="lightbox-link"><img alt="exemple" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-13.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e50b9a19e9dc05e9bf266aa72801584c"><img alt="exemple" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-13.png"></a></p>
 
   <footer class="footline">
   </footer>
@@ -265,7 +135,7 @@
 </a>
         </div>
         <script>
-          window.index_js_url="/420-414/searchindex.en.js?1738611471";
+          window.index_js_url="/420-414/searchindex.en.js?1738612927";
         </script>
         <search><form action="/420-414/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -278,12 +148,12 @@
         <script>
           var contentLangs=['fr'];
         </script>
-        <script src="/420-414/js/auto-complete.js?1738611471" defer></script>
-        <script src="/420-414/js/lunr/lunr.min.js?1738611471" defer></script>
-        <script src="/420-414/js/lunr/lunr.stemmer.support.min.js?1738611471" defer></script>
-        <script src="/420-414/js/lunr/lunr.multi.min.js?1738611471" defer></script>
-        <script src="/420-414/js/lunr/lunr.fr.min.js?1738611471" defer></script>
-        <script src="/420-414/js/search.js?1738611471" defer></script>
+        <script src="/420-414/js/auto-complete.js?1738612927" defer></script>
+        <script src="/420-414/js/lunr/lunr.min.js?1738612927" defer></script>
+        <script src="/420-414/js/lunr/lunr.stemmer.support.min.js?1738612927" defer></script>
+        <script src="/420-414/js/lunr/lunr.multi.min.js?1738612927" defer></script>
+        <script src="/420-414/js/lunr/lunr.fr.min.js?1738612927" defer></script>
+        <script src="/420-414/js/search.js?1738612927" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation">
         <hr class="padding">
@@ -296,7 +166,7 @@
             <li class="" data-nav-id="/420-414/1-introduction/2-infrastructure-aws/index.html"><a class="padding" href="/420-414/1-introduction/2-infrastructure-aws/index.html"><b>2. </b>Infrastructure AWS</a></li></ul></li>
             <li class="active parent " data-nav-id="/420-414/2-reseau/index.html"><input type="checkbox" id="R-section-baffac8e0afbb3fcb6f930c1a1a93369" aria-controls="R-subsections-baffac8e0afbb3fcb6f930c1a1a93369" checked><label for="R-section-baffac8e0afbb3fcb6f930c1a1a93369"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Réseau Infonuagique</span></label><a class="padding" href="/420-414/2-reseau/index.html"><b>2. </b>Réseau Infonuagique</a><ul id="R-subsections-baffac8e0afbb3fcb6f930c1a1a93369" class="collapsible-menu">
             <li class="alwaysopen " data-nav-id="/420-414/2-reseau/1-notions/index.html"><input type="checkbox" id="R-section-5280a9ddc335b7c76fbfe22d7640b2f3" aria-controls="R-subsections-5280a9ddc335b7c76fbfe22d7640b2f3" checked><label for="R-section-5280a9ddc335b7c76fbfe22d7640b2f3"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Notions</span></label><a class="padding" href="/420-414/2-reseau/1-notions/index.html">Notions</a><ul id="R-subsections-5280a9ddc335b7c76fbfe22d7640b2f3" class="collapsible-menu">
-            <li class="" data-nav-id="/420-414/2-reseau/1-notions/1-vpc/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/1-vpc/index.html">VPC</a></li>
+            <li class="" data-nav-id="/420-414/2-reseau/1-notions/1-vpc/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/1-vpc/index.html">Virtual Private Cloud</a></li>
             <li class="" data-nav-id="/420-414/2-reseau/1-notions/2-composantes-reseau/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/2-composantes-reseau/index.html">Autres composantes réseau</a></li>
             <li class="" data-nav-id="/420-414/2-reseau/1-notions/3-securite-vpc/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/3-securite-vpc/index.html">Sécurité de VPC</a></li></ul></li>
             <li class="" data-nav-id="/420-414/2-reseau/2-laboratoire/index.html"><a class="padding" href="/420-414/2-reseau/2-laboratoire/index.html">Laboratoire</a></li></ul></li>
@@ -354,8 +224,8 @@
         </div>
       </div>
     </aside>
-    <script src="/420-414/js/clipboard.min.js?1738611471" defer></script>
-    <script src="/420-414/js/perfect-scrollbar.min.js?1738611471" defer></script>
-    <script src="/420-414/js/theme.js?1738611471" defer></script>
+    <script src="/420-414/js/clipboard.min.js?1738612927" defer></script>
+    <script src="/420-414/js/perfect-scrollbar.min.js?1738612927" defer></script>
+    <script src="/420-414/js/theme.js?1738612927" defer></script>
   </body>
 </html>

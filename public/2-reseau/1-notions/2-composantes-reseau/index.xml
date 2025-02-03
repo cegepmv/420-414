@@ -3,7 +3,7 @@
   <channel>
     <title>Autres composantes réseau :: Infonuagique</title>
     <link>http://localhost:1313/420-414/2-reseau/1-notions/2-composantes-reseau/index.html</link>
-    <description>Passerelle Internet (Internet Gateway ou IGW) Définition simplifiée : Une combinaison de matériel et de logiciel qui fournit à votre VPC une route vers le monde extérieur (c’est-à-dire l’Internet).&#xA;Définition AWS&#xA;“Une passerelle Internet est un composant VPC redondant et hautement disponible, mis à l’echelle horizontalement, qui permet la communication entre les instances de votre VPC et Internet. Elle n’impose donc aucun risque de disponibilité ni aucune contrainte de bande passante à votre trafic réseau.</description>
+    <description>Passerelle Internet (Internet Gateway ou IGW) Définition simplifiée&#xA;Une combinaison de matériel et de logiciel qui fournit à votre VPC une route vers le monde extérieur (c’est-à-dire l’Internet). Définition AWS&#xA;“Une passerelle Internet est un composant VPC redondant et hautement disponible, mis à l’echelle horizontalement, qui permet la communication entre les instances de votre VPC et Internet. Elle n’impose donc aucun risque de disponibilité ni aucune contrainte de bande passante à votre trafic réseau.</description>
     <generator>Hugo</generator>
     <language>fr-fr</language>
     <atom:link href="http://localhost:1313/420-414/2-reseau/1-notions/2-composantes-reseau/index.xml" rel="self" type="application/rss+xml" />

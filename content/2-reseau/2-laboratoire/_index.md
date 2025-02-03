@@ -285,6 +285,6 @@ Félicitation, vous venez de déployer votre première infrastructure réseau et
 ![Architecture](/420-414/images/2-reseau/2-14-lab-architecture.png)
 
 
-### Conseils
-
-Pour vous assurer de maitriser les méthodes vues dans ce laboratoire, n'hésitez pas à le refaire sans l'aide de ce guide (la meilleure façon d'apprendre, c'est de répéter de façon autonome).
+{{% notice style="info" title="Conseils"%}}
+Pour vous assurer de maitriser les méthodes vues dans ce laboratoire, n'hésitez pas à le refaire **sans l'aide de ce guide** (la meilleure façon d'apprendre, c'est de répéter de façon autonome).
+{{% /notice %}}
