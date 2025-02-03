@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sécurité de VPC :: Infonuagique</title>
+    <link>http://localhost:1313/420-414/2-reseau/1-notions/3-securite-vpc/index.html</link>
+    <description>Groupe de sécurité (Security Group ou SG) Pare-feu/couche de sécurité au niveau d’une instance (spécifiquement au niveau de l’interface/carte réseau).&#xA;Les groupes de sécurité ont des règles qui contrôlent le trafic d’instance entrant (inbound) et sortant (outbound).&#xA;Les groupes de sécurité par défaut refusent tout trafic entrant et autorisent tout le trafic sortant.&#xA;Les groupes de sécurité sont avec état (stateful) : On ne définit que le trafic entrant, le trafic sortant est toujours autorisé.</description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <atom:link href="http://localhost:1313/420-414/2-reseau/1-notions/3-securite-vpc/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

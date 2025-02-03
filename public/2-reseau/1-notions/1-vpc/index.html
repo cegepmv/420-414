@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr-fr" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/420-414/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=420-414/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.133.1">
+    <meta name="generator" content="Relearn 7.3.1">
+    <meta name="description" content="Définitions Définition simplifiée :
+Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS :
+Amazon Virtual Private Cloud (VPC) permet de mettre en service une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Virtual Private Cloud :: Infonuagique">
+    <meta name="twitter:description" content="Définitions Définition simplifiée :
+Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS :
+Amazon Virtual Private Cloud (VPC) permet de mettre en service une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
+    <meta property="og:url" content="http://localhost:1313/420-414/2-reseau/1-notions/1-vpc/index.html">
+    <meta property="og:site_name" content="Infonuagique">
+    <meta property="og:title" content="Virtual Private Cloud :: Infonuagique">
+    <meta property="og:description" content="Définitions Définition simplifiée :
+Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS :
+Amazon Virtual Private Cloud (VPC) permet de mettre en service une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
+    <meta property="og:locale" content="fr_fr">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Virtual Private Cloud :: Infonuagique">
+    <meta itemprop="description" content="Définitions Définition simplifiée :
+Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS :
+Amazon Virtual Private Cloud (VPC) permet de mettre en service une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
+    <meta itemprop="wordCount" content="577">
+    <title>Virtual Private Cloud :: Infonuagique</title>
+    <link href="/420-414/2-reseau/1-notions/1-vpc/index.xml" rel="alternate" type="application/rss+xml" title="Virtual Private Cloud :: Infonuagique"><link rel="icon" href="/images/react-logo.png" type="image/png">
+
+
+    <link href="/420-414/css/fontawesome-all.min.css?1738612632" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/fontawesome-all.min.css?1738612632" rel="stylesheet"></noscript>
+    <link href="/420-414/css/auto-complete.css?1738612632" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/auto-complete.css?1738612632" rel="stylesheet"></noscript>
+    <link href="/420-414/css/perfect-scrollbar.min.css?1738612632" rel="stylesheet">
+    <link href="/420-414/css/theme.css?1738612632" rel="stylesheet">
+    <link href="/420-414/css/format-html.css?1738612632" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/420-414';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'auto', 'zen-light', 'zen-dark' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/420-414/2-reseau/1-notions/1-vpc/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#définitions">Définitions</a></li>
+        <li><a href="#vpc-et-sous-réseaux">VPC et sous-réseaux</a></li>
+        <li><a href="#adressage-ip">Adressage IP</a></li>
+        <li><a href="#interface-réseau-elastic">Interface réseau Elastic</a></li>
+        <li><a href="#tables-de-routage-et-routes">Tables de routage et routes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/420-414/2-reseau/index.html"><span itemprop="name">Réseau Infonuagique</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/420-414/2-reseau/1-notions/index.html"><span itemprop="name">Notions</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Virtual Private Cloud</span><meta itemprop="position" content="3"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/420-414/2-reseau/1-notions/index.html" title="Notions (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/420-414/2-reseau/1-notions/2-composantes-reseau/index.html" title="Autres composantes réseau (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable 2-reseau" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="virtual-private-cloud">Virtual Private Cloud</h1>
+
+<hr>
+<h3 id="définitions">Définitions</h3>
+<p><a href="#R-image-73b2664fd951c349d3abd705928839e1" class="lightbox-link"><img alt="Logo VPC" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-16-vpc-logo.png?width=8rem" style=" height: auto; width: 8rem;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-73b2664fd951c349d3abd705928839e1"><img alt="Logo VPC" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-16-vpc-logo.png?width=8rem"></a></p>
+<p><strong>Définition simplifiée :</strong></p>
+<ul>
+<li>Un VPC (Virtual Private Cloud) est une sous-section privée d&rsquo;AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un <strong>contrôle total</strong> sur l&rsquo;accès aux ressources AWS que vous déployez dans votre VPC.</li>
+</ul>
+<p><strong>Définition d&rsquo;AWS :</strong></p>
+<ul>
+<li>
+<p><em>Amazon Virtual Private Cloud (VPC)</em> permet de mettre en service une section <strong>logiquement isolée</strong> du cloud AWS où vous pouvez lancer des ressources dans un <strong>réseau virtuel</strong> que <strong>vous</strong> définissez.</p>
+</li>
+<li>
+<p>Amazon VPC vous permet de <strong>contrôler vos ressources de réseau virtuel</strong>, notamment :</p>
+<ul>
+<li>la sélection d&rsquo;une plage d&rsquo;adresses IP</li>
+<li>la création de <strong>sous-réseaux</strong></li>
+<li>la configuration de <strong>tables de routage</strong> et de <strong>passerelles réseau</strong>.&quot;</li>
+</ul>
+</li>
+<li>
+<p>Vous permet de <strong>personnaliser la configuration réseau</strong> de votre VPC.</p>
+</li>
+<li>
+<p>Vous permet d&rsquo;utiliser <strong>plusieurs couches de sécurité</strong>.</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+<details open class=" box cstyle notices info">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-info-circle"></i> 
+    Note
+  </summary>
+  <div class="box-content">
+<ul>
+<li>Lorsque vous créez un compte AWS, un VPC &ldquo;par défaut&rdquo; est créé pour vous.</li>
+<li>Chaque VPC a une plage d&rsquo;adresse définie. Chaque sous-réseau ou instance déployée dans le VPC aura une adresse IP incluse dans cette plage.</li>
+</ul>
+  </div>
+</details>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h3 id="vpc-et-sous-réseaux">VPC et sous-réseaux</h3>
+<p><a href="#R-image-f0f4f52157925717b7f2845e43472833" class="lightbox-link"><img alt="VPC et sous-réseaux" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-17-vpc-sous-reseaux.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f0f4f52157925717b7f2845e43472833"><img alt="VPC et sous-réseaux" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-17-vpc-sous-reseaux.png"></a></p>
+<ul>
+<li>
+<p><strong>VPC :</strong></p>
+<ul>
+<li><strong>Logiquement isolées</strong> des autres VPC.</li>
+<li><strong>Dédiés</strong> à votre compte AWS.</li>
+<li>Appartiennent à <strong>une seule région AWS</strong> et peuvent s&rsquo;étendre sur <strong>plusieurs zones de disponibilité</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sous-réseaux :</strong></p>
+<ul>
+<li><strong>Plages d&rsquo;adresses IP</strong> qui divient un VPC.</li>
+<li>Appartiennent à <strong>une seule zone de disponibilité</strong>.</li>
+<li>Classés comme <strong>publics</strong> ou <strong>privé</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="adressage-ip">Adressage IP</h3>
+<p><a href="#R-image-7b8977fbff5fb586a76d5356ab6a6895" class="lightbox-link"><img alt="Adressage IP dans un VPC" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-18-adressage-ip.png?width=30rem" style=" height: auto; width: 30rem;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7b8977fbff5fb586a76d5356ab6a6895"><img alt="Adressage IP dans un VPC" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-18-adressage-ip.png?width=30rem"></a></p>
+<ul>
+<li>
+<p>Lorsque vous créez un VPC, vous l&rsquo;affectez à un <strong>bloc d&rsquo;adresse CIDR</strong> IPv4 (plage d&rsquo;adresses IPv4 <strong>privées</strong>).</p>
+</li>
+<li>
+<p>Une fois que vous avez crée le VPC, nous <strong>ne pouvez plus modifier la plage d&rsquo;adresses</strong>.</p>
+</li>
+<li>
+<p>La <strong>plus grande</strong> taille de bloc d&rsquo;adresse CIDR IPv4 est <strong>/16</strong>.</p>
+</li>
+<li>
+<p>La <strong>plus petite</strong> taille de bloc d&rsquo;adresse CIDR IPv4 est <strong>/28</strong>.</p>
+</li>
+<li>
+<p>IPv6 est également pris en charge.</p>
+</li>
+<li>
+<p>Les blocs d&rsquo;adresses CIDR des sous-réseaux <strong>ne peuvent pas se chevaucher</strong>.</p>
+</li>
+</ul>
+<h4 id="adresses-réservées">Adresses réservées</h4>
+<p><a href="#R-image-e7a8f7d8cbe0b3a6a50c9397165a393b" class="lightbox-link"><img alt="Adresses IP réservées" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-19-vpc-ip-reservees.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e7a8f7d8cbe0b3a6a50c9397165a393b"><img alt="Adresses IP réservées" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-19-vpc-ip-reservees.png"></a></p>
+<p><strong>Exemple :</strong></p>
+<ul>
+<li>
+<p>Un VPC avec un bloc d&rsquo;adresse CIDR IPv4 de <code>10.0.0.0/16</code> a <strong>65 536</strong> (2^16) adresses IP au total.</p>
+</li>
+<li>
+<p>Le VPC possède 4 sous-réseaux</p>
+<ul>
+<li><code>10.0.0.0/24</code></li>
+<li><code>10.0.1.0/24</code></li>
+<li><code>10.0.2.0/24</code></li>
+<li><code>10.0.3.0/24</code></li>
+</ul>
+</li>
+<li>
+<p><strong>251</strong> adresses IP sont disponibles par sous réseau (<strong>2^8 - 5 adresses réservées</strong>).</p>
+</li>
+</ul>
+<h4 id="types-dadresses-ip-publiques">Types d&rsquo;adresses IP publiques</h4>
+<p><strong>Adresse IP privées :</strong></p>
+<ul>
+<li>On attribue une adresse IP privée à ahaque machine déployée dans un sous-réseau. Cette adresse IP est inclue dans la plage d&rsquo;adresses du sous-réseau.</li>
+</ul>
+<p><strong>Adresse IPv4 publique :</strong></p>
+<ul>
+<li>Attribuée manuellement via une adresse IP <em>Elastic</em></li>
+<li>Attribuée automatiquement</li>
+</ul>
+<p><strong>Adresse IP <em>Elastic</em></strong></p>
+<ul>
+<li>Associée à un compte AWS</li>
+<li>Peut être allouée et remappée à tout moment</li>
+</ul>
+<h3 id="interface-réseau-elastic">Interface réseau Elastic</h3>
+<ul>
+<li>
+<p>Une interface réseau Elastic est une <strong>interface réseau virtuelle</strong> que vous pouvez :</p>
+<ul>
+<li>Attacher à une instance</li>
+<li>Détacher de l&rsquo;instance et attacher à une autre instance pour rediriger le trafic réseau</li>
+</ul>
+</li>
+<li>
+<p>Ses attributs sont conservés lorsqu&rsquo;elle est rattachée à une nouvelle instance.</p>
+</li>
+<li>
+<p>Chaque instanbce de votre VPC possède une interface réseau par défaut à laquelle est attribuée une adresse IPv4 à partir de la plage d&rsquo;adresses IPv4 de votre VPC.</p>
+</li>
+</ul>
+<h3 id="tables-de-routage-et-routes">Tables de routage et routes</h3>
+<p><a href="#R-image-9875b7e48a4d8a972067327ce263739a" class="lightbox-link"><img alt="Route par défaut" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-20-table-de-routage.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9875b7e48a4d8a972067327ce263739a"><img alt="Route par défaut" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-20-table-de-routage.png"></a></p>
+<ul>
+<li>
+<p>Une <strong>table de routage</strong> contient un ensemble de règles (ou <strong>routes</strong>) que vous pouvez configurer pour <strong>déterminer où le trafic réseau doit être dirigé</strong> depuis votre sous-réseau.</p>
+</li>
+<li>
+<p>Chaque route spécifie une destination et une cible.</p>
+</li>
+<li>
+<p>Par défaut, chaque table de routage contient la route locale pour la communication au sein du VPC.</p>
+</li>
+<li>
+<p>Chaque sous-réseau <strong>doit être associé à une table de routage</strong> (au plus une).</p>
+</li>
+</ul>
+
+<details open class=" box cstyle notices info">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-info-circle"></i> 
+    Note
+  </summary>
+  <div class="box-content">
+<ul>
+<li>Pensez une table de routage comme un <strong>GPS</strong> : Elle redirige les données vers la destination (adresse IP de destination).</li>
+<li>Votre VPC <strong>par défaut</strong> a déjà une table de routage <strong>principale</strong>.</li>
+</ul>
+  </div>
+</details>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<a id="R-logo" href="/420-414/index.html">
+    <img style="vertical-align: middle;" src="/420-414/images/cloud-logo.png" width="15%" alt="logo">
+    <span style="vertical-align: middle; padding-left: 4%; font-size: 160%">Infonuagique</span>
+</a>
+        </div>
+        <script>
+          window.index_js_url="/420-414/searchindex.en.js?1738612632";
+        </script>
+        <search><form action="/420-414/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/420-414/js/auto-complete.js?1738612632" defer></script>
+        <script src="/420-414/js/lunr/lunr.min.js?1738612632" defer></script>
+        <script src="/420-414/js/lunr/lunr.stemmer.support.min.js?1738612632" defer></script>
+        <script src="/420-414/js/lunr/lunr.multi.min.js?1738612632" defer></script>
+        <script src="/420-414/js/lunr/lunr.fr.min.js?1738612632" defer></script>
+        <script src="/420-414/js/search.js?1738612632" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/420-414/1-introduction/index.html"><input type="checkbox" id="R-section-1c923956455691612f1dbcc6d951d5eb" aria-controls="R-subsections-1c923956455691612f1dbcc6d951d5eb"><label for="R-section-1c923956455691612f1dbcc6d951d5eb"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Introduction</span></label><a class="padding" href="/420-414/1-introduction/index.html"><b>1. </b>Introduction</a><ul id="R-subsections-1c923956455691612f1dbcc6d951d5eb" class="collapsible-menu">
+            <li class="" data-nav-id="/420-414/1-introduction/1-modeles/index.html"><a class="padding" href="/420-414/1-introduction/1-modeles/index.html"><b>1. </b>Modèles Infonuagiques</a></li>
+            <li class="" data-nav-id="/420-414/1-introduction/2-infrastructure-aws/index.html"><a class="padding" href="/420-414/1-introduction/2-infrastructure-aws/index.html"><b>2. </b>Infrastructure AWS</a></li></ul></li>
+            <li class="parent " data-nav-id="/420-414/2-reseau/index.html"><input type="checkbox" id="R-section-baffac8e0afbb3fcb6f930c1a1a93369" aria-controls="R-subsections-baffac8e0afbb3fcb6f930c1a1a93369" checked><label for="R-section-baffac8e0afbb3fcb6f930c1a1a93369"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Réseau Infonuagique</span></label><a class="padding" href="/420-414/2-reseau/index.html"><b>2. </b>Réseau Infonuagique</a><ul id="R-subsections-baffac8e0afbb3fcb6f930c1a1a93369" class="collapsible-menu">
+            <li class="parent alwaysopen " data-nav-id="/420-414/2-reseau/1-notions/index.html"><input type="checkbox" id="R-section-5280a9ddc335b7c76fbfe22d7640b2f3" aria-controls="R-subsections-5280a9ddc335b7c76fbfe22d7640b2f3" checked><label for="R-section-5280a9ddc335b7c76fbfe22d7640b2f3"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Notions</span></label><a class="padding" href="/420-414/2-reseau/1-notions/index.html">Notions</a><ul id="R-subsections-5280a9ddc335b7c76fbfe22d7640b2f3" class="collapsible-menu">
+            <li class="active " data-nav-id="/420-414/2-reseau/1-notions/1-vpc/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/1-vpc/index.html">Virtual Private Cloud</a></li>
+            <li class="" data-nav-id="/420-414/2-reseau/1-notions/2-composantes-reseau/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/2-composantes-reseau/index.html">Autres composantes réseau</a></li>
+            <li class="" data-nav-id="/420-414/2-reseau/1-notions/3-securite-vpc/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/3-securite-vpc/index.html">Sécurité de VPC</a></li></ul></li>
+            <li class="" data-nav-id="/420-414/2-reseau/2-laboratoire/index.html"><a class="padding" href="/420-414/2-reseau/2-laboratoire/index.html">Laboratoire</a></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/420-414/2-reseau/1-notions/1-vpc/index.html" lang="fr-fr" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter">
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/420-414/js/clipboard.min.js?1738612632" defer></script>
+    <script src="/420-414/js/perfect-scrollbar.min.js?1738612632" defer></script>
+    <script src="/420-414/js/theme.js?1738612632" defer></script>
+  </body>
+</html>

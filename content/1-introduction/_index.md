@@ -1,7 +1,7 @@
 +++
 pre = '<b>1. </b>'
 title = "Introduction"
-weight = "10"
+weight = "100"
 +++
 
 ### Qu'est-ce que le Cloud ?

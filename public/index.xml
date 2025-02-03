@@ -14,5 +14,12 @@
       <guid>http://localhost:1313/420-414/1-introduction/index.html</guid>
       <description>Qu’est-ce que le Cloud ? En général, quand on pense “Cloud”, on pense surtout aux services de stockage, comme Dropbox, iCloud, Google Drive, ou OneDrive.&#xA;Mais le Cloud, c’est bien plus que ça : Il offre des services pour vos besoins informatiques, réseaux, base de données, et même ce que qu’on considère généralement comme le “Cloud” : le stockage de fichiers.&#xA;Quelques-uns de ces outils que nous utilisons tous les jours et dont nous ne savions pas qu’ils faisaient partie du cloud :</description>
     </item>
+    <item>
+      <title>Réseau Infonuagique</title>
+      <link>http://localhost:1313/420-414/2-reseau/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/2-reseau/index.html</guid>
+      <description>VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS : “Amazon Virtual Private Cloud vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.</description>
+    </item>
   </channel>
 </rss>

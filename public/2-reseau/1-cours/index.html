@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr-fr" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/420-414/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=420-414/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.133.1">
+    <meta name="generator" content="Relearn 7.3.1">
+    <meta name="description" content="VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC.
+Définition d’AWS : “Amazon Virtual Private Cloud (VPC) vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Notions :: Infonuagique">
+    <meta name="twitter:description" content="VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC.
+Définition d’AWS : “Amazon Virtual Private Cloud (VPC) vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
+    <meta property="og:url" content="http://localhost:1313/420-414/2-reseau/1-cours/index.html">
+    <meta property="og:site_name" content="Infonuagique">
+    <meta property="og:title" content="Notions :: Infonuagique">
+    <meta property="og:description" content="VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC.
+Définition d’AWS : “Amazon Virtual Private Cloud (VPC) vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
+    <meta property="og:locale" content="fr_fr">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Notions :: Infonuagique">
+    <meta itemprop="description" content="VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC.
+Définition d’AWS : “Amazon Virtual Private Cloud (VPC) vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.">
+    <meta itemprop="wordCount" content="516">
+    <title>Notions :: Infonuagique</title>
+    <link href="/420-414/2-reseau/1-cours/index.xml" rel="alternate" type="application/rss+xml" title="Notions :: Infonuagique"><link rel="icon" href="/images/react-logo.png" type="image/png">
+
+
+    <link href="/420-414/css/fontawesome-all.min.css?1738354440" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/fontawesome-all.min.css?1738354440" rel="stylesheet"></noscript>
+    <link href="/420-414/css/auto-complete.css?1738354440" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/auto-complete.css?1738354440" rel="stylesheet"></noscript>
+    <link href="/420-414/css/perfect-scrollbar.min.css?1738354440" rel="stylesheet">
+    <link href="/420-414/css/theme.css?1738354440" rel="stylesheet">
+    <link href="/420-414/css/format-html.css?1738354440" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/420-414';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'auto', 'zen-light', 'zen-dark' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/420-414/2-reseau/1-cours/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#vpc">VPC</a></li>
+        <li><a href="#passerelle-internet-internet-gateway-ou-igw">Passerelle Internet (<em>Internet Gateway</em> ou <em>IGW</em>)</a></li>
+        <li><a href="#table-de-routage-routing-table">Table de routage (<em>Routing Table</em>)</a></li>
+        <li><a href="#sécurité-réseau">Sécurité réseau</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/420-414/2-reseau/index.html"><span itemprop="name">Réseau Infonuagique</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Notions</span><meta itemprop="position" content="2"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/420-414/2-reseau/index.html" title="Réseau Infonuagique (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/420-414/2-reseau/2-laboratoire/index.html" title="Laboratoire (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable 2-reseau" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="notions">Notions</h1>
+
+<h3 id="vpc">VPC</h3>
+<ul>
+<li>
+<p><strong>Définition simplifiée :</strong> Un VPC (Virtual Private Cloud) est une sous-section privée d&rsquo;AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un <strong>contrôle total</strong> sur l&rsquo;accès aux ressources AWS que vous déployez dans votre VPC.</p>
+</li>
+<li>
+<p><strong>Définition d&rsquo;AWS :</strong> &ldquo;<em>Amazon Virtual Private Cloud (VPC)</em> vous permet de provisionner une section <strong>logiquement isolée</strong> du cloud AWS où vous pouvez lancer des ressources dans un <strong>réseau virtuel</strong> que <strong>vous</strong> définissez. <strong>Vous avez un contrôle total sur votre environnement réseau virtuel</strong>, y compris la sélection de votre propre plage d&rsquo;adresses IP, la création de <strong>sous-réseaux</strong> et la configuration de <strong>tables de routage</strong> et de <strong>passerelles réseau</strong>.&rdquo;</p>
+</li>
+</ul>
+<p><a href="#R-image-ecde57f28077be9cd6e5543e2ed4d585" class="lightbox-link"><img alt="VPC-analogie" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-01.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ecde57f28077be9cd6e5543e2ed4d585"><img alt="VPC-analogie" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-01.png"></a></p>
+
+<details open class=" box cstyle notices info">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-info-circle"></i> 
+    Note
+  </summary>
+  <div class="box-content">
+<ul>
+<li>Lorsque vous créez un compte AWS, un VPC &ldquo;par défaut&rdquo; est créé pour vous.</li>
+<li>Chaque VPC a une plage d&rsquo;adresse définie. Chaque sous-réseau ou instance déployée dans le VPC aura une adresse IP incluse dans cette plage.</li>
+</ul>
+  </div>
+</details>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h4 id="laboratoire">Laboratoire</h4>
+<h3 id="passerelle-internet-internet-gateway-ou-igw">Passerelle Internet (<em>Internet Gateway</em> ou <em>IGW</em>)</h3>
+<p><a href="#R-image-daa5aed2e1412ad0506fd8138d7f8830" class="lightbox-link"><img alt="IGW" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-05.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-daa5aed2e1412ad0506fd8138d7f8830"><img alt="IGW" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-05.png"></a></p>
+<ul>
+<li>
+<p><strong>Définition simplifiée :</strong> Une combinaison de matériel et de logiciel qui fournit à votre <em>VPC</em> une <strong>route</strong> vers le monde extérieur (c&rsquo;est-à-dire l&rsquo;Internet).</p>
+</li>
+<li>
+<p><strong>Définition d&rsquo;AWS :</strong> &ldquo;Une passerelle Internet est un composant VPC <strong>redondant</strong> et <strong>hautement disponible</strong>, mis à l&rsquo;echelle horizontalement, qui permet la <strong>communication entre les instances de votre VPC et Internet</strong>. Elle n&rsquo;impose donc aucun risque de disponibilité ni aucune contrainte de bande passante à votre trafic réseau.</p>
+</li>
+</ul>
+
+<details open class=" box cstyle notices info">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-info-circle"></i> 
+    Note
+  </summary>
+  <div class="box-content">
+<ul>
+<li>Votre VPC <strong>par défaut</strong> a déjà une passerelle internet <strong>attachée</strong>.</li>
+<li><strong>On ne peut attacher qu&rsquo;un IGW par VPC</strong>.</li>
+</ul>
+  </div>
+</details>
+<p><a href="#R-image-b383823aebc047a0c27054af6e684d2d" class="lightbox-link"><img alt="IGW" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-06.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b383823aebc047a0c27054af6e684d2d"><img alt="IGW" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-06.png"></a></p>
+<h3 id="table-de-routage-routing-table">Table de routage (<em>Routing Table</em>)</h3>
+<p><a href="#R-image-f90e1762478c75294332966336a830d2" class="lightbox-link"><img alt="Table de routage" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-07.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f90e1762478c75294332966336a830d2"><img alt="Table de routage" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-07.png"></a></p>
+<ul>
+<li><strong>Définition d&rsquo;AWS :</strong> &ldquo;Une table de routage contient un <strong>ensemble de règles</strong>, appelées <strong>routes</strong> ou <strong>acheminements</strong>, qui sont utilisées pour <strong>déterminer où le trafic du réseau doit être dirigé</strong>.&rdquo;</li>
+</ul>
+
+<details open class=" box cstyle notices info">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-info-circle"></i> 
+    Note
+  </summary>
+  <div class="box-content">
+<ul>
+<li>Pensez une table de routage comme un <strong>GPS</strong> : Elle redirige la &ldquo;data&rdquo; vers la destination.</li>
+<li>Votre VPC <strong>par défaut</strong> a déjà une table de routage <strong>principale</strong>.</li>
+</ul>
+  </div>
+</details>
+<p><a href="#R-image-39274e77bed142d192f1bcf82260f912" class="lightbox-link"><img alt="Table de routage exemple" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-08.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-39274e77bed142d192f1bcf82260f912"><img alt="Table de routage exemple" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-08.png"></a></p>
+<h4 id="sous-réseaux">Sous-réseaux</h4>
+<ul>
+<li>
+<p><strong>Définition simplifiée :</strong> un <em>subnet</em> (abréviation de <em>subnetwork</em>) est une sous-section d&rsquo;un réseau.</p>
+</li>
+<li>
+<p><strong>Définition AWS :</strong> Lorsque vous créez un VPC, il s&rsquo;étend sur toutes les zones de disponibilité d&rsquo;une région. Après avoir créé un VPC, <strong>vous pouvez ajouter un ou plusieurs sous-réseaux dans chaque zone de disponibilité</strong> disponible dans cette région. Chaque sous-réseau doit résider entièrement dans une zone de disponibilité et ne peut pas s&rsquo;étendre à d&rsquo;autres zones&rdquo;.</p>
+</li>
+<li>
+<p>Nos services sont déployés (VMs, Bases de données etc&hellip;) <strong>à l&rsquo;intérieur de <em>subnets</em></strong> :</p>
+</li>
+</ul>
+<p><a href="#R-image-30c7b9112e038e13c72abb1967c3109d" class="lightbox-link"><img alt="Services dans un sous-réseau" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-03.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-30c7b9112e038e13c72abb1967c3109d"><img alt="Services dans un sous-réseau" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-03.png"></a></p>
+
+<details open class=" box cstyle notices info">
+  <summary class="box-label" tabindex="-1">
+    <i class="fa-fw fas fa-info-circle"></i> 
+    Note
+  </summary>
+  <div class="box-content">
+<ul>
+<li>Votre VPC <strong>par défaut</strong> a déjà un <em>subnet</em> par zone de disponibilité crées par défaut.</li>
+</ul>
+  </div>
+</details>
+<p><a href="#R-image-7c6fca405259668668182e140be5a63c" class="lightbox-link"><img alt="Communication" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-11.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7c6fca405259668668182e140be5a63c"><img alt="Communication" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-11.png"></a></p>
+<h4 id="privé-private-subnet-vs-publique-public-subnet">Privé (<em>Private Subnet</em>) vs publique (<em>Public Subnet</em>)</h4>
+<p><a href="#R-image-0fd58aa883b64a3102fae6a9cafa9378" class="lightbox-link"><img alt="Subnet privé vs publique" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-12.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0fd58aa883b64a3102fae6a9cafa9378"><img alt="Subnet privé vs publique" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-12.png"></a></p>
+<h3 id="sécurité-réseau">Sécurité réseau</h3>
+<ul>
+<li>
+<p><strong>Liste de contrôle d&rsquo;accès (<em>Network ACLs</em> ou <em>NACL</em>) :</strong> Un pare-feu/une couche de sécurité qui contrôle le trafic entrant (<em>inbound</em>) et sortant (<em>outbound</em>) pour un ou plusieurs <em>subnet</em> (<strong>au niveau du <em>subnet</em></strong>).</p>
+</li>
+<li>
+<p><strong>Groupe de sécurité (<em>Security Group</em> ou <em>SG</em>) :</strong> Un pare-feu/une couche de sécurité <strong>au niveau d&rsquo;une/d&rsquo;un serveur</strong></p>
+</li>
+<li>
+<p><strong>Exemple :</strong> Si un <em>NACL</em> et un <em>SG</em> sont configurés pour autoriser le trafic web (HTTP), les requêtes HTTP seront autorisées dans le <em>subnet</em> et ensuite dans l&rsquo;instance EC2. S&rsquo;ils sont configurés pour refuser le trafic FTP, toute requête FTP sera bloquée.</p>
+</li>
+</ul>
+<p><a href="#R-image-1ad53d60eb5ec8b96193915a93d119a6" class="lightbox-link"><img alt="NACLs et SG" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-09.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1ad53d60eb5ec8b96193915a93d119a6"><img alt="NACLs et SG" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-09.png"></a></p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-33a8074943861a8a6be4e4fce1fe2a14" class="lightbox-link"><img alt="NACLs et SG exemple" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-10.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-33a8074943861a8a6be4e4fce1fe2a14"><img alt="NACLs et SG exemple" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-10.png"></a></p>
+<p><a href="#R-image-0ceeca6621ba2121699db4f10fdc11bc" class="lightbox-link"><img alt="exemple" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/2-reseau/2-13.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0ceeca6621ba2121699db4f10fdc11bc"><img alt="exemple" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/2-reseau/2-13.png"></a></p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<a id="R-logo" href="/420-414/index.html">
+    <img style="vertical-align: middle;" src="/420-414/images/cloud-logo.png" width="15%" alt="logo">
+    <span style="vertical-align: middle; padding-left: 4%; font-size: 160%">Infonuagique</span>
+</a>
+        </div>
+        <script>
+          window.index_js_url="/420-414/searchindex.en.js?1738354440";
+        </script>
+        <search><form action="/420-414/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/420-414/js/auto-complete.js?1738354440" defer></script>
+        <script src="/420-414/js/lunr/lunr.min.js?1738354440" defer></script>
+        <script src="/420-414/js/lunr/lunr.stemmer.support.min.js?1738354440" defer></script>
+        <script src="/420-414/js/lunr/lunr.multi.min.js?1738354440" defer></script>
+        <script src="/420-414/js/lunr/lunr.fr.min.js?1738354440" defer></script>
+        <script src="/420-414/js/search.js?1738354440" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/420-414/1-introduction/index.html"><input type="checkbox" id="R-section-1c923956455691612f1dbcc6d951d5eb" aria-controls="R-subsections-1c923956455691612f1dbcc6d951d5eb"><label for="R-section-1c923956455691612f1dbcc6d951d5eb"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Introduction</span></label><a class="padding" href="/420-414/1-introduction/index.html"><b>1. </b>Introduction</a><ul id="R-subsections-1c923956455691612f1dbcc6d951d5eb" class="collapsible-menu">
+            <li class="" data-nav-id="/420-414/1-introduction/1-modeles/index.html"><a class="padding" href="/420-414/1-introduction/1-modeles/index.html"><b>1. </b>Modèles Infonuagiques</a></li>
+            <li class="" data-nav-id="/420-414/1-introduction/2-infrastructure-aws/index.html"><a class="padding" href="/420-414/1-introduction/2-infrastructure-aws/index.html"><b>2. </b>Infrastructure AWS</a></li></ul></li>
+            <li class="parent " data-nav-id="/420-414/2-reseau/index.html"><input type="checkbox" id="R-section-baffac8e0afbb3fcb6f930c1a1a93369" aria-controls="R-subsections-baffac8e0afbb3fcb6f930c1a1a93369" checked><label for="R-section-baffac8e0afbb3fcb6f930c1a1a93369"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Réseau Infonuagique</span></label><a class="padding" href="/420-414/2-reseau/index.html"><b>2. </b>Réseau Infonuagique</a><ul id="R-subsections-baffac8e0afbb3fcb6f930c1a1a93369" class="collapsible-menu">
+            <li class="active " data-nav-id="/420-414/2-reseau/1-cours/index.html"><a class="padding" href="/420-414/2-reseau/1-cours/index.html"><b>1. </b>Notions</a></li>
+            <li class="" data-nav-id="/420-414/2-reseau/2-laboratoire/index.html"><a class="padding" href="/420-414/2-reseau/2-laboratoire/index.html"><b>2. </b>Laboratoire</a></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/420-414/2-reseau/1-cours/index.html" lang="fr-fr" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter">
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/420-414/js/clipboard.min.js?1738354440" defer></script>
+    <script src="/420-414/js/perfect-scrollbar.min.js?1738354440" defer></script>
+    <script src="/420-414/js/theme.js?1738354440" defer></script>
+  </body>
+</html>

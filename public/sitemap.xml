@@ -10,6 +10,24 @@
     <loc>http://localhost:1313/420-414/1-introduction/2-infrastructure-aws/index.html</loc>
   </url>
   <url>
+    <loc>http://localhost:1313/420-414/2-reseau/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/2-reseau/1-notions/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/2-reseau/1-notions/1-vpc/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/2-reseau/1-notions/2-composantes-reseau/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/2-reseau/1-notions/3-securite-vpc/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/2-reseau/2-laboratoire/index.html</loc>
+  </url>
+  <url>
     <loc>http://localhost:1313/420-414/categories/index.html</loc>
   </url>
   <url>

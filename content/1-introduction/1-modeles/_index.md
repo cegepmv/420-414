@@ -2,7 +2,7 @@
 pre = '<b>1. </b>'
 title = 'Modèles Infonuagiques'
 draft = false
-weight = "11"
+weight = "110"
 +++
 
 #### Les modèles "as-a-Service"

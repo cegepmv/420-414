@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notions :: Infonuagique</title>
+    <link>http://localhost:1313/420-414/2-reseau/1-notions/index.html</link>
+    <description></description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <atom:link href="http://localhost:1313/420-414/2-reseau/1-notions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Virtual Private Cloud</title>
+      <link>http://localhost:1313/420-414/2-reseau/1-notions/1-vpc/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/2-reseau/1-notions/1-vpc/index.html</guid>
+      <description>Définitions Définition simplifiée :&#xA;Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS :&#xA;Amazon Virtual Private Cloud (VPC) permet de mettre en service une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.</description>
+    </item>
+    <item>
+      <title>Autres composantes réseau</title>
+      <link>http://localhost:1313/420-414/2-reseau/1-notions/2-composantes-reseau/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/2-reseau/1-notions/2-composantes-reseau/index.html</guid>
+      <description>Passerelle Internet (Internet Gateway ou IGW) Définition simplifiée : Une combinaison de matériel et de logiciel qui fournit à votre VPC une route vers le monde extérieur (c’est-à-dire l’Internet).&#xA;Définition AWS&#xA;“Une passerelle Internet est un composant VPC redondant et hautement disponible, mis à l’echelle horizontalement, qui permet la communication entre les instances de votre VPC et Internet. Elle n’impose donc aucun risque de disponibilité ni aucune contrainte de bande passante à votre trafic réseau.</description>
+    </item>
+    <item>
+      <title>Sécurité de VPC</title>
+      <link>http://localhost:1313/420-414/2-reseau/1-notions/3-securite-vpc/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/2-reseau/1-notions/3-securite-vpc/index.html</guid>
+      <description>Groupe de sécurité (Security Group ou SG) Pare-feu/couche de sécurité au niveau d’une instance (spécifiquement au niveau de l’interface/carte réseau).&#xA;Les groupes de sécurité ont des règles qui contrôlent le trafic d’instance entrant (inbound) et sortant (outbound).&#xA;Les groupes de sécurité par défaut refusent tout trafic entrant et autorisent tout le trafic sortant.&#xA;Les groupes de sécurité sont avec état (stateful) : On ne définit que le trafic entrant, le trafic sortant est toujours autorisé.</description>
+    </item>
+  </channel>
+</rss>
