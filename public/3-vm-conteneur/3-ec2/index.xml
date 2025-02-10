@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Amazon EC2 :: Infonuagique</title>
+    <link>http://localhost:1313/420-414/3-vm-conteneur/3-ec2/index.html</link>
+    <description>Amazon Elastic Compute Cloud (Amazon EC2) est un service AWS qui permet de créer et gérer des machines virtuelles (appelées instances EC2) dans le cloud AWS.&#xA;Création d’une VM EC2 Les points les plus importants à configurer lorsque vous voulez lancer une instance EC2 :&#xA;AMI Type d’instance Paramètres réseau Données utilisateur Options de stockage Groupe de sécurité Paire de clés AMI Amazon Machine Image (AMI) est un modèle (ou image) utilisé.</description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <atom:link href="http://localhost:1313/420-414/3-vm-conteneur/3-ec2/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

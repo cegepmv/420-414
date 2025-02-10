@@ -19,7 +19,14 @@
       <link>http://localhost:1313/420-414/2-reseau/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/420-414/2-reseau/index.html</guid>
-      <description>VPC Définition simplifiée : Un VPC (Virtual Private Cloud) est une sous-section privée d’AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un contrôle total sur l’accès aux ressources AWS que vous déployez dans votre VPC. Définition d’AWS : “Amazon Virtual Private Cloud vous permet de provisionner une section logiquement isolée du cloud AWS où vous pouvez lancer des ressources dans un réseau virtuel que vous définissez.</description>
+      <description></description>
+    </item>
+    <item>
+      <title>Virtualisation et Conteneurs</title>
+      <link>http://localhost:1313/420-414/3-vm-conteneur/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/3-vm-conteneur/index.html</guid>
+      <description>Au cours des deux dernières décennies, la manière dont les entreprises gèrent leur infrastructure a beaucoup évolué. L’époque des serveurs physiques dédiés est révolue depuis longtemps, et il existe toute une série d’options pour tirer le meilleur parti de vos hôtes et services, que vous les déployez sur-site ou dans le nuage.&#xA;La virtualisation a ouvert la voie à la scalabilité, à la normalisation et à l’optimisation des coûts.&#xA;La conteneurisation a apporté de nouvelles efficacités.</description>
     </item>
   </channel>
 </rss>

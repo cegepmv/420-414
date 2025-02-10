@@ -28,6 +28,21 @@
     <loc>http://localhost:1313/420-414/2-reseau/2-laboratoire/index.html</loc>
   </url>
   <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/1-virtualisation/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/2-conteneurisation/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/3-ec2/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/4-docker/index.html</loc>
+  </url>
+  <url>
     <loc>http://localhost:1313/420-414/categories/index.html</loc>
   </url>
   <url>

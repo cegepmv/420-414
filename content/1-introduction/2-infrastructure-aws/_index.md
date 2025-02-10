@@ -22,7 +22,7 @@ AWS possède une infrastructure immense, avec des centres de données (*data cen
 + Chaque **zone de disponibilité** est une partition entièrement isolée de l'infrastructure mondiale AWS.
     + Les zones de disponibilité consistent en un ou plusieurs centres de données (typiquement 3).
     + Elles sont **isolées** et conçues pour l'isolation des défaillances : Chaque zone de disponibilité a sa propre source d'alimentation et est physiquement séparée des autres zones de disponibilités.
-    + Elles sont i**nterconnectées avec d'autres zones de disponibilité** via des **réseaux privés à haut débit** : permet d'avoir une réplication syncrone et rapide des données. 
+    + Elles sont i**nterconnectées avec d'autres zones de disponibilité** via des **réseaux privés à haut débit** : permet d'avoir une réplication syncrone et rapide des données (très peu de latence). 
     + **Vous** choisissez vos zones de disponibilité.
 
 + **AWS recommande de répliquer les données et les ressources dans minimum 2 zones de disponibilité** pour garantir la résilience de vos services.
