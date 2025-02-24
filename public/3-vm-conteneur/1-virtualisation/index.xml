@@ -3,7 +3,7 @@
   <channel>
     <title>Virtualisation :: Infonuagique</title>
     <link>http://localhost:1313/420-414/3-vm-conteneur/1-virtualisation/index.html</link>
-    <description>Autrefois, les serveurs physiques fonctionnaient comme un ordinateur ordinaire. Vous disposiez d’un boîtier physique, vous installiez un système d’exploitation, puis vous installiez des applications par-dessus.&#xA;Ces types de serveurs sont appelés “serveurs bare-metal” (n’y a rien entre la machine physique et le système d’exploitation).&#xA;Ces serveurs étaient dédiés à un usage spécifique. La gestion était simple et les problèmes plus faciles à traiter mais les coûts étaient élevés. Non seulement il fallait de plus en plus de serveurs au fur et à mesure que l’entreprise se développait, mais il fallait aussi disposer de suffisamment de ressources matérielles pour les héberger.</description>
+    <description>Autrefois, les serveurs physiques fonctionnaient comme un ordinateur ordinaire. Vous disposiez d’un boîtier physique, vous installiez un système d’exploitation, puis vous installiez des applications par-dessus.&#xA;Ces types de serveurs sont appelés “serveurs bare-metal” (n’y a rien entre la machine physique et le système d’exploitation).&#xA;Ces serveurs étaient dédiés à un usage spécifique. La gestion était simple et les problèmes plus faciles à traiter mais les coûts étaient élevés : Il fallait de plus en plus de serveurs au fur et à mesure qu’une entreprise se développait.</description>
     <generator>Hugo</generator>
     <language>fr-fr</language>
     <atom:link href="http://localhost:1313/420-414/3-vm-conteneur/1-virtualisation/index.xml" rel="self" type="application/rss+xml" />

@@ -26,16 +26,16 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
     <meta itemprop="description" content="Amazon Elastic Compute Cloud (Amazon EC2) est un service AWS qui permet de créer et gérer des machines virtuelles (appelées instances EC2) dans le cloud AWS.
 Création d’une VM EC2 Les points les plus importants à configurer lorsque vous voulez lancer une instance EC2 :
 AMI Type d’instance Paramètres réseau Données utilisateur Options de stockage Groupe de sécurité Paire de clés AMI Amazon Machine Image (AMI) est un modèle (ou image) utilisé.">
-    <meta itemprop="wordCount" content="534">
+    <meta itemprop="wordCount" content="546">
     <title>Amazon EC2 :: Infonuagique</title>
-    <link href="/420-414/3-vm-conteneur/3-ec2/index.xml" rel="alternate" type="application/rss+xml" title="Amazon EC2 :: Infonuagique"><link rel="icon" href="/images/react-logo.png" type="image/png">
+    <link href="/420-414/3-vm-conteneur/3-ec2/index.xml" rel="alternate" type="application/rss+xml" title="Amazon EC2 :: Infonuagique"><link rel="icon" href="/420-414/images/cloud-logo.png" type="image/png">
 
 
-    <link href="/420-414/css/fontawesome-all.min.css?1739218711" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/fontawesome-all.min.css?1739218711" rel="stylesheet"></noscript>
-    <link href="/420-414/css/auto-complete.css?1739218711" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/auto-complete.css?1739218711" rel="stylesheet"></noscript>
-    <link href="/420-414/css/perfect-scrollbar.min.css?1739218711" rel="stylesheet">
-    <link href="/420-414/css/theme.css?1739218711" rel="stylesheet">
-    <link href="/420-414/css/format-html.css?1739218711" rel="stylesheet" id="R-format-style">
+    <link href="/420-414/css/fontawesome-all.min.css?1740421105" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/fontawesome-all.min.css?1740421105" rel="stylesheet"></noscript>
+    <link href="/420-414/css/auto-complete.css?1740421105" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/auto-complete.css?1740421105" rel="stylesheet"></noscript>
+    <link href="/420-414/css/perfect-scrollbar.min.css?1740421105" rel="stylesheet">
+    <link href="/420-414/css/theme.css?1740421105" rel="stylesheet">
+    <link href="/420-414/css/format-html.css?1740421105" rel="stylesheet" id="R-format-style">
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -101,7 +101,7 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
     <li>
       <ul>
         <li><a href="#création-dune-vm-ec2">Création d&rsquo;une VM EC2</a></li>
-        <li><a href="#interface-de-ligne-de-commande">Interface de ligne de commande</a></li>
+        <li><a href="#interface-de-ligne-de-commande-cli">Interface de ligne de commande (CLI)</a></li>
         <li><a href="#cycle-de-vie">Cycle de vie</a></li>
         <li><a href="#métadonnées">Métadonnées</a></li>
       </ul>
@@ -145,13 +145,13 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
 <h3 id="création-dune-vm-ec2">Création d&rsquo;une VM EC2</h3>
 <p>Les points les plus importants à configurer lorsque vous voulez lancer une instance EC2 :</p>
 <ol>
-<li>AMI</li>
-<li>Type d&rsquo;instance</li>
-<li>Paramètres réseau</li>
-<li>Données utilisateur</li>
-<li>Options de stockage</li>
-<li>Groupe de sécurité</li>
-<li>Paire de clés</li>
+<li><strong>AMI</strong></li>
+<li><strong>Type d&rsquo;instance</strong></li>
+<li><strong>Paramètres réseau</strong></li>
+<li><strong>Données utilisateur</strong></li>
+<li><strong>Options de stockage</strong></li>
+<li><strong>Groupe de sécurité</strong></li>
+<li><strong>Paire de clés</strong></li>
 </ol>
 <h4 id="ami">AMI</h4>
 <ul>
@@ -162,7 +162,8 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
 </ul>
 <h4 id="type-dinstance">Type d&rsquo;instance</h4>
 <ul>
-<li>Le type d&rsquo;instance que vous choisissez dépend de vos besoins en :
+<li>
+<p>Le type d&rsquo;instance que vous choisissez dépend de vos besoins en :</p>
 <ul>
 <li>Mémoire RAM</li>
 <li>Puissance de traitement (CPU)</li>
@@ -170,13 +171,13 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
 <li>Performances réseau</li>
 </ul>
 </li>
-</ul>
-<p><a href="#R-image-cb8fbd5b99ede4622c60a48b195ad1d8" class="lightbox-link"><img alt="Types d&rsquo;instance EC2" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-04-ec2.png?width=22rem" style=" height: auto; width: 22rem;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-cb8fbd5b99ede4622c60a48b195ad1d8"><img alt="Types d&rsquo;instance EC2" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-04-ec2.png?width=22rem"></a></p>
-<ul>
-<li>Dénomination des types d&rsquo;instances
-<ul>
-<li>Exemple : <code>t3.large</code>
+<li>
+<p>Dénomination des types d&rsquo;instances
+<a href="#R-image-7f28ab6bbea29ce505eaa6c0f571ac51" class="lightbox-link"><img alt="Types d&rsquo;instance EC2" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-04-ec2.png?width=22rem" style=" height: auto; width: 22rem;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7f28ab6bbea29ce505eaa6c0f571ac51"><img alt="Types d&rsquo;instance EC2" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-04-ec2.png?width=22rem"></a></p>
+</li>
+<li>
+<p>Exemple : <code>t3.large</code></p>
 <ul>
 <li><code>t</code> correspond au nom de la famille</li>
 <li><code>3</code> correspond au numéro de génération</li>
@@ -184,16 +185,14 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<p><a href="#R-image-c018f7b1822fcf22ca564bb400f057cf" class="lightbox-link"><img alt="Catégories d&rsquo;instance EC2" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-05-ec2.png?width=40rem" style=" height: auto; width: 40rem;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c018f7b1822fcf22ca564bb400f057cf"><img alt="Catégories d&rsquo;instance EC2" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-05-ec2.png?width=40rem"></a></p>
+<p><a href="#R-image-e426b900c7d497d50576d6762d47f39f" class="lightbox-link"><img alt="Catégories d&rsquo;instance EC2" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-05-ec2.png?width=40rem" style=" height: auto; width: 40rem;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e426b900c7d497d50576d6762d47f39f"><img alt="Catégories d&rsquo;instance EC2" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-05-ec2.png?width=40rem"></a></p>
 <h4 id="paramètres-réseau">Paramètres réseau</h4>
 <ul>
 <li>Pour lancer une instance EC2, il faut spécifier le <strong>VPC</strong> et le <strong>sous-réseau</strong> où elle sera déployée.</li>
 <li>L&rsquo;instance doit-elle avoir une adresse IP publique (pour la rendre accessible sur Internet) ? Si oui, il faut aussi le spécifier lors de la création.</li>
 </ul>
-<h4 id="données-utilisateur-user-data">Données utilisateur (<em>user data</em>)</h4>
+<h4 id="données-utilisateur-user-data">Données utilisateur (<em>user-data</em>)</h4>
 <ul>
 <li>Vous pouvez (optionnellement) spécifier un script de <strong>données utilisateur</strong> (<em>user data</em>) au lancement de l&rsquo;instance</li>
 <li>Le script s&rsquo;exécute au <strong>démarrage initial de l&rsquo;instance</strong> (avec les privilèges <code>root</code>)</li>
@@ -201,7 +200,7 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
 <h4 id="options-de-stockage">Options de stockage</h4>
 <ul>
 <li>Il est nécessaire de configurer le <strong>volume racine</strong> (emplacement d&rsquo;installation du système d&rsquo;exploitation)</li>
-<li>Il est possible d&rsquo;attachez des <strong>volumes de stockage supplémentaires</strong> (facultatif)</li>
+<li>Il est possible d&rsquo;attacher des <strong>volumes de stockage supplémentaires</strong> (facultatif)</li>
 <li>Pour chaque volume, il est possible indiquez la taille du disque (en Go), le type de volume (SSD, HDD), si le volume doit être supprimé lorsque l&rsquo;instance est détruite, si vous souhaitez <strong>chiffrer</strong> le volume</li>
 </ul>
 <h4 id="groupe-de-sécurité">Groupe de sécurité</h4>
@@ -217,17 +216,13 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
 <li>Un fichier de <strong>clé privée</strong> que vous stockez</li>
 </ul>
 </li>
-<li>Elle permet de sécuriser les connexions à une instance</li>
+<li>Elle permet de sécuriser les connexions à une instance (via SSH pour les instances Linux, RDP pour les instances Windows)</li>
 </ul>
-<h3 id="interface-de-ligne-de-commande">Interface de ligne de commande</h3>
+<h3 id="interface-de-ligne-de-commande-cli">Interface de ligne de commande (CLI)</h3>
 <ul>
-<li>
-<p>Les instances EC2 (ainsi que d&rsquo;autres services AWS) peuvent également être crées par programmation.</p>
-</li>
-<li>
-<p>Exemple de commande (suppose que la paire de clé et le groupe de sécurité existe déjà) :</p>
-</li>
+<li>Les instances EC2 (ainsi que d&rsquo;autres services AWS) peuvent également être crées par programmation.</li>
 </ul>
+<p><em>Exemple de commande (suppose que la paire de clé et le groupe de sécurité existent déjà) :</em></p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws ec2 run-instances /
 </span></span><span style="display:flex;"><span>    --image-id ami-1a2b3c4d /
 </span></span><span style="display:flex;"><span>    --count <span style="color:#ae81ff">1</span> /
@@ -236,27 +231,27 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
 </span></span><span style="display:flex;"><span>    --security-groups MySecurityGroup
 </span></span><span style="display:flex;"><span>    --region us-east-1</span></span></code></pre></div>
 <h3 id="cycle-de-vie">Cycle de vie</h3>
-<p><a href="#R-image-b40316915ed2e167b90a33bd9d817494" class="lightbox-link"><img alt="Cycle de vie EC2" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-06-ec2.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b40316915ed2e167b90a33bd9d817494"><img alt="Cycle de vie EC2" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-06-ec2.png"></a></p>
+<p><a href="#R-image-2324f65fe6b56b3fef0fea1c08d8f420" class="lightbox-link"><img alt="Cycle de vie EC2" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-06-ec2.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2324f65fe6b56b3fef0fea1c08d8f420"><img alt="Cycle de vie EC2" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/3-vm-conteneur/3-06-ec2.png"></a></p>
 <ul>
 <li>Le redémarrage d&rsquo;une instance ne modifie aucune adresse IP ni aucun nom de domaine</li>
 <li>Lorsqu&rsquo;une instance est arrêtée puis redémarrée :
 <ul>
-<li>L&rsquo;adresse IPv4 publique et le nom de domaine externe changent</li>
-<li>L&rsquo;adresse IPv4 privée et le nom de domaine interne ne change pas</li>
+<li>L&rsquo;adresse IPv4 publique et le nom de domaine externe changent.</li>
+<li>L&rsquo;adresse IPv4 privée et le nom de domaine interne ne change pas.</li>
 </ul>
 </li>
 </ul>
 <h3 id="métadonnées">Métadonnées</h3>
 <ul>
-<li>Les métadonnées d&rsquo;instance sont des données relatives à votre instance</li>
+<li>Les métadonnées d&rsquo;une instance sont des données relatives à une instance</li>
 <li>Vous pouvez les visualiser lorsque vous êtes connecté à l&rsquo;instance :
 <ul>
 <li>Dans un navigateur : <code>http://169.254.169.254/latest/meta-data/</code></li>
 <li>Dans un terminal : <code>curl http://169.254.169.254/latest/meta-data/</code></li>
 </ul>
 </li>
-<li>Exemples de données : adresse IP publique, privée, nom de domaine public, ID de l&rsquo;instance, groupes de sécurité, région, zone de disponibilité.</li>
+<li>Exemples de données : Adresse IP publique, privée, nom de domaine public, ID de l&rsquo;instance, groupes de sécurité, région, zone de disponibilité.</li>
 <li>Les données utilisateur sont aussi accessibles : <code>http://169.254.169.254/latest/user-data</code></li>
 </ul>
 
@@ -276,7 +271,7 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
 </a>
         </div>
         <script>
-          window.index_js_url="/420-414/searchindex.en.js?1739218711";
+          window.index_js_url="/420-414/searchindex.en.js?1740421105";
         </script>
         <search><form action="/420-414/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -289,12 +284,12 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
         <script>
           var contentLangs=['fr'];
         </script>
-        <script src="/420-414/js/auto-complete.js?1739218711" defer></script>
-        <script src="/420-414/js/lunr/lunr.min.js?1739218711" defer></script>
-        <script src="/420-414/js/lunr/lunr.stemmer.support.min.js?1739218711" defer></script>
-        <script src="/420-414/js/lunr/lunr.multi.min.js?1739218711" defer></script>
-        <script src="/420-414/js/lunr/lunr.fr.min.js?1739218711" defer></script>
-        <script src="/420-414/js/search.js?1739218711" defer></script>
+        <script src="/420-414/js/auto-complete.js?1740421105" defer></script>
+        <script src="/420-414/js/lunr/lunr.min.js?1740421105" defer></script>
+        <script src="/420-414/js/lunr/lunr.stemmer.support.min.js?1740421105" defer></script>
+        <script src="/420-414/js/lunr/lunr.multi.min.js?1740421105" defer></script>
+        <script src="/420-414/js/lunr/lunr.fr.min.js?1740421105" defer></script>
+        <script src="/420-414/js/search.js?1740421105" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation">
         <hr class="padding">
@@ -308,7 +303,7 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
             <li class="" data-nav-id="/420-414/2-reseau/index.html"><input type="checkbox" id="R-section-baffac8e0afbb3fcb6f930c1a1a93369" aria-controls="R-subsections-baffac8e0afbb3fcb6f930c1a1a93369"><label for="R-section-baffac8e0afbb3fcb6f930c1a1a93369"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Réseau Infonuagique</span></label><a class="padding" href="/420-414/2-reseau/index.html"><b>2. </b>Réseau Infonuagique</a><ul id="R-subsections-baffac8e0afbb3fcb6f930c1a1a93369" class="collapsible-menu">
             <li class="alwaysopen " data-nav-id="/420-414/2-reseau/1-notions/index.html"><input type="checkbox" id="R-section-5280a9ddc335b7c76fbfe22d7640b2f3" aria-controls="R-subsections-5280a9ddc335b7c76fbfe22d7640b2f3" checked><label for="R-section-5280a9ddc335b7c76fbfe22d7640b2f3"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Notions</span></label><a class="padding" href="/420-414/2-reseau/1-notions/index.html">Notions</a><ul id="R-subsections-5280a9ddc335b7c76fbfe22d7640b2f3" class="collapsible-menu">
             <li class="" data-nav-id="/420-414/2-reseau/1-notions/1-vpc/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/1-vpc/index.html">Virtual Private Cloud</a></li>
-            <li class="" data-nav-id="/420-414/2-reseau/1-notions/2-composantes-reseau/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/2-composantes-reseau/index.html">Autres composantes réseau</a></li>
+            <li class="" data-nav-id="/420-414/2-reseau/1-notions/2-passerelles/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/2-passerelles/index.html">Passerelles</a></li>
             <li class="" data-nav-id="/420-414/2-reseau/1-notions/3-securite-vpc/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/3-securite-vpc/index.html">Sécurité de VPC</a></li></ul></li>
             <li class="" data-nav-id="/420-414/2-reseau/2-laboratoire/index.html"><a class="padding" href="/420-414/2-reseau/2-laboratoire/index.html">Laboratoire</a></li></ul></li>
             <li class="parent " data-nav-id="/420-414/3-vm-conteneur/index.html"><input type="checkbox" id="R-section-e9deeac50ca7a3e4df8ac866a3ad315d" aria-controls="R-subsections-e9deeac50ca7a3e4df8ac866a3ad315d" checked><label for="R-section-e9deeac50ca7a3e4df8ac866a3ad315d"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu VM/Conteneur</span></label><a class="padding" href="/420-414/3-vm-conteneur/index.html"><b>3. </b>VM/Conteneur</a><ul id="R-subsections-e9deeac50ca7a3e4df8ac866a3ad315d" class="collapsible-menu">
@@ -369,8 +364,8 @@ AMI Type d’instance Paramètres réseau Données utilisateur Options de stocka
         </div>
       </div>
     </aside>
-    <script src="/420-414/js/clipboard.min.js?1739218711" defer></script>
-    <script src="/420-414/js/perfect-scrollbar.min.js?1739218711" defer></script>
-    <script src="/420-414/js/theme.js?1739218711" defer></script>
+    <script src="/420-414/js/clipboard.min.js?1740421105" defer></script>
+    <script src="/420-414/js/perfect-scrollbar.min.js?1740421105" defer></script>
+    <script src="/420-414/js/theme.js?1740421105" defer></script>
   </body>
 </html>

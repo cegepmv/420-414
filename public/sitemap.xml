@@ -19,7 +19,7 @@
     <loc>http://localhost:1313/420-414/2-reseau/1-notions/1-vpc/index.html</loc>
   </url>
   <url>
-    <loc>http://localhost:1313/420-414/2-reseau/1-notions/2-composantes-reseau/index.html</loc>
+    <loc>http://localhost:1313/420-414/2-reseau/1-notions/2-passerelles/index.html</loc>
   </url>
   <url>
     <loc>http://localhost:1313/420-414/2-reseau/1-notions/3-securite-vpc/index.html</loc>
@@ -38,9 +38,6 @@
   </url>
   <url>
     <loc>http://localhost:1313/420-414/3-vm-conteneur/3-ec2/index.html</loc>
-  </url>
-  <url>
-    <loc>http://localhost:1313/420-414/3-vm-conteneur/4-docker/index.html</loc>
   </url>
   <url>
     <loc>http://localhost:1313/420-414/categories/index.html</loc>

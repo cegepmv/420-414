@@ -1,5 +1,5 @@
 +++
-title = 'Autres composantes réseau'
+title = 'Passerelles'
 draft = false
 weight = "212"
 +++
