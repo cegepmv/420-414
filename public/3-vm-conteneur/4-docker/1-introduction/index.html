@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr-fr" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
+  <head><script src="/420-414/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=420-414/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.133.1">
+    <meta name="generator" content="Relearn 7.3.1">
+    <meta name="description" content="Vue d’ensemble et utilité Pour comprendre l’utilité de Docker, commençons par un exemple :
+Imaginons que nous devions mettre en place un “stack” (plusieurs services pour faire rouler une application) incluant plusieurs technologies différentes comme un serveur Web utilisant Node.js (Express) une base de données (MongoDB) et un système de messagerie comme Redis.
+Plusieurs enjeux se posent :
+Nous devons nous assurer que tous ces services soient compatibles avec la version du système d’exploitation qu’on prévoit utiliser.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Introduction :: Infonuagique">
+    <meta name="twitter:description" content="Vue d’ensemble et utilité Pour comprendre l’utilité de Docker, commençons par un exemple :
+Imaginons que nous devions mettre en place un “stack” (plusieurs services pour faire rouler une application) incluant plusieurs technologies différentes comme un serveur Web utilisant Node.js (Express) une base de données (MongoDB) et un système de messagerie comme Redis.
+Plusieurs enjeux se posent :
+Nous devons nous assurer que tous ces services soient compatibles avec la version du système d’exploitation qu’on prévoit utiliser.">
+    <meta property="og:url" content="http://localhost:1313/420-414/3-vm-conteneur/4-docker/1-introduction/index.html">
+    <meta property="og:site_name" content="Infonuagique">
+    <meta property="og:title" content="Introduction :: Infonuagique">
+    <meta property="og:description" content="Vue d’ensemble et utilité Pour comprendre l’utilité de Docker, commençons par un exemple :
+Imaginons que nous devions mettre en place un “stack” (plusieurs services pour faire rouler une application) incluant plusieurs technologies différentes comme un serveur Web utilisant Node.js (Express) une base de données (MongoDB) et un système de messagerie comme Redis.
+Plusieurs enjeux se posent :
+Nous devons nous assurer que tous ces services soient compatibles avec la version du système d’exploitation qu’on prévoit utiliser.">
+    <meta property="og:locale" content="fr_fr">
+    <meta property="og:type" content="website">
+    <meta itemprop="name" content="Introduction :: Infonuagique">
+    <meta itemprop="description" content="Vue d’ensemble et utilité Pour comprendre l’utilité de Docker, commençons par un exemple :
+Imaginons que nous devions mettre en place un “stack” (plusieurs services pour faire rouler une application) incluant plusieurs technologies différentes comme un serveur Web utilisant Node.js (Express) une base de données (MongoDB) et un système de messagerie comme Redis.
+Plusieurs enjeux se posent :
+Nous devons nous assurer que tous ces services soient compatibles avec la version du système d’exploitation qu’on prévoit utiliser.">
+    <meta itemprop="wordCount" content="1257">
+    <title>Introduction :: Infonuagique</title>
+    <link href="/420-414/3-vm-conteneur/4-docker/1-introduction/index.xml" rel="alternate" type="application/rss+xml" title="Introduction :: Infonuagique"><link rel="icon" href="/420-414/images/cloud-logo.png" type="image/png">
+
+
+    <link href="/420-414/css/fontawesome-all.min.css?1741295367" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/fontawesome-all.min.css?1741295367" rel="stylesheet"></noscript>
+    <link href="/420-414/css/auto-complete.css?1741295367" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-414/css/auto-complete.css?1741295367" rel="stylesheet"></noscript>
+    <link href="/420-414/css/perfect-scrollbar.min.css?1741295367" rel="stylesheet">
+    <link href="/420-414/css/theme.css?1741295367" rel="stylesheet">
+    <link href="/420-414/css/format-html.css?1741295367" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/420-414';
+      window.relearn.min = ``;
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.relearn.themevariants = [ 'auto', 'zen-light', 'zen-dark' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant");
+        var select = document.querySelector("#R-select-variant");
+        if (select) {
+          select.value = variant;
+        }
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.localStorage.getItem(window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.localStorage.setItem(window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/420-414/3-vm-conteneur/4-docker/1-introduction/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#vue-densemble-et-utilité">Vue d&rsquo;ensemble et utilité</a></li>
+        <li><a href="#images">Images</a></li>
+        <li><a href="#conteneurs">Conteneurs</a></li>
+        <li><a href="#registres-dimages-docker">Registres d&rsquo;images Docker</a></li>
+        <li><a href="#avantages">Avantages</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/420-414/3-vm-conteneur/index.html"><span itemprop="name">VMs et Conteneurs</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/420-414/3-vm-conteneur/4-docker/index.html"><span itemprop="name">Docker</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Introduction</span><meta itemprop="position" content="3"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/420-414/3-vm-conteneur/4-docker/index.html" title="Docker (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/420-414/3-vm-conteneur/4-docker/2-commandes/index.html" title="Commandes (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable 3-vm-conteneur" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="introduction">Introduction</h1>
+
+<h3 id="vue-densemble-et-utilité">Vue d&rsquo;ensemble et utilité</h3>
+<p>Pour comprendre l&rsquo;utilité de Docker, commençons par un exemple :</p>
+<p>Imaginons que nous devions mettre en place un &ldquo;<em>stack</em>&rdquo; (plusieurs services pour faire rouler une application) incluant plusieurs technologies différentes comme un serveur Web utilisant <em>Node.js</em> (<em>Express</em>) une base de données (<em>MongoDB</em>) et un système de messagerie comme <em>Redis</em>.</p>
+<p><a href="#R-image-39cb4dd88dfa448359e8fd11df5f5d98" class="lightbox-link"><img alt="Conteneurs" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/3-vm-conteneur/matrix-from-hell.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-39cb4dd88dfa448359e8fd11df5f5d98"><img alt="Conteneurs" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/3-vm-conteneur/matrix-from-hell.png"></a></p>
+<p>Plusieurs enjeux se posent :</p>
+<ul>
+<li>
+<p>Nous devons nous assurer que tous ces services soient <strong>compatibles</strong> avec la version du système d&rsquo;exploitation qu&rsquo;on prévoit utiliser. Dans certains cas, des versions de ces services peuvent ne pas être compatibles avec un OS mais sont compatibles avec un autre.</p>
+</li>
+<li>
+<p>Il faut aussi vérifier que les bibliothèques et les dépendances de ces services soient compatibles entre elles. En effet, un service pourrait avoir besoin d&rsquo;une certaine version d&rsquo;une bibliothèque pour fonctionner alors qu&rsquo;un autre service ne peut fonctionner que sur une version différente de la même bibliothèque.</p>
+</li>
+<li>
+<p>Imaginons maintenant que nous voulons changer l&rsquo;infrastructure de l&rsquo;application, comme par exemple mettre à jour un service ou changer la base de données vers <em>MySQL</em>. Chaque fois que quelque chose change dans notre <em>stack</em>, il faut passer par le même processus de vérification de la compatibilité entre les composants de notre application et l&rsquo;infrastructure sous-jacente (OS).</p>
+</li>
+<li>
+<p>Ce problème de matrice de compatibilité est appelé &ldquo;la matrice de l&rsquo;enfer&rdquo; (<em>Matrix From Hell</em>).</p>
+</li>
+<li>
+<p>Chaque fois qu&rsquo;un nouveau développeur rentre dans une équipe, il est difficile de configurer un nouvel environnement pour lui qui satisfait toutes les dépendances nécessaires à faire rouler l&rsquo;application : Il doit s&rsquo;assurer d&rsquo;avoir le bon OS, les bonnes versions de chacun des composants. Chaque développeur devait tout configurer lui-même à chaque fois. Il était donc impossible de garantir que l&rsquo;application fonctionnerait de la même manière dans des environnements différents, ce qui rend notre vie dans le développement, le build et le shipping de l&rsquo;application très difficile.</p>
+</li>
+</ul>
+<p>Il faut donc trouver quelque chose qui pourrait aider avec ce problème de compatibilité, qui permettrait de modifier ou changer une composant sans affecter les autres et même modifier le système d&rsquo;exploitation si nécessaire. C&rsquo;est dans cette situation que Docker prend tout son sens.</p>
+<p><a href="#R-image-5f6b438e2757c148b6160a1e021c0595" class="lightbox-link"><img alt="Conteneurs" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/420-414/images/3-vm-conteneur/docker-libs-deps.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5f6b438e2757c148b6160a1e021c0595"><img alt="Conteneurs" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/420-414/images/3-vm-conteneur/docker-libs-deps.png"></a></p>
+<p>Avec Docker, il est possible d&rsquo;exécuter chaque composant dans un conteneur séparé avec ses propres dépendances et ses propres bibliothèques, le tout sur la même VM et le même OS ! Une fois que Docker est installé, tous les développeurs peuvent lancer l&rsquo;application avec une simple commande <code>docker run</code>, peu importe quel OS ils utilisent.</p>
+<h4 id="fonctionnement">Fonctionnement</h4>
+<p>Docker crée un environnement virtualisé pour une application appelée <strong>conteneur</strong>. Un conteneur est un package <strong>léger</strong> qui intègre tout ce dont vous avez besoin pour exécuter un service, y compris le code, les bibliothèques et les dépendances.</p>
+<p>Les conteneurs sont <strong>isolés du système hôte</strong>. Par conséquent, ils peuvent s’exécuter sur n’importe quelle machine prenant en charge Docker, quel que soit le système d’exploitation ou le matériel sous-jacent.</p>
+<p>Les conteneurs sont créés à partir d&rsquo;<strong>images</strong> qui sont des <strong>modèles (ou templates)</strong> en lecture seule qui définissent l&rsquo;application et ses dépendances. Ces images sont stockées dans un registre, tel que <em>Docker Hub</em> ou un registre privé. Les développeurs peuvent créer eux-mêmes des images personnalisées ou utiliser des images prédéfinies à partir du registre.</p>
+<p>Lorsqu&rsquo;un conteneur est lancé, il est construit à partir d&rsquo;une image et doté de son propre système de fichiers, réseau et espace de processus isolés. Le conteneur peut alors exécuter l&rsquo;application comme si elle s&rsquo;exécutait sur un serveur dédié.</p>
+<h4 id="workflow-docker">Workflow Docker</h4>
+<ol>
+<li><em>Build</em> : Créer un Dockerfile qui définit votre application et ses dépendances.</li>
+<li><em>Ship</em> : <em>Push</em> votre image Docker vers un registre comme Docker Hub.</li>
+<li><em>Run</em> : Télécharger l&rsquo;image et l&rsquo;exécuter sur n&rsquo;importe quel hôte compatible avec Docker.</li>
+</ol>
+<p><strong>Exemple  :</strong></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Build une image</span>
+</span></span><span style="display:flex;"><span>docker build -t myapp:v1 .
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pull l&#39;image vers Docker Hub</span>
+</span></span><span style="display:flex;"><span>username/myapp:v1
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Exécuter le conteneur</span>
+</span></span><span style="display:flex;"><span>docker run -d -p 8080:80 username/myapp:v1</span></span></code></pre></div>
+<h3 id="images">Images</h3>
+<p>Une image Docker est un package <strong>léger</strong>, <strong>autonome</strong> et <strong>exécutable</strong> qui conserve tout ce qui est nécessaire pour exécuter une application, y compris le code, les bibliothèques et les dépendances. Les images Docker sont utilisées pour créer et exécuter des conteneurs, qui sont des environnements isolés pouvant être utilisés pour exécuter des applications.</p>
+<p>Les images Docker sont <strong>créées à partir d&rsquo;un Dockerfile</strong>, qui est un fichier texte contenant un ensemble d&rsquo;instructions pour créer l&rsquo;image. Le Dockerfile spécifie l&rsquo;image de base, le code de l&rsquo;application et ses dépendances, les variables d&rsquo;environnement et d&rsquo;autres options de configuration nécessaires à la création de l&rsquo;image.</p>
+<p>Les images Docker sont stockées dans un <strong>registre</strong> public, tel que <em>Docker Hub</em>, ou privé. Chaque fois qu&rsquo;un conteneur est créé à partir d&rsquo;une image, il s&rsquo;exécute en tant que processus distinct sur la machine hôte, isolé des autres processus et conteneurs.</p>
+<p>Les images Docker peuvent être utilisées pour déployer des applications de manière cohérente sur différentes plates-formes. Ils facilitent l&rsquo;<strong>empaquetage</strong> (<em>build</em>), la <strong>distribution</strong> (<em>shipping</em>) et le déploiement (<em>deploiment</em>) d&rsquo;applications et garantissent qu&rsquo;elles fonctionnent de la même manière partout.</p>
+<h3 id="conteneurs">Conteneurs</h3>
+<p>Un conteneur est <strong>une instance en cours d&rsquo;exécution d&rsquo;une image</strong>.</p>
+<p>Chaque conteneur s&rsquo;exécute comme un processus distinct sur la machine hôte et possède son propre système de fichiers, son réseau et d&rsquo;autres ressources.</p>
+<p>Les conteneurs Docker sont conçus pour être <strong>portables</strong> et <strong>faciles à déployer</strong>. Ils peuvent être exécutés sur n’importe quelle machine sur laquelle Docker est installé, quel que soit le système d’exploitation ou le matériel sous-jacent. Les conteneurs fournissent un environnement cohérent pour l&rsquo;exécution des applications, ce qui facilite le déplacement d&rsquo;applications entre différents environnements, tels que le développement, les tests et la production.</p>
+<p>Les conteneurs Docker peuvent être gérés à l&rsquo;aide de Docker CLI ou d&rsquo;outils Docker tels que Docker Compose ou Kubernetes. Ils peuvent être démarrés, arrêtés, mis en pause et redémarrés selon les besoins. Ils peuvent également être surveillés et gérés à l’aide d’une gamme d’outils et de plateformes.</p>
+<p>Dans l&rsquo;ensemble, les conteneurs Docker offrent un moyen flexible et évolutif de regrouper et de déployer des applications, ce qui simplifie la gestion et la mise à l&rsquo;échelle d&rsquo;applications complexes sur différents environnements et plates-formes.</p>
+<h3 id="registres-dimages-docker">Registres d&rsquo;images Docker</h3>
+<p>Docker héberge l&rsquo;un des plus grands registre d&rsquo;images Docker, appelé <em>Docker Hub</em>.</p>
+<p>Il s&rsquo;agit d&rsquo;un système de stockage et de distribution d&rsquo;images Docker. Il fournit un référentiel central permettant aux développeurs et aux organisations de partager et de distribuer leurs images Docker, ce qui rend plus agréable la création, le partage et le déploiement d&rsquo;applications avec Docker.</p>
+<p>Docker Hub permet aux utilisateurs et aux organisations de stocker et de gérer leurs images Docker et fournit également des fonctionnalités telles que la gestion des versions, le balisage et la collaboration. Les utilisateurs peuvent rechercher et télécharger des images depuis Docker Hub, ainsi que publier leurs propres images dans le registre.</p>
+<p>En plus du registre public, Docker Hub fournit un registre privé pour les organisations qui souhaitent gérer leurs propres images Docker et garantir qu&rsquo;elles ne sont accessibles qu&rsquo;aux utilisateurs autorisés.</p>
+<h3 id="avantages">Avantages</h3>
+<ul>
+<li>
+<p><strong>Portabilité :</strong> Les conteneurs Docker peuvent être exécutés sur n&rsquo;importe quelle machine prenant en charge Docker, ce qui facilite le déploiement d&rsquo;applications dans différents environnements.</p>
+</li>
+<li>
+<p><strong>Cohérence :</strong> En regroupant une application et ses dépendances dans un conteneur, Docker garantit que l&rsquo;application s&rsquo;exécutera de manière cohérente, quelle que soit l&rsquo;infrastructure sous-jacente.</p>
+</li>
+<li>
+<p><strong>Évolutivité :</strong> Docker facilite la mise à l&rsquo;échelle des applications horizontalement en exécutant plusieurs instances du même conteneur.</p>
+</li>
+<li>
+<p><strong>Efficacité des ressources :</strong> Les conteneurs Docker sont légers et nécessitent un minimum de ressources, ce qui les rend idéaux pour une exécution sur une infrastructure cloud.</p>
+</li>
+<li>
+<p><strong>Securité :</strong> Docker fournit un environnement sécurisé et isolé pour l&rsquo;exécution des applications, réduisant ainsi le risque de conflits avec d&rsquo;autres applications ou avec le système hôte.</p>
+</li>
+</ul>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<a id="R-logo" href="/420-414/index.html">
+    <img style="vertical-align: middle;" src="/420-414/images/cloud-logo.png" width="15%" alt="logo">
+    <span style="vertical-align: middle; padding-left: 4%; font-size: 160%">Infonuagique</span>
+</a>
+        </div>
+        <script>
+          window.index_js_url="/420-414/searchindex.en.js?1741295367";
+        </script>
+        <search><form action="/420-414/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['fr'];
+        </script>
+        <script src="/420-414/js/auto-complete.js?1741295367" defer></script>
+        <script src="/420-414/js/lunr/lunr.min.js?1741295367" defer></script>
+        <script src="/420-414/js/lunr/lunr.stemmer.support.min.js?1741295367" defer></script>
+        <script src="/420-414/js/lunr/lunr.multi.min.js?1741295367" defer></script>
+        <script src="/420-414/js/lunr/lunr.fr.min.js?1741295367" defer></script>
+        <script src="/420-414/js/search.js?1741295367" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation">
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-shortcutmenu-home" class="R-sidebarmenu">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/420-414/1-introduction/index.html"><input type="checkbox" id="R-section-1c923956455691612f1dbcc6d951d5eb" aria-controls="R-subsections-1c923956455691612f1dbcc6d951d5eb"><label for="R-section-1c923956455691612f1dbcc6d951d5eb"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Introduction</span></label><a class="padding" href="/420-414/1-introduction/index.html"><b>1. </b>Introduction</a><ul id="R-subsections-1c923956455691612f1dbcc6d951d5eb" class="collapsible-menu">
+            <li class="" data-nav-id="/420-414/1-introduction/1-modeles/index.html"><a class="padding" href="/420-414/1-introduction/1-modeles/index.html"><b>1. </b>Modèles Infonuagiques</a></li>
+            <li class="" data-nav-id="/420-414/1-introduction/2-infrastructure-aws/index.html"><a class="padding" href="/420-414/1-introduction/2-infrastructure-aws/index.html"><b>2. </b>Infrastructure AWS</a></li></ul></li>
+            <li class="" data-nav-id="/420-414/2-reseau/index.html"><input type="checkbox" id="R-section-baffac8e0afbb3fcb6f930c1a1a93369" aria-controls="R-subsections-baffac8e0afbb3fcb6f930c1a1a93369"><label for="R-section-baffac8e0afbb3fcb6f930c1a1a93369"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Réseau Infonuagique</span></label><a class="padding" href="/420-414/2-reseau/index.html"><b>2. </b>Réseau Infonuagique</a><ul id="R-subsections-baffac8e0afbb3fcb6f930c1a1a93369" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/420-414/2-reseau/1-notions/index.html"><input type="checkbox" id="R-section-5280a9ddc335b7c76fbfe22d7640b2f3" aria-controls="R-subsections-5280a9ddc335b7c76fbfe22d7640b2f3" checked><label for="R-section-5280a9ddc335b7c76fbfe22d7640b2f3"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Notions</span></label><a class="padding" href="/420-414/2-reseau/1-notions/index.html">Notions</a><ul id="R-subsections-5280a9ddc335b7c76fbfe22d7640b2f3" class="collapsible-menu">
+            <li class="" data-nav-id="/420-414/2-reseau/1-notions/1-vpc/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/1-vpc/index.html">Virtual Private Cloud</a></li>
+            <li class="" data-nav-id="/420-414/2-reseau/1-notions/2-passerelles/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/2-passerelles/index.html">Passerelles</a></li>
+            <li class="" data-nav-id="/420-414/2-reseau/1-notions/3-securite-vpc/index.html"><a class="padding" href="/420-414/2-reseau/1-notions/3-securite-vpc/index.html">Sécurité de VPC</a></li></ul></li>
+            <li class="" data-nav-id="/420-414/2-reseau/2-laboratoire/index.html"><a class="padding" href="/420-414/2-reseau/2-laboratoire/index.html">Laboratoire</a></li></ul></li>
+            <li class="parent " data-nav-id="/420-414/3-vm-conteneur/index.html"><input type="checkbox" id="R-section-e9deeac50ca7a3e4df8ac866a3ad315d" aria-controls="R-subsections-e9deeac50ca7a3e4df8ac866a3ad315d" checked><label for="R-section-e9deeac50ca7a3e4df8ac866a3ad315d"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu VMs et Conteneurs</span></label><a class="padding" href="/420-414/3-vm-conteneur/index.html"><b>3. </b>VMs et Conteneurs</a><ul id="R-subsections-e9deeac50ca7a3e4df8ac866a3ad315d" class="collapsible-menu">
+            <li class="" data-nav-id="/420-414/3-vm-conteneur/1-virtualisation/index.html"><a class="padding" href="/420-414/3-vm-conteneur/1-virtualisation/index.html">Virtualisation</a></li>
+            <li class="" data-nav-id="/420-414/3-vm-conteneur/2-conteneurisation/index.html"><a class="padding" href="/420-414/3-vm-conteneur/2-conteneurisation/index.html">Conteneurisation</a></li>
+            <li class="" data-nav-id="/420-414/3-vm-conteneur/3-ec2/index.html"><a class="padding" href="/420-414/3-vm-conteneur/3-ec2/index.html">Amazon EC2</a></li>
+            <li class="parent alwaysopen " data-nav-id="/420-414/3-vm-conteneur/4-docker/index.html"><input type="checkbox" id="R-section-b9bccbf5ed66b6f02ab43234a507be64" aria-controls="R-subsections-b9bccbf5ed66b6f02ab43234a507be64" checked><label for="R-section-b9bccbf5ed66b6f02ab43234a507be64"><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Docker</span></label><a class="padding" href="/420-414/3-vm-conteneur/4-docker/index.html">Docker</a><ul id="R-subsections-b9bccbf5ed66b6f02ab43234a507be64" class="collapsible-menu">
+            <li class="active " data-nav-id="/420-414/3-vm-conteneur/4-docker/1-introduction/index.html"><a class="padding" href="/420-414/3-vm-conteneur/4-docker/1-introduction/index.html">Introduction</a></li>
+            <li class="" data-nav-id="/420-414/3-vm-conteneur/4-docker/2-commandes/index.html"><a class="padding" href="/420-414/3-vm-conteneur/4-docker/2-commandes/index.html">Commandes</a></li>
+            <li class="" data-nav-id="/420-414/3-vm-conteneur/4-docker/3-images/index.html"><a class="padding" href="/420-414/3-vm-conteneur/4-docker/3-images/index.html">Images</a></li>
+            <li class="" data-nav-id="/420-414/3-vm-conteneur/4-docker/4-dockerfile/index.html"><a class="padding" href="/420-414/3-vm-conteneur/4-docker/4-dockerfile/index.html">Dockerfile</a></li>
+            <li class="" data-nav-id="/420-414/3-vm-conteneur/4-docker/5-reseau/index.html"><a class="padding" href="/420-414/3-vm-conteneur/4-docker/5-reseau/index.html">Réseau</a></li>
+            <li class="" data-nav-id="/420-414/3-vm-conteneur/4-docker/6-volumes/index.html"><a class="padding" href="/420-414/3-vm-conteneur/4-docker/6-volumes/index.html">Volumes</a></li>
+            <li class="" data-nav-id="/420-414/3-vm-conteneur/4-docker/7-docker-compose/index.html"><a class="padding" href="/420-414/3-vm-conteneur/4-docker/7-docker-compose/index.html">Docker Compose</a></li></ul></li></ul></li>
+          </ul>
+        </div>
+    
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVariantSwitch">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVariantSwitch">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/420-414/3-vm-conteneur/4-docker/1-introduction/index.html" lang="fr-fr" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch showVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.relearn.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                      <option id="R-select-variant-zen-light" value="zen-light">Zen Light</option>
+                      <option id="R-select-variant-zen-dark" value="zen-dark">Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.relearn.markVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter">
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/420-414/js/clipboard.min.js?1741295367" defer></script>
+    <script src="/420-414/js/perfect-scrollbar.min.js?1741295367" defer></script>
+    <script src="/420-414/js/theme.js?1741295367" defer></script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Volumes :: Infonuagique</title>
+    <link>http://localhost:1313/420-414/3-vm-conteneur/4-docker/6-volumes/index.html</link>
+    <description>Les volumes Docker sont le mécanisme privilégié pour conserver les données générées et utilisées par les conteneurs Docker. Bien que les conteneurs puissent créer, mettre à jour et supprimer des fichiers, ces modifications sont perdues lorsque le conteneur est supprimé et toutes les modifications sont isolées de ce conteneur. Les volumes permettent de connecter des chemins spécifiques du système de fichiers du conteneur à la machine hôte. Si un répertoire du conteneur est monté, les modifications apportées à ce répertoire sont également visibles sur la machine hôte.</description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <atom:link href="http://localhost:1313/420-414/3-vm-conteneur/4-docker/6-volumes/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

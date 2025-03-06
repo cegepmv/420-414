@@ -7,5 +7,54 @@
     <generator>Hugo</generator>
     <language>fr-fr</language>
     <atom:link href="http://localhost:1313/420-414/3-vm-conteneur/4-docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction</title>
+      <link>http://localhost:1313/420-414/3-vm-conteneur/4-docker/1-introduction/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/3-vm-conteneur/4-docker/1-introduction/index.html</guid>
+      <description>Vue d’ensemble et utilité Pour comprendre l’utilité de Docker, commençons par un exemple :&#xA;Imaginons que nous devions mettre en place un “stack” (plusieurs services pour faire rouler une application) incluant plusieurs technologies différentes comme un serveur Web utilisant Node.js (Express) une base de données (MongoDB) et un système de messagerie comme Redis.&#xA;Plusieurs enjeux se posent :&#xA;Nous devons nous assurer que tous ces services soient compatibles avec la version du système d’exploitation qu’on prévoit utiliser.</description>
+    </item>
+    <item>
+      <title>Commandes</title>
+      <link>http://localhost:1313/420-414/3-vm-conteneur/4-docker/2-commandes/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/3-vm-conteneur/4-docker/2-commandes/index.html</guid>
+      <description>Lancer votre premier conteneur docker run hello-world Cette commande effectue les opérations suivantes :&#xA;Recherche de l’image hello-world localement Si l’image n’est pas trouvée, elle est téléchargée de Docker Hub Crée un conteneur à partir de l’image Exécute le conteneur, qui affiche un message d’accueil. Quitte le conteneur Commandes de base Lister les conteneurs Pour voir tous les conteneurs en cours d’exécution : docker ps Pour lister tous les conteneurs (même ceux arrêtés): docker ps -a Lancer et arrêter des conteneurs Arrêter un conteneur docker stop &lt;id_ou_nom_du_conteneur&gt; Démarrer un conteneur arrêté docker start &lt;id_ou_nom_du_conteneur&gt; Redémarrer un conteneur docker restart &lt;id_ou_nom_du_conteneur&gt; Supprimer des conteneurs Supprimer un conteneur arrêté docker rm &lt;id_ou_nom_du_conteneur&gt; Forcer la suppression d’un conteneur (en cours d’exécution) docker rm -f &lt;id_ou_nom_du_conteneur&gt; Modes de démarrage d’un conteneur Mode détaché (Detached Mode) Pour rouler un conteneur en arrière-plan : docker run -d &lt;image&gt; Mode interactif (Interactive Mode) Pour rouler un conteneur et intéragir avec (entrer dans le conteneur) docker run -it &lt;nom_image&gt; /bin/bash Mappage de port Pour mapper le port d’un conteneur à celui de l’hôte docker run -p &lt;port_hote&gt;:&lt;port_conteneur&gt; &lt;image&gt; Exemple : docker run -d -p 80:80 nginx Journaux des conteneurs (logs) Accéder aux journal d’un conteneur docker logs &lt;id_ou_nom_conteneur&gt; Suivre les logs d’un conteneur en temps-réel docker logs -f &lt;id_ou_nom_conteneur&gt; Exécuter des commandes dans un conteneur en cours d’exécution Exécuter une commande dans un conteneur en cours d’exécution : docker exec -it &lt;id_ou_nom_conteneur&gt; &lt;commande&gt; Exemple : docker exec -it my_container /bin/bash Laboratoire : exécuter un conteneur Apache Exécutons un serveur web Apache dans un conteneur :</description>
+    </item>
+    <item>
+      <title>Images</title>
+      <link>http://localhost:1313/420-414/3-vm-conteneur/4-docker/3-images/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/3-vm-conteneur/4-docker/3-images/index.html</guid>
+      <description>Concepts clés Couches (layers) : Les images sont composées de plusieurs couches, chacune représentant un ensemble de modifications du système de fichiers. modifications du système de fichiers. Image de base (Base Image) : La base d’une image, généralement un système d’exploitation minimal. Image parent (Parent Image) : Une image sur laquelle votre image est construite. Tags d’images : Étiquettes utilisées pour la version et l’identification des images. ID de l’image : Identifiant unique pour chaque image.</description>
+    </item>
+    <item>
+      <title>Dockerfile</title>
+      <link>http://localhost:1313/420-414/3-vm-conteneur/4-docker/4-dockerfile/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/3-vm-conteneur/4-docker/4-dockerfile/index.html</guid>
+      <description>Un Dockerfile est un fichier qui contient une série d’instructions et d’arguments. Ces instructions sont utilisées pour créer automatiquement une image Docker. Il s’agit essentiellement d’un script de commandes successives que Docker exécutera pour assembler une image, automatisant ainsi le processus de création d’image.&#xA;Instructions d’un Dockerfile FROM L’instruction FROM définit l’image de base pour les instructions suivantes.&#xA;FROM ubuntu:24.04 Cette instruction est généralement la première d’un fichier Docker.&#xA;LABEL LABEL ajoute des métadonnées à une image sous forme de paires clé-valeur.</description>
+    </item>
+    <item>
+      <title>Réseau</title>
+      <link>http://localhost:1313/420-414/3-vm-conteneur/4-docker/5-reseau/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/3-vm-conteneur/4-docker/5-reseau/index.html</guid>
+      <description>La mise en réseau Docker permet aux conteneurs de communiquer entre eux et avec le monde extérieur.&#xA;Pilotes réseau Docker Docker propose plusieurs pilotes de réseau :&#xA;Bridge : Le pilote réseau par défaut. Il convient aux conteneurs autonomes qui ont besoin de communiquer. Host (hôte) : Supprime l’isolation réseau entre le conteneur et l’hôte Docker. Overlay (superposition) : Permet la communication entre les conteneurs sur plusieurs hôtes de démon Docker.</description>
+    </item>
+    <item>
+      <title>Volumes</title>
+      <link>http://localhost:1313/420-414/3-vm-conteneur/4-docker/6-volumes/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/3-vm-conteneur/4-docker/6-volumes/index.html</guid>
+      <description>Les volumes Docker sont le mécanisme privilégié pour conserver les données générées et utilisées par les conteneurs Docker. Bien que les conteneurs puissent créer, mettre à jour et supprimer des fichiers, ces modifications sont perdues lorsque le conteneur est supprimé et toutes les modifications sont isolées de ce conteneur. Les volumes permettent de connecter des chemins spécifiques du système de fichiers du conteneur à la machine hôte. Si un répertoire du conteneur est monté, les modifications apportées à ce répertoire sont également visibles sur la machine hôte.</description>
+    </item>
+    <item>
+      <title>Docker Compose</title>
+      <link>http://localhost:1313/420-414/3-vm-conteneur/4-docker/7-docker-compose/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/3-vm-conteneur/4-docker/7-docker-compose/index.html</guid>
+      <description>Docker Compose est un outil puissant pour définir et exécuter des applications Docker multi-conteneurs. Avec Docker Compose, vous utilisez un fichier YAML pour configurer les services, les réseaux et les volumes de votre application. Ensuite, vous pouvez créer et démarrer tous les services avec une seule commande.&#xA;Avantages Simplicité : Définissez l’ensemble de votre stack d’applications dans un seul fichier. Reproductibilité : Partagez et contrôlez facilement la version de votre configuration d’application.</description>
+    </item>
   </channel>
 </rss>

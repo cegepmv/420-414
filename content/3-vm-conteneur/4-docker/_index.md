@@ -1,5 +1,5 @@
 +++
 title = 'Docker'
-draft = true
-weight = "304"
+draft = false
+weight = "400"
 +++

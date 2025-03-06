@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dockerfile :: Infonuagique</title>
+    <link>http://localhost:1313/420-414/3-vm-conteneur/4-docker/4-dockerfile/index.html</link>
+    <description>Un Dockerfile est un fichier qui contient une série d’instructions et d’arguments. Ces instructions sont utilisées pour créer automatiquement une image Docker. Il s’agit essentiellement d’un script de commandes successives que Docker exécutera pour assembler une image, automatisant ainsi le processus de création d’image.&#xA;Instructions d’un Dockerfile FROM L’instruction FROM définit l’image de base pour les instructions suivantes.&#xA;FROM ubuntu:24.04 Cette instruction est généralement la première d’un fichier Docker.&#xA;LABEL LABEL ajoute des métadonnées à une image sous forme de paires clé-valeur.</description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <atom:link href="http://localhost:1313/420-414/3-vm-conteneur/4-docker/4-dockerfile/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

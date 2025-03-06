@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker Compose :: Infonuagique</title>
+    <link>http://localhost:1313/420-414/3-vm-conteneur/4-docker/7-docker-compose/index.html</link>
+    <description>Docker Compose est un outil puissant pour définir et exécuter des applications Docker multi-conteneurs. Avec Docker Compose, vous utilisez un fichier YAML pour configurer les services, les réseaux et les volumes de votre application. Ensuite, vous pouvez créer et démarrer tous les services avec une seule commande.&#xA;Avantages Simplicité : Définissez l’ensemble de votre stack d’applications dans un seul fichier. Reproductibilité : Partagez et contrôlez facilement la version de votre configuration d’application.</description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <atom:link href="http://localhost:1313/420-414/3-vm-conteneur/4-docker/7-docker-compose/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

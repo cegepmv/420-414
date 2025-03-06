@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>VM/Conteneur :: Infonuagique</title>
+    <title>VMs et Conteneurs :: Infonuagique</title>
     <link>http://localhost:1313/420-414/3-vm-conteneur/index.html</link>
     <description>Au cours des deux dernières décennies, la manière dont les entreprises gèrent leur infrastructure a beaucoup évolué. L’époque des serveurs physiques dédiés est révolue depuis longtemps, et il existe toute une série d’options pour tirer le meilleur parti de vos hôtes et services, que vous les déployez sur-site ou dans le nuage.&#xA;La virtualisation a ouvert la voie à la scalabilité, à la normalisation et à l’optimisation des coûts.&#xA;La conteneurisation a apporté de nouvelles efficacités.</description>
     <generator>Hugo</generator>
@@ -27,6 +27,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/420-414/3-vm-conteneur/3-ec2/index.html</guid>
       <description>Amazon Elastic Compute Cloud (Amazon EC2) est un service AWS qui permet de créer et gérer des machines virtuelles (appelées instances EC2) dans le cloud AWS.&#xA;Création d’une VM EC2 Les points les plus importants à configurer lorsque vous voulez lancer une instance EC2 :&#xA;AMI Type d’instance Paramètres réseau Données utilisateur Options de stockage Groupe de sécurité Paire de clés AMI Amazon Machine Image (AMI) est un modèle (ou image) utilisé.</description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>http://localhost:1313/420-414/3-vm-conteneur/4-docker/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-414/3-vm-conteneur/4-docker/index.html</guid>
+      <description></description>
     </item>
   </channel>
 </rss>

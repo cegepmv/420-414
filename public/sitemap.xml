@@ -40,6 +40,30 @@
     <loc>http://localhost:1313/420-414/3-vm-conteneur/3-ec2/index.html</loc>
   </url>
   <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/4-docker/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/4-docker/1-introduction/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/4-docker/2-commandes/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/4-docker/3-images/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/4-docker/4-dockerfile/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/4-docker/5-reseau/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/4-docker/6-volumes/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/420-414/3-vm-conteneur/4-docker/7-docker-compose/index.html</loc>
+  </url>
+  <url>
     <loc>http://localhost:1313/420-414/categories/index.html</loc>
   </url>
   <url>
