@@ -248,3 +248,53 @@ sudo docker run -d -p 80:80 \
     --network my-network \
     <nom-utilisateur>/atelier-frontend:v1
 ```
+
+### Atelier 4 - Création d'un docker-compose
+Pour faciliter la publication, le déploiement des conteneurs et éviter d'utiliser des commandes avec plusieurs options, il est possible de créer un fichier de configuration décrivant toutes les options pour créer les images, mapper les ports, créer des réseaux dans Docker etc... Ce fichier s'appelle `docker-compose.yml`
+
+Voici un exemple d'un `docker-compose.yml` pour notre frontend et backend : 
+
+```yaml
+services:
+  backend:
+      image: cmvghazi/atelier-backend:v3
+      build:
+        context: ./backend
+      ports:
+        - "8787:8787"
+      networks:
+        - my-network
+  
+  frontend:
+      image: cmvghazi/atelier-frontend:v3
+      build:
+        context: ./frontend
+      ports:
+        - "80:80"
+      depends_on:
+        - backend
+      networks:
+        - my-network
+
+networks:
+  my-network:
+    driver: bridge
+```
+
+Commande pour créer une nouvelle image à partir du docker-compose et push ses images dans Docker Hub:
+```bash
+docker compose build --push
+``` 
+Commande pour seulement push de nouvelles images à partir du docker-compose.yml :
+```bash
+docker compose push
+```
+
+Commande pour démarrer les conteneurs à partir du docker-compose : 
+```bash
+docker compose up -d
+```
+
+
+
+
