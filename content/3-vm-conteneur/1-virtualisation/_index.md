@@ -1,7 +1,7 @@
 +++
 title = 'Virtualisation'
 draft = false
-weight = "301"
+weight = "310"
 +++
 
 Autrefois, les serveurs physiques fonctionnaient comme un ordinateur ordinaire. Vous disposiez d'un boîtier physique, vous installiez un système d'exploitation, puis vous installiez des applications par-dessus. 

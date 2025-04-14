@@ -1,7 +1,7 @@
 +++
 title = 'Volumes'
 draft = false
-weight = "406"
+weight = "346"
 +++
 
 Les volumes Docker sont le mécanisme privilégié pour conserver les données générées et utilisées par les conteneurs Docker. Bien que les conteneurs puissent créer, mettre à jour et supprimer des fichiers, ces modifications sont perdues lorsque le conteneur est supprimé et toutes les modifications sont isolées de ce conteneur. Les volumes permettent de connecter des chemins spécifiques du système de fichiers du conteneur à la machine hôte. Si un répertoire du conteneur est monté, les modifications apportées à ce répertoire sont également visibles sur la machine hôte. Si nous montons ce même répertoire à chaque redémarrage du conteneur, nous verrons les mêmes fichiers.

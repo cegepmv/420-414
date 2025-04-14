@@ -1,7 +1,7 @@
 +++
 title = 'Docker Compose'
 draft = false
-weight = "407"
+weight = "347"
 +++
 
 *Docker Compose* est un outil puissant pour définir et exécuter des applications Docker multi-conteneurs. Avec *Docker Compose*, vous utilisez un fichier YAML pour configurer les services, les réseaux et les volumes de votre application. Ensuite, vous pouvez créer et démarrer tous les services avec une seule commande.

@@ -1,7 +1,7 @@
 +++
 title = 'Conteneurisation'
 draft = false
-weight = "302"
+weight = "320"
 +++
 
 Comme la virtualisation, la conteneurisation permet aussi d'exécuter de nombreuses instances sur un seul hôte physique, mais sans que l'hyperviseur ne joue le rôle d'intermédiaire. 

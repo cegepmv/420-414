@@ -1,7 +1,7 @@
 +++
 title = 'Amazon EC2'
 draft = false
-weight = "303"
+weight = "330"
 +++
 
 *Amazon Elastic Compute Cloud (Amazon EC2)* est un service AWS qui permet de créer et gérer des machines virtuelles (appelées instances EC2) dans le cloud AWS.  

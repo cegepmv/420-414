@@ -1,7 +1,7 @@
 +++
 title = 'Dockerfile'
 draft = false
-weight = "404"
+weight = "344"
 +++
 
 Un Dockerfile est un fichier qui contient une série d'instructions et d'arguments. Ces instructions sont utilisées pour créer automatiquement une image Docker. Il s'agit essentiellement d'un script de commandes successives que Docker exécutera pour assembler une image, automatisant ainsi le processus de création d'image.
