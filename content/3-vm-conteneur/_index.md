@@ -1,6 +1,6 @@
 +++
 pre = '<b>3. </b>'
-title = 'VMs et Conteneurs'
+title = 'VM et Conteneur'
 draft = false
 weight = "300"
 +++

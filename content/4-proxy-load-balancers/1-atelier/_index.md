@@ -9,11 +9,11 @@ Dans ce laboratoire, nous allons implémenter trois services ainsi qu'un reverse
 ### Services
 Voici la liste des services que nous allons déployer :
 
-+ [Portainer](https://www.portainer.io/) : Un service permettant d'avoir un tableau de bors centralisé pour *monitorer* notre infrastructure *Docker*.
++ [Portainer](https://www.portainer.io/) : Un service permettant d'avoir un tableau de bord centralisé pour *monitorer* notre infrastructure *Docker*.
 
 + [Jellyfin](https://jellyfin.org/) : Un *media server* (similaire à *Plex*), permettant d'avoir une bibliothèque pour vos films, musique et séries.
 
-+ [Nextcloud](https://fr.wikipedia.org/wiki/Nextcloud) : Logiciel libre de site d'hébergement de fichiers et une plateforme de travail collaboratif (de type *OneDrive* et *Office365*). 
++ [Nextcloud](https://fr.wikipedia.org/wiki/Nextcloud) : Logiciel libre d'hébergement de fichiers et une plateforme de travail collaboratif (de type *OneDrive* et *Office365*). 
 
 + [Traefik](https://traefik.io/traefik/) : Un *reverse proxy* facile à implémenter.
 
@@ -27,19 +27,21 @@ L'infrastructure Docker est la suivante :
 
 ### Étape 1 - Déploiement d'une machine EC2
 Déployez une instance EC2 avec les spécificité suivantes : 
-+ AMI : Ubuntu 24.04 LTS
++ AMI : *Ubuntu 24.04 LTS*
++ Type de l'instance : `t2.large`
 + Groupe de sécurité : Autorise HTTP, HTTPS, SSH et tous les ports TCP.
 + Espace : 64GB
 
+
 ### Étape 2 - Déploiement des services
 
-Maintenant que notre VM EC2 est déployé, nous pouvons commencer à la configurer.  
+Maintenant que notre VM EC2 est déployée, nous pouvons commencer à la configurer.  
 
 #### 1- Connexion
 Connectez-vous par SSH à votre instance EC2 en utilisant votre éditeur préféré. 
 
 #### 2- Installation de Docker
-Installez Docker en utilisant le script donné sur le [site de la documentation de Docker](https://docs.docker.com/engine/install/ubuntu/) : 
+Installez Docker en utilisant le script disponible dans [la documentation Docker](https://docs.docker.com/engine/install/ubuntu/) : 
 ```bash
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -57,7 +59,7 @@ sudo apt-get update
 ```
 ```bash
 
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 #### 3- Déploiement de *Portainer*
@@ -196,7 +198,7 @@ Maintenant, lancez de nouveau la commande `docker compose` pour déployer les no
 sudo docker compose up -d
 ```
 
-Dans la configuration de *Nextcloud*, le port `80` du conteneur (port sur lequel *Nexcloud* écoute par défaut) est mappé sur le port `8081` de notre machine. 
+Dans la configuration de *Nextcloud*, le port `80` du conteneur (port sur lequel *Nextcloud* écoute par défaut) est mappé sur le port `8081` de notre machine. 
 
 Dans un navigateur, allez sur `<adresse IP de l'instance EC2>:8081`
 
@@ -249,8 +251,8 @@ Dans un navigateur, allez sur `<adresse IP de l'instance EC2>:8096`
 Vous serez en mesure d'accéder à la page d'accueil de *Jellyfin*. Nous n'allons par rentrer dans les détails de configuration de ce service (en dehors du *scope* du cours, mais si vous voulez avoir plus d'informations sur comment configurer *Jellyfin*, vous pouvez vous réferer à cette vidéo)
 
 
-### Étape 3 - Déploiement du proxy inverse
-Une fois que tous nos services sont maintenant déployés, le dernier service manquant est le *reverse proxy*.
+### Étape 3 - Déploiement du *reverse proxy (Traefik)*
+Une fois que tous nos services sont maintenant déployés, le dernier service à déployer est le *reverse proxy*. 
 
 #### 1- Obtention d'un nom de domaine (DuckDNS)
 Avant de déployer notre proxy inverse, il nous faut obtenir un nom de domaine.
@@ -267,7 +269,7 @@ MY_DOMAIN=votre-domaine-duck-dns.duckdns.org
 DUCKDNS_TOKEN=le token de votre compte duckDNS
 ```
 
-Dans votre fichier de configuration `compose.yml`, commentez la section `ports` (mappage de port) de chaque services puis  ajoutez les labels suivants pour chacun des services : 
+Dans votre fichier de configuration `compose.yml`, commentez la section `ports` (mappage de port) de chaque services puis ajoutez les labels suivants : 
 
 *Portainer :*
 ```yaml
@@ -303,17 +305,10 @@ Ces `labels` vont permettre à *Traefik* d'automatiquement configurer les règle
 
 + Faire passer les requêtes à *Nextcloud* lorsqu'il reçoit une requête `https://nextcloud.<votre_nom_de_domaine>` 
 
-Nous n'avons plus à exposer les ports des services déployés, ce qui ajoute un niveau de sécurité à nos applications.
+Nous n'avons plus à exposer les ports des services déployés, ce qui ajoute une couche de sécurité à notre architecture.
 
-Lancez la commande suivante pour mettre à jour vos services : 
-```bash
-sudo docker compose up --force-recreate -d
-```
-
-Ensuite, créez un nouveau fichier `compose.proxy.yml`
-et mettez-y la configuration suivante (pour *Traefik*) :
+Enfin, ajoutez la configuration de *Traefik* dans votre  `compose.yml` (sections `services`) :
 ```yaml
-services:
   proxy:
     image: traefik
     container_name: traefik
@@ -354,213 +349,392 @@ services:
       - "DUCKDNS_TOKEN=${DUCKDNS_TOKEN}"
 ```
 
-Lancez votre reverse proxy avec la commande suivante : 
+Lancez la commande suivante pour déployer *Traefik* : 
 ```bash
-sudo docker compose -f compose.proxy.yml up -d
+sudo docker compose up -d
 ```
 
-Attendez quelques minutes (le temps que traefik puisse récupérer les labels de chaque service et demander un certificat SSL/TLS pour mettre en place HTTPS), puis naviguez aux adresses `jellyfin.votredomaine.duckdns.org`, `portainer.votredomaine.duckdns.org` et `nextcloud.votredomaine.duckdns.org`.
+Attendez quelques minutes (le temps que *Traefik* puisse récupérer les labels de chaque service et demander un certificat SSL/TLS à *Let's Encrypt*). Vous pouvez aller voir dans les *logs* du conteneur `proxy` pour valider l'acquisition du certificat (sur *Portainer*).
 
-Bingo !!
+Naviguez aux adresses `jellyfin.votredomaine.duckdns.org`, `portainer.votredomaine.duckdns.org` et `nextcloud.votredomaine.duckdns.org`, vous serez en mesure d'accéder aux services.
 
-
-<!-- 
+{{% expand title="compose.yml final" %}}
 ```yaml
-  proxy:
-    image: traefik
-    container_name: traefik
-    restart: unless-stopped
-    networks: 
-        - cloud
-    command:
-      - "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns"
-      - "--certificatesresolvers.letsencrypt.acme.email=mail@mail.com"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.disablePropagationCheck=true"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-      - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.websecure.http.tls=true"
-      - "--entrypoints.websecure.http.tls.certResolver=letsencrypt"
-      - "--entrypoints.websecure.http.tls.domains[0].main=${MY_DOMAIN}"
-      - "--entrypoints.websecure.http.tls.domains[0].sans=*.${MY_DOMAIN}"
-    volumes:
-      - "../data/traefik/letsencrypt:/letsencrypt"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.api.rule=Host(`${MY_DOMAIN}`)'
-      - 'traefik.http.routers.api.entryPoints=websecure'
-      - 'traefik.http.routers.api.service=api@internal'
-    ports:
-      - "443:443"
-      - "80:80"
-    environment:
-      DUCKDNS_TOKEN: "${DUCKDNS_TOKEN}"
-```
-
-
-```yaml
-
 services:
-  proxy:
-    image: traefik
-    container_name: traefik
-    restart: unless-stopped
-    networks: 
-        - cloud
-    command:
-      - "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns"
-      - "--certificatesresolvers.letsencrypt.acme.email=mail@mail.com"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.disablePropagationCheck=true"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-      - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.websecure.http.tls=true"
-      - "--entrypoints.websecure.http.tls.certResolver=letsencrypt"
-      - "--entrypoints.websecure.http.tls.domains[0].main=${MY_DOMAIN}"
-      - "--entrypoints.websecure.http.tls.domains[0].sans=*.${MY_DOMAIN}"
-    volumes:
-      - "../data/traefik/letsencrypt:/letsencrypt"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.api.rule=Host(`${MY_DOMAIN}`)'
-      - 'traefik.http.routers.api.entryPoints=websecure'
-      - 'traefik.http.routers.api.service=api@internal'
-    ports:
-      - "443:443"
-      - "80:80"
-    environment:
-      DUCKDNS_TOKEN: "${DUCKDNS_TOKEN}"
-
-  jellyfin:
-    container_name: jellyfin
-    image: jellyfin/jellyfin:latest
-    restart: unless-stopped
-    networks: 
-        - cloud
-    labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.jellyfin.rule=Host(`jellyfin.${MY_DOMAIN}`)'
-      - 'traefik.http.routers.jellyfin.entryPoints=websecure'
-    environment:
-      - TZ=Europe/Amsterdam
-    volumes:
-      - ../data/jellyfin:/config
-      - /mnt/media/Movies:/movies
-      - /mnt/media/TV:/tv
-
   portainer:
+    # Image de portainer officielle (ce=community edition, alpine=légère) 
     image: portainer/portainer-ce:alpine
+    # Nom donné au conteneur 
     container_name: portainer
+    # Dans le cas où le conteneur s'arrête/crash, il est automatiquement relancé 
+    restart: unless-stopped
+    # Réseau docker dans lequel le conteneur va s'exécuter
     networks: 
         - cloud
+    # Mappage de port (du port 9000 du conteneur vers le port 9000 de la machine hôte)
+    #ports:
+    #  - 9000:9000
+    # Volumes 
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "portainer_data:/data"
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
     labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.portainer.rule=Host(`portainer.${MY_DOMAIN}`)'
-      - 'traefik.http.routers.portainer.entryPoints=websecure'
-      - "traefik.http.services.frontend.loadbalancer.server.port=9000"
-      - "traefik.http.routers.frontend.service=frontend"
-    restart: unless-stopped
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.portainer.rule=Host(`portainer.${MY_DOMAIN}`)'
+        - 'traefik.http.routers.portainer.entryPoints=websecure'
+        - "traefik.http.services.frontend.loadbalancer.server.port=9000"
+        - "traefik.http.routers.frontend.service=frontend"
+
 
   nextclouddb:
-      image: mariadb # offical mariadb image
-      container_name: nextcloud-db 
-      restart: unless-stopped 
-      command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
-      networks: 
-        - cloud
-      volumes:
-        - ./nextclouddb:/var/lib/mysql
-      environment:
-        - PUID=1000 # Should be the same as the other containers
-        - PGID=1000
-        - TZ=America/Los_Angeles
-        - MYSQL_RANDOM_ROOT_PASSWORD=true
-        - MYSQL_PASSWORD=${DB_PASSWORD} # Same information that was entered in the nextcloud portion
-        - MYSQL_DATABASE=${DB_DATABASE}
-        - MYSQL_USER=${DB_USER}
-
-  collabora:
-      image: collabora/code:latest
-      container_name: collabora
-      restart: unless-stopped
-      networks: 
-        - cloud
-      labels:
-        - 'traefik.enable=true'
-        - 'traefik.http.routers.collabora.rule=Host(`collabora.${MY_DOMAIN}`)'
-        - 'traefik.http.routers.collabora.entryPoints=websecure'
-      environment:
-        - PUID=1000
-        - PGID=1000
-        - TZ=America/Montreal # Should be the same as the others 
-        - password=password 
-        - username=nextcloud
-        - domain=nextcloud.${MY_DOMAIN} # domain your nextcloud is on
+    # Image mariadb officielle pour entreposer les données de nextcloud
+    image: mariadb
+    # Nom donné au conteneur 
+    container_name: nextcloud-db 
+    # Dans le cas où le conteneur s'arrête/crash, il est automatiquement relancé 
+    restart: unless-stopped 
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    # Réseau dans lequel le conteneur va s'exécuter (dans le même réseau que nextcloud)
+    networks: 
+      - cloud
+    # Volumes du conteneur: mappe un répertoire du conteneur vers un volume docker pour faire persister les données
+    volumes:
+      - nextclouddb:/var/lib/mysql
+    # Variables d'environnement passés au conteneur lors de son lancement
+    environment:
+      - PUID=1000
+      - PGID=1000
+      # Timezone
+      - TZ=America/Montreal
+      # Indentifiants, mots de passe de la base de données
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
 
   nextcloud:
-      image: nextcloud # The image that will be used. The official nextcloud docker
-      container_name: nextcloud # Just the name of the container. Help you identify it
-      restart: unless-stopped # If something happens like the container crashes then we want the container to start up again
-      networks: # Link all the containers through the network "cloud"
-        - cloud
-      depends_on: # Wait for the database and redis containers before starting nextcloud
-        - nextclouddb 
-      ports: # If you have multiple web service on your server you need to change the port. I am directing nextcloud from port 80 to port 8081
-        - 8081:80
-      volumes: # These are important. This will map a file directory inside the container to a directory on your actual computer
-        - ./html:/var/www/html # Map the /var/www/html directory in the container to the html folder in the same folder as the docker-compose.yml
-        - ./custom_apps:/var/www/html/custom_apps # These volumes allow us to easily interact with the files in the container
-        - ./config:/var/www/html/config
-        - ./data:/var/www/html/data
-      labels:
+    # Image nextcloud officielle 
+    image: nextcloud
+    # Nom donné au conteneur 
+    container_name: nextcloud
+    # Dans le cas où le conteneur s'arrête/crash, il est automatiquement relancé 
+    restart: unless-stopped
+    # Réseau dans lequel le conteneur va s'exécuter (dans le même réseau que la BD)
+    networks:
+      - cloud
+    # Attend que la base de données se lance avant de se lancer
+    depends_on:
+      - nextclouddb 
+    # Mappage de port (du port 80 du conteneur vers le port 8081 de la machine hôte)
+    # ports:
+    #  - 8081:80
+    # Volumes du conteneur: mappe un répertoire du conteneur vers un répertoire de la machine hôte
+    volumes:
+      - ./html:/var/www/html 
+      - ./custom_apps:/var/www/html/custom_apps
+      - ./config:/var/www/html/config
+      - ./data:/var/www/html/data
+    # Variables d'environnement passés au conteneur lors de son lancement
+    environment:
+      - PUID=1000 # The user ids. Most likely both should be 1000. Incorrectly setting these will led to file permission issues
+      - PGID=1000 # Set these to whatever your user is.
+      # Timezone
+      - TZ=America/Montreal
+      # Indentifiants, mots de passe de la base de données
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+    labels:
         - 'traefik.enable=true'
         - 'traefik.http.routers.nextcloud.rule=Host(`nextcloud.${MY_DOMAIN}`)'
         - 'traefik.http.routers.nextcloud.entryPoints=websecure'
+
+
+  jellyfin:
+    # Image jellyfin officielle
+    image: jellyfin/jellyfin:latest
+    # Nom donné au conteneur 
+    container_name: jellyfin
+    # Dans le cas où le conteneur s'arrête/crash, il est automatiquement relancé 
+    restart: unless-stopped
+    # Réseau dans lequel le conteneur va s'exécuter
+    networks: 
+      - cloud
+    # Mappage de port (du port 8096 du conteneur vers le port 8096 de la machine hôte)
+    # ports:
+    #  - 8096:8096
+    environment:
+      - TZ=America/Montreal
+    # Volumes du conteneur: mappe des répertoires du conteneur vers des répertoire de la machine hôte
+    volumes:
+      - jellyfin_data:/config
+      - /mnt/media/Movies:/movies
+      - /mnt/media/TV:/tv
+    labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.jellyfin.rule=Host(`jellyfin.${MY_DOMAIN}`)'
+        - 'traefik.http.routers.jellyfin.entryPoints=websecure'
+  proxy:
+      image: traefik
+      container_name: traefik
+      restart: unless-stopped
+      networks: 
+          - cloud
+      command:
+        - "--log.level=DEBUG"
+        - "--api.insecure=true"
+        - "--providers.docker=true"
+        - "--providers.docker.exposedbydefault=false"
+        - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
+        - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns"
+        - "--certificatesresolvers.letsencrypt.acme.email=mail@mail.com"
+        - "--certificatesresolvers.letsencrypt.acme.dnschallenge.disablePropagationCheck=true"
+        - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
+        - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+        - "--entrypoints.web.address=:80"
+        - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+        - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+        - "--entrypoints.websecure.address=:443"
+        - "--entrypoints.websecure.http.tls=true"
+        - "--entrypoints.websecure.http.tls.certResolver=letsencrypt"
+        - "--entrypoints.websecure.http.tls.domains[0].main=${MY_DOMAIN}"
+        - "--entrypoints.websecure.http.tls.domains[0].sans=*.${MY_DOMAIN}"
+      volumes:
+        - "../data/traefik/letsencrypt:/letsencrypt"
+        - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.api.rule=Host(`${MY_DOMAIN}`)'
+        - 'traefik.http.routers.api.entryPoints=websecure'
+        - 'traefik.http.routers.api.service=api@internal'
+      ports:
+        - "443:443"
+        - "80:80"
       environment:
-        - PUID=1000 # The user ids. Most likely both should be 1000. Incorrectly setting these will led to file permission issues
-        - PGID=1000 # Set these to whatever your user is.
-        - TZ=America/Los_Angeles # Set this to your timezone
-        - MYSQL_PASSWORD=${DB_PASSWORD} # Same information that was entered in the nextcloud portion
-        - MYSQL_DATABASE=${DB_DATABASE}
-        - MYSQL_USER=${DB_USER}
-        - REDIS_HOST=${REDIS_HOST} # The redis container to use
+        - "DUCKDNS_TOKEN=${DUCKDNS_TOKEN}"
 
-
-
+# Définition des volumes des conteneurs (portainer et bd)
 volumes:
-  portainer_data:
-
-
+    portainer_data:
+    nextclouddb:
+    jellyfin_data:
+# Création du réseau cloud (ou les conteneurs vont être lancés)
 networks:
-  cloud:
-    driver: bridge
-
+    cloud:
+        driver: bridge
 ```
-```bash
+{{% /expand%}}
 
-MY_DOMAIN=tp310239.duckdns.org
-DUCKDNS_TOKEN=4ef983df-80ff-499c-b67d-095398eacddc
+### Challenge
+Ajoutez l'application *fullstack [Movies-Gold](https://github.com/gbenachour/movies-gold/tree/main)* à vos services. Celle-ci doit être accessible via `https://movies-gold.<votre-domaine>.duckdns.org` 
+<!-- 
+services:
+  portainer:
+    # Image de portainer officielle (ce=community edition, alpine=légère) 
+    image: portainer/portainer-ce:alpine
+    # Nom donné au conteneur 
+    container_name: portainer
+    # Dans le cas où le conteneur s'arrête/crash, il est automatiquement relancé 
+    restart: unless-stopped
+    # Réseau docker dans lequel le conteneur va s'exécuter
+    networks: 
+        - cloud
+    # Mappage de port (du port 9000 du conteneur vers le port 9000 de la machine hôte)
+    #ports:
+    #  - 9000:9000
+    # Volumes 
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.portainer.rule=Host(`portainer.${MY_DOMAIN}`)'
+        - 'traefik.http.routers.portainer.entryPoints=websecure'
+        - "traefik.http.services.frontend.loadbalancer.server.port=9000"
+        - "traefik.http.routers.frontend.service=frontend"
+
+
+  nextclouddb:
+    # Image mariadb officielle pour entreposer les données de nextcloud
+    image: mariadb
+    # Nom donné au conteneur 
+    container_name: nextcloud-db 
+    # Dans le cas où le conteneur s'arrête/crash, il est automatiquement relancé 
+    restart: unless-stopped 
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    # Réseau dans lequel le conteneur va s'exécuter (dans le même réseau que nextcloud)
+    networks: 
+      - cloud
+    # Volumes du conteneur: mappe un répertoire du conteneur vers un volume docker pour faire persister les données
+    volumes:
+      - nextclouddb:/var/lib/mysql
+    # Variables d'environnement passés au conteneur lors de son lancement
+    environment:
+      - PUID=1000
+      - PGID=1000
+      # Timezone
+      - TZ=America/Montreal
+      # Indentifiants, mots de passe de la base de données
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+
+  nextcloud:
+    # Image nextcloud officielle 
+    image: nextcloud
+    # Nom donné au conteneur 
+    container_name: nextcloud
+    # Dans le cas où le conteneur s'arrête/crash, il est automatiquement relancé 
+    restart: unless-stopped
+    # Réseau dans lequel le conteneur va s'exécuter (dans le même réseau que la BD)
+    networks:
+      - cloud
+    # Attend que la base de données se lance avant de se lancer
+    depends_on:
+      - nextclouddb 
+    # Mappage de port (du port 80 du conteneur vers le port 8081 de la machine hôte)
+    # ports:
+    #  - 8081:80
+    # Volumes du conteneur: mappe un répertoire du conteneur vers un répertoire de la machine hôte
+    volumes:
+      - ./html:/var/www/html 
+      - ./custom_apps:/var/www/html/custom_apps
+      - ./config:/var/www/html/config
+      - ./data:/var/www/html/data
+    # Variables d'environnement passés au conteneur lors de son lancement
+    environment:
+      - PUID=1000 # The user ids. Most likely both should be 1000. Incorrectly setting these will led to file permission issues
+      - PGID=1000 # Set these to whatever your user is.
+      # Timezone
+      - TZ=America/Montreal
+      # Indentifiants, mots de passe de la base de données
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+    labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.nextcloud.rule=Host(`nextcloud.${MY_DOMAIN}`)'
+        - 'traefik.http.routers.nextcloud.entryPoints=websecure'
+
+
+  jellyfin:
+    # Image jellyfin officielle
+    image: jellyfin/jellyfin:latest
+    # Nom donné au conteneur 
+    container_name: jellyfin
+    # Dans le cas où le conteneur s'arrête/crash, il est automatiquement relancé 
+    restart: unless-stopped
+    # Réseau dans lequel le conteneur va s'exécuter
+    networks: 
+      - cloud
+    # Mappage de port (du port 8096 du conteneur vers le port 8096 de la machine hôte)
+    # ports:
+    #  - 8096:8096
+    environment:
+      - TZ=America/Montreal
+    # Volumes du conteneur: mappe des répertoires du conteneur vers des répertoire de la machine hôte
+    volumes:
+      - jellyfin_data:/config
+      - /mnt/media/Movies:/movies
+      - /mnt/media/TV:/tv
+    labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.jellyfin.rule=Host(`jellyfin.${MY_DOMAIN}`)'
+        - 'traefik.http.routers.jellyfin.entryPoints=websecure'
+  proxy:
+      image: traefik
+      container_name: traefik
+      restart: unless-stopped
+      networks: 
+          - cloud
+      command:
+        - "--log.level=DEBUG"
+        - "--api.insecure=true"
+        - "--providers.docker=true"
+        - "--providers.docker.exposedbydefault=false"
+        - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
+        - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns"
+        - "--certificatesresolvers.letsencrypt.acme.email=mail@mail.com"
+        - "--certificatesresolvers.letsencrypt.acme.dnschallenge.disablePropagationCheck=true"
+        - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
+        - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+        - "--entrypoints.web.address=:80"
+        - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+        - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+        - "--entrypoints.websecure.address=:443"
+        - "--entrypoints.websecure.http.tls=true"
+        - "--entrypoints.websecure.http.tls.certResolver=letsencrypt"
+        - "--entrypoints.websecure.http.tls.domains[0].main=${MY_DOMAIN}"
+        - "--entrypoints.websecure.http.tls.domains[0].sans=*.${MY_DOMAIN}"
+      volumes:
+        - "../data/traefik/letsencrypt:/letsencrypt"
+        - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.api.rule=Host(`${MY_DOMAIN}`)'
+        - 'traefik.http.routers.api.entryPoints=websecure'
+        - 'traefik.http.routers.api.service=api@internal'
+      ports:
+        - "443:443"
+        - "80:80"
+      environment:
+        - "DUCKDNS_TOKEN=${DUCKDNS_TOKEN}"
+
+  frontend:
+    image: cmvghazi/movies-frontend:v1
+    container_name: movies-frontend
+    build:
+      context: ./movies-frontend
+    #ports:
+    #  - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - cloud
+    labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.movies-gold.rule=Host(`movies-gold.${MY_DOMAIN}`)'
+        - 'traefik.http.routers.movies-gold.entryPoints=websecure'
+  backend:
+    image: cmvghazi/movies-backend:v1
+    container_name: movies-backend
+    # In case you just want to deploy the backend and access it
+    # without deploying the frontend, add a port mapping
+    # ports:
+    #   - "8080:8080"
+    depends_on:
+      - mongodb
+    networks:
+      - cloud
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_URL}:${MONGO_PORT}/${MONGO_DATABASE}?authSource=admin
+      - SERVER_PORT=${API_PORT}
+
+  mongodb:
+    image: mongo:8.0.6
+    networks:
+      - cloud
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    volumes:
+      - db:/data/db
+      # ./mongo-seed folder contains a script to populate the database
+      # this script will be copied inside the container and will run 
+      # when the container starts
+      - ./mongo-seed:/docker-entrypoint-initdb.d
+
+# Définition des volumes des conteneurs (portainer et bd)
+volumes:
+    portainer_data:
+    nextclouddb:
+    jellyfin_data:
+    db:
+# Création du réseau cloud (ou les conteneurs vont être lancés)
+networks:
+    cloud:
+        driver: bridge
 
 
 
@@ -569,8 +743,16 @@ DB_PASSWORD=dbpassword
 DB_DATABASE=nextcloud
 DB_USER=nextcloud
 
+#### REVERSE PROXY ####
+MY_DOMAIN="atelier-cloud.duckdns.org"
+DUCKDNS_TOKEN="4ef983df-80ff-499c-b67d-095398eacddc"
 
-### Collabora
-COLLABORA_USERNAME=nexcloud
-COLLABORA_PASSWORD=password
-``` -->
+
+#### MOVIES-BACKEND
+API_PORT=8080
+MONGO_DATABASE=movie-api-db
+MONGO_USER=root
+MONGO_PASSWORD=123456
+MONGO_URL=mongodb
+MONGO_PORT=27017
+-->

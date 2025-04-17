@@ -1,6 +1,6 @@
 +++
 pre = '<b>4. </b>'
-title = 'Proxy et équilibreurs de charge'
+title = 'Proxy et Load Balancer'
 draft = false
 weight = "400"
 +++
