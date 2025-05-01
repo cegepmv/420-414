@@ -74,7 +74,7 @@ sudo apt install terraform
 + Dans la section `AWS CLI`, copiez les identifiants puis collez les dans le fichier `~/.aws/credentials`.
 
 #### Étape 2 - Création d'un fichier de configuration
-```
+```hcl
 terraform {
   required_providers {
     aws = {
@@ -134,7 +134,7 @@ terraform destroy
 ### Changer l'infrastructure
 
 ### Variables
-```
+```hcl
 variable "instance_name" {
   description = "Value of the Name tag for the EC2 instance"
   type        = string
@@ -142,7 +142,7 @@ variable "instance_name" {
 }
 ```
 ### Outputs
-```
+```hcl
 output "instance_id" {
   description = "ID de l'instance EC2"
   value       = aws_instance.app_server.id
@@ -152,9 +152,8 @@ output "instance_public_ip" {
   description = "Adresse IP publique de l'instance EC2"
   value       = aws_instance.app_server.public_ip
 }
-
-
 ```
+
 ```bash
 terraform output
 ```
