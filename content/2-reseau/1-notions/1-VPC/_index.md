@@ -11,19 +11,25 @@ weight = "211"
 
 
 **Définition simplifiée :** 
-+ Un VPC (Virtual Private Cloud) est une sous-section privée d'AWS que vous contrôlez et dans laquelle vous pouvez placer des ressources AWS (telles que des instances EC2 et des bases de données). Vous avez un **contrôle total** sur l'accès aux ressources AWS que vous déployez dans votre VPC.
++ Un VPC (Virtual Private Cloud) est une section privée et logiquement isolée du cloud AWS dans laquelle vous pouvez déployer des ressources (instances EC2, bases de données, services, etc.).
+
+Vous avez un contrôle total sur :
++ l’adressage IP,
++ le routage,
++ l’accès réseau,
++ les mécanismes de sécurité.
+
+
 
 **Définition d'AWS :**
 + *Amazon Virtual Private Cloud (VPC)* permet de mettre en service une section **logiquement isolée** du cloud AWS où vous pouvez lancer des ressources dans un **réseau virtuel** que **vous** définissez. 
 
-+ Amazon VPC vous permet de **contrôler vos ressources de réseau virtuel**, notamment : 
-    + la sélection d'une plage d'adresses IP
-    + la création de **sous-réseaux**
-    + la configuration de **tables de routage** et de **passerelles réseau**.
-
-+ Vous permet de **personnaliser la configuration réseau** de votre VPC.
-
-+ Vous permet d'utiliser **plusieurs couches de sécurité**.
+Amazon VPC permet notamment :
++ la sélection d’une plage d’adresses IP (CIDR),
++ la création de sous-réseaux,
++ la configuration des tables de routage,
++ l’utilisation de passerelles réseau,
++ la mise en place de plusieurs couches de sécurité.
 
 <!-- 
 ![VPC-analogie](/420-414/images/2-reseau/2-01.png) 
@@ -41,16 +47,22 @@ weight = "211"
 
 ![VPC et sous-réseaux](/420-414/images/2-reseau/2-17-vpc-sous-reseaux.png)
 
+#### VPC
++ Un VPC :
+    + est logiquement isolé des autres VPC,
+    + est dédié à un compte AWS,
+    + appartient à une seule région AWS,
+    + peut s’étendre sur plusieurs zones de disponibilité.
 
-+ **VPC :**
-    + **Logiquement isolées** des autres VPC.
-    + **Dédiés** à votre compte AWS.
-    + Appartiennent à **une seule région AWS** et peuvent s'étendre sur **plusieurs zones de disponibilité**.
+#### Sous-réseaux (Subnets)
+Les sous-réseaux sont des subdivisions du VPC.
++ Ils correspondent à des plages d’adresses IP.
++ Chaque sous-réseau appartient à une seule zone de disponibilité.
++ Ils sont généralement classés comme :
+    + sous-réseaux publics
+    + sous-réseaux privés
 
-+ **Sous-réseaux :**
-    + **Plages d'adresses IP** qui divient un VPC.
-    + Appartiennent à **une seule zone de disponibilité**.
-    + Classés comme **publics** ou **privé**
+La distinction public / privé dépend principalement de la **table de routage** associée au sous-réseau.
 
 
 ### Adressage IP
@@ -58,17 +70,13 @@ weight = "211"
 ![Adressage IP dans un VPC](/420-414/images/2-reseau/2-18-adressage-ip.png?width=30rem)
 
 
-+ Lorsque vous créez un VPC, vous l'affectez à un **bloc d'adresse CIDR** IPv4 (plage d'adresses IPv4 **privées**).
-
-+ Une fois que vous avez crée le VPC, nous **ne pouvez plus modifier la plage d'adresses**.
-
-+ La **plus grande** taille de bloc d'adresse CIDR IPv4 est **/16**.
-
-+ La **plus petite** taille de bloc d'adresse CIDR IPv4 est **/28**.
-
+Lors de la création d’un VPC, vous devez lui attribuer un **bloc CIDR IPv4 privé**.
+#### Règles importantes
++ La plage d’adresses du VPC ne peut pas être modifiée après sa création.
++ Taille maximale du bloc IPv4 : /16
++ Taille minimale du bloc IPv4 : /28
++ Les blocs CIDR des sous-réseaux ne peuvent pas se chevaucher.
 + IPv6 est également pris en charge.
-
-+ Les blocs d'adresses CIDR des sous-réseaux **ne peuvent pas se chevaucher**.
 
 
 #### Adresses réservées
@@ -90,37 +98,47 @@ weight = "211"
 #### Types d'adresses IP publiques
 
 **Adresse IP privées :**
-+ On attribue une adresse IP privée à ahaque machine déployée dans un sous-réseau. Cette adresse IP est inclue dans la plage d'adresses du sous-réseau.
++ Attribuées automatiquement à chaque instance dans un sous-réseau.
++ Incluses dans la plage CIDR du sous-réseau.
++ Utilisées pour la communication interne au VPC.
+
 
 **Adresse IPv4 publique :**
-+ Attribuée manuellement via une adresse IP *Elastic*
-+ Attribuée automatiquement
++ Permettent l’accès direct depuis Internet.
++ Peuvent être :
+    + attribuées automatiquement,
+    + associées manuellement via une **Elastic IP**.
 
 **Adresse IP *Elastic***
-+ Associée à un compte AWS
-+ Peut être allouée et remappée à tout moment
++ Adresse IPv4 publique statique.
++ Associée à un **compte AWS**.
++ Peut être remappée vers une autre instance à tout moment.
+
 
 ### Interface réseau Elastic
-+ Une interface réseau Elastic est une **interface réseau virtuelle** que vous pouvez :
-    + Attacher à une instance
-    + Détacher de l'instance et attacher à une autre instance pour rediriger le trafic réseau
+Une **Elastic Network Interface (ENI)** est une interface réseau virtuelle.
 
-+ Ses attributs sont conservés lorsqu'elle est rattachée à une nouvelle instance.
+Elle peut être :
++ attachée à une instance,
++ détachée puis rattachée à une autre instance.
 
-+ Chaque instanbce de votre VPC possède une interface réseau par défaut à laquelle est attribuée une adresse IPv4 à partir de la plage d'adresses IPv4 de votre VPC.
+Ses attributs (adresse IP, groupes de sécurité) sont conservés lors du rattachement.
+
+Chaque instance possède au minimum **une ENI par défaut**.
 
 ### Tables de routage et routes
 
 ![Route par défaut](/420-414/images/2-reseau/2-20-table-de-routage.png)
 
 
-+ Une **table de routage** contient un ensemble de règles (ou **routes**) que vous pouvez configurer pour **déterminer où le trafic réseau doit être dirigé** depuis votre sous-réseau.
+Une **table de routage** contient un ensemble de règles (routes) qui déterminent où le trafic réseau est dirigé.
 
-+ Chaque route spécifie une destination et une cible.
+Chaque route définit :
++ une **destination** (CIDR),
++ une **cible** (IGW, NAT Gateway, etc.).
++ Chaque sous-réseau doit être associé à **une table de routage**.
+Par défaut, une route locale permet la communication interne au VPC.
 
-+ Par défaut, chaque table de routage contient la route locale pour la communication au sein du VPC.
-
-+ Chaque sous-réseau **doit être associé à une table de routage** (au plus une).
 
 {{% notice style="info" title="Note"%}}
 + Pensez une table de routage comme un **GPS** : Elle redirige les données vers la destination (adresse IP de destination). 

@@ -8,11 +8,11 @@ weight = "212"
 
 <!-- ![IGW](/420-414/images/2-reseau/2-05.png) -->
 
-**Définition simplifiée** 
-+ Une combinaison de matériel et de logiciel qui fournit à votre *VPC* une **route** vers le monde extérieur (c'est-à-dire l'Internet).
 
-**Définition AWS** 
-+ *"Une passerelle Internet est un composant VPC **redondant** et **hautement disponible**, mis à l'echelle horizontalement, qui permet la **communication entre les instances de votre VPC et Internet**. Elle n'impose donc aucun risque de disponibilité ni aucune contrainte de bande passante à votre trafic réseau.*
+
++ Une **Internet Gateway** permet la communication entre les ressources d’un VPC et Internet.
+
++ **Définition AWS :** *Une passerelle Internet est un composant VPC redondant, hautement disponible et mis à l’échelle horizontalement*.
 
 ![IGW](/420-414/images/2-reseau/2-21-passerelle-internet.png)
 
@@ -23,9 +23,18 @@ weight = "212"
 
 ### Passerelle NAT
 
+Une **NAT Gateway** permet aux instances situées dans un **sous-réseau privé** d’accéder à Internet **sans être accessibles depuis Internet**.
 
-**Définition AWS**
-+ *"Une passerelle NAT est un service de traduction d'adresses réseau (NAT). Vous pouvez utiliser une passerelle NAT afin que les instances d'un **sous-réseau privé** puissent se **connecter à des services en dehors de votre VPC** (sur Internet), mais que les **services externes ne puissent pas initier une connexion** avec ces instances."*
+#### Fonctionnement
+
++ Les instances privées initient la connexion.
++ Les connexions entrantes depuis Internet sont bloquées.
+
+Ce mécanisme est essentiel pour :
++ les mises à jour système,
++ l’accès à des API externes,
++ la sécurité des instances privées.
+
 
 ![Passerelle NAT](/420-414/images/2-reseau/2-22-passerelle-nat.png)
 

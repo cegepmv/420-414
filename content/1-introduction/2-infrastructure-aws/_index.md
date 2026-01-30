@@ -5,62 +5,100 @@ draft = false
 weight = "120"
 +++
 
-AWS possède une infrastructure immense, avec des centres de données (*data centers*) déployés sur les quatre coins du globe. AWS a une façon spécifique de séparer logiquement et physiquement son infrastructure pour permettre une disponibilité et une redondance optimale.
+Amazon Web Services (AWS) repose sur l’une des infrastructures informatiques les plus vastes et les plus avancées au monde. Des centres de données sont déployés aux quatre coins du globe afin d’offrir des services performants, résilients et hautement disponibles.
+AWS organise son infrastructure selon une **séparation logique et physique bien définie**, ce qui permet de limiter l’impact des pannes, d’assurer la redondance des données et de garantir une continuité de service optimale.
 
-### Régions
-+ Une **région** AWS est une zone géographique.
-    + **Vous** contrôlez la réplication des données entre les régions.
-    + La communication entre les régions s'effecture par le biais de l'infrastructure réseau de AWS.
+## Infrastructure AWS : vue d’ensemble
+L’infrastructure mondiale d’AWS est structurée en plusieurs niveaux :
++ Régions
++ Zones de disponibilité (Availability Zones)
++ Centres de données
++ Edge Locations
 
-+ Chaque région AWS assure une **redondance** et une **connectivité** complète au réseau AWS.
-
-+ Une région se compose de deux **zones de disponibilité** ou plus.
-
-### Zones de disponibilité
-+ Chaque **région** compte plusieurs zones de disponibilité (*Availability Zones* ou *AZs*).
-
-+ Chaque **zone de disponibilité** est une partition entièrement isolée de l'infrastructure mondiale AWS.
-    + Les zones de disponibilité consistent en un ou plusieurs centres de données (typiquement 3).
-    + Elles sont **isolées** et conçues pour l'isolation des défaillances : Chaque zone de disponibilité a sa propre source d'alimentation et est physiquement séparée des autres zones de disponibilités.
-    + Elles sont i**nterconnectées avec d'autres zones de disponibilité** via des **réseaux privés à haut débit** : permet d'avoir une réplication syncrone et rapide des données (très peu de latence). 
-    + **Vous** choisissez vos zones de disponibilité.
-
-+ **AWS recommande de répliquer les données et les ressources dans minimum 2 zones de disponibilité** pour garantir la résilience de vos services.
+Cette organisation hiérarchique permet aux architectes et ingénieurs cloud de concevoir des systèmes tolérants aux pannes et capables de s’adapter à une échelle mondiale.
 
 
-**Exemple**
+
+### Les régions AWS
+Une **région AWS** correspond à une zone géographique distincte (par exemple : Canada Central, Europe de l’Ouest, Asie-Pacifique).
+
+**Caractéristiques des régions**
++ Vous **contrôlez la réplication des données** entre les régions.
++ La communication entre les régions s’effectue via le **réseau privé mondial d’AWS**.
++ Chaque région est conçue pour offrir une **redondance interne** et une connectivité complète avec l’infrastructure AWS.
++ Les régions sont **isolées les unes des autres**, ce qui permet de répondre à des exigences de conformité, de latence ou de souveraineté des données.
+
+Une région AWS est composée d’au minimum **deux zones de disponibilité**, mais la plupart en comptent trois ou plus.
+
+### Zones de disponibilité (*Availability Zones*)
+Les **zones de disponibilité** (*AZs*) sont des partitions totalement isolées à l’intérieur d’une même région.
+
+#### Caractéristiques des zones de disponibilité
+
++ Chaque zone de disponibilité est physiquement séparée des autres.
++ Une AZ regroupe un ou plusieurs centres de données (généralement trois).
++ Chaque zone possède sa propre alimentation électrique, son propre réseau et ses propres systèmes de refroidissement.
++ Elles sont conçues pour l’isolation des défaillances : une panne dans une AZ n’affecte pas les autres.
++ Les AZs sont interconnectées par des liens réseau privés à très haut débit et à faible latence, ce qui permet une réplication rapide (souvent synchrone) des données.
+
+#### Bonnes pratiques
+AWS recommande de déployer les applications critiques sur **au moins deux zones de disponibilité** afin d’assurer la résilience et la continuité de service.
+
+Vous choisissez explicitement les zones de disponibilité utilisées lors du déploiement de vos ressources.
+
+
+#### Exemple 
 
 ![Exemple Régions et Zones de disponibilité](/420-414/images/1-introduction/1-07-aws-regions-az.png)
 
-+ La région Virginie du Nord possède 6 zones de disponibilité : *us-east-1a*, *us-east-1b*, *us-east-1c*, *us-east-1d*, *us-east-1e*, *us-east-1f*
-+ Une application s'exécute sur plusieurs zones : *1a*, *1b* et *1c*, mais la zone *1a* tombe en panne => votre application fonctionnera toujours dans les zones 1b et 1c.
+La région Virginie du Nord possède 6 zones de disponibilité : *us-east-1a*, *us-east-1b*, *us-east-1c*, *us-east-1d*, *us-east-1e*, *us-east-1f*
+
+Si une application est déployée sur les zones **1a, 1b et 1c**, et que la zone **1a** subit une panne, l’application continue de fonctionner normalement grâce aux zones **1b et 1c**.
 
 ### Centres de données
-+ Les centres de données AWS sont conçus pour la **sécurité**.
+Les **centres de données** sont les installations physiques où les données sont stockées et où les traitements informatiques ont lieu.
 
-+ Les centres de données sont l'emplacement où les données sont hébergées et où le traitement des données a lieu.
+#### Caractéristiques des centres de données
++ Conçus avec un **haut niveau de sécurité physique**.
++ Chaque centre dispose d’une alimentation, d’un réseau et d’une connectivité redondants.
++ Les centres de données sont hébergés dans des installations distinctes afin de limiter les risques communs.
++ Un centre de données AWS contient généralement entre 50 000 et 80 000 serveurs physiques.
 
-+ Chaque centre de données dispose d'une alimentation, d'un réseau et d'une connectivité redondants et est hébergé dans une installation distincte des autres centres de données.
+Ces centres constituent la base matérielle sur laquelle reposent tous les services AWS.
 
-+ Un centre de données compte généralement entre 50 000 et 80 000 serveurs physiques !
+### Les Edge Locations
+Les *Edge Locations* sont des points de présence AWS répartis dans de nombreuses villes à travers le monde, souvent plus proches des utilisateurs finaux que les régions AWS.
+
+#### À quoi servent les Edge Locations ?
+Les Edge Locations ont pour objectif principal de **réduire la latence** et d’améliorer les performances pour les utilisateurs finaux.
+
+Elles sont principalement utilisées par des services comme :
++ **Amazon CloudFront** (réseau de diffusion de contenu – CDN),
++ **AWS Shield** et **AWS WAF** (sécurité),
++ **Route 53** (résolution DNS).
+#### Fonctionnement
++ Les contenus (images, vidéos, fichiers statiques, pages web) sont mis en cache dans les Edge Locations.
++ Lorsqu’un utilisateur fait une requête, celle-ci est traitée par le point de présence le plus proche géographiquement.
++ Cela permet de réduire le temps de réponse, la charge sur les régions AWS et la consommation de bande passante.
+
+Les Edge Locations ne remplacent pas les régions ou les zones de disponibilité : elles les complètent en rapprochant les services des utilisateurs.
 
 
 ### Avantages de l'infrastructure AWS
 
 ![Caractéristiques de l'Infrastructure AWS](/420-414/images/1-introduction/1-09-caracteristiques-infra-aws.png)
 
-+ **Élasticité et mise à l'échelle (*scalability*) :**
-    + Infrastructure élastique, adaptation dynamique de la capacité
-    + Infrastructure évolutive, adaptation à la croissance
+#### Élasticité et mise à l’échelle (Scalability)
++ Infrastructure élastique : adaptation dynamique de la capacité selon la demande.
++ Infrastructure évolutive : accompagnement de la croissance des applications sans refonte majeure.
+#### Tolérance aux pannes
++ Fonctionnement continu même en cas de défaillance matérielle ou logicielle.
++ Redondance intégrée à tous les niveaux de l’infrastructure.
+#### Haute disponibilité
++ Haut niveau de performance opérationnelle.
++ Réduction significative des temps d’arrêt (downtime).
++ Automatisation avancée limitant les interventions humaines.
 
-+ **Tolérance aux pannes :**
-    + Fonctionnement continu en cas de panne
-    + Redondance intégrée des composants
-
-+ **Haute disponibilité :**
-    + Haut niveau de performances opérationnelles
-    + Temps d'arrêt réduit (*down time*)
-    + Aucune intervention humaine nécessaire
 
 {{% notice style="debug" title="Références"%}}
 + [Carte interactive de l'infrastructure mondiale de AWS](https://apps.kaonadn.net/5181491956940800/index.html)
