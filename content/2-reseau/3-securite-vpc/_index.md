@@ -4,32 +4,33 @@ draft = false
 weight = "213"
 +++
 
-### Groupe de sécurité (*Security Group* ou *SG*)
+AWS propose plusieurs couches de sécurité réseau.
 
-+ Pare-feu/couche de sécurité **au niveau d'une instance** (spécifiquement au niveau de l'interface/carte réseau).
+## Groupe de sécurité (*Security Group/SG*)
 
-+ Les groupes de sécurité ont des règles qui contrôlent le trafic d'instance entrant (*inbound*) et sortant (*outbound*).
++ Pare-feu/couche de sécurité **au niveau d'une instance** (spécifiquement au niveau de l'ENI).
 
-+ Les groupes de sécurité par défaut **refusent tout trafic entrant** et **autorisent tout le trafic sortant**.
++ Les groupes de sécurité ont des règles qui contrôlent le trafic d'instance **entrant** (*inbound*) et **sortant** (*outbound*).
 
-+ Les groupes de sécurité sont **avec état** (*stateful*) : On ne définit que le trafic entrant, le trafic sortant est toujours autorisé.
++ Par défaut: 
+    + tout le **trafic entrant est refusé**
+    + tout le **trafic sortant est autorisé**.
 
-### Liste de contrôle d'accès réseau (*Network ACLs* ou *NACL*)
+### Caractéristique clé
++ Les groupes de sécurité sont **avec état** (*stateful*) : si le trafic entrant est autorisé, la réponse sortante l’est automatiquement.
+
+## Liste de contrôle d'accès réseau (*Network ACLs* ou *NACL*)
 
 ![NACL Logo](/420-414/images/2-reseau/2-25-nacl-logo.png)
 
 
-+ Pare-feu/couche de sécurité qui **contrôle le trafic entrant** (*inbound*) et **sortant** (*outbound*) pour un ou plusieurs *subnet(s)* (**au niveau du *subnet***).
-
-+ Les ACL réseau agissent **au niveau du sous-réseau**
-
++ Pare-feu **au niveau du sous-réseau**
++ Contrôle le trafic entrant (*inbound*) **ET** sortant (*outbound*).
 + Une ACL réseau comporte des **règles entrantes et sortantes distinctes**.
-
 + Les ACL réseau par défaut **autorisent tout le trafic IPv4 entre et sortant**.
-
 + Les ACL réseau sont **sans état** (*stateless*) : Il n'enregistre pas les requêtes. Il faut donc définir des règles pour le trafic entrant **ET** sortant du sous-réseau.
 
-**Règles de l'ACL réseau par défaut :**
+### Règles d'un NACL par défaut
 ![NACL par défaut](/420-414/images/2-reseau/2-23-nacl-par-defaut.png)
 
 <!--
@@ -44,6 +45,6 @@ weight = "213"
 ![NACLs et SG](/420-414/images/2-reseau/2-09.png)
 -->
 
-### Groupe de sécurité vs ACL réseau
+## SG vs NACL
 
 ![NACL vs SG](/420-414/images/2-reseau/2-24-nacl-vs-sg.png)

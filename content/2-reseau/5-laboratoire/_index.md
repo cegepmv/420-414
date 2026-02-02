@@ -1,7 +1,7 @@
 +++
 title = 'Laboratoire'
 draft = false
-weight = "220"
+weight = "250"
 +++
 
 ## Création d'un VPC et déploiement d'un serveur web

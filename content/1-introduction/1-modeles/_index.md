@@ -4,6 +4,7 @@ title = 'Modèles Infonuagiques'
 draft = false
 weight = "110"
 +++
+-------------------
 
 L’infonuagique repose sur différents **modèles de services** et **modèles de déploiement**. Ces modèles permettent de définir clairement :
 + qui est responsable de quoi,
@@ -13,7 +14,7 @@ L’infonuagique repose sur différents **modèles de services** et **modèles d
 Comprendre ces modèles est essentiel pour choisir la solution la plus adaptée aux besoins techniques, financiers et organisationnels.
 
 
-#### Les modèles "as-a-Service"
+## Les modèles "as-a-Service"
 
 ![as-a-Service](/420-414/images/1-introduction/1-03-iaas-paas-saas.png)
 
@@ -24,9 +25,9 @@ L’objectif principal est de permettre aux organisations de **se concentrer sur
 Plus le service est "haut niveau", plus le fournisseur gère d’éléments, et moins l’utilisateur a de responsabilités techniques.
 
 
-#### Infrastructure sur-site (*On-Premise / On-Site*)
+### Infrastructure sur-site (*On-Premise / On-Site*)
 Avant le cloud, la majorité des organisations utilisaient une **infrastructure sur site**.
-##### Caractéristiques
+#### Caractéristiques
 + Tout le matériel et les logiciels sont hébergés localement.
 + L’organisation est responsable de :
     + l’achat du matériel,
@@ -39,10 +40,12 @@ Avant le cloud, la majorité des organisations utilisaient une **infrastructure 
 
 Le cloud computing permet d’**externaliser une partie ou la totalité de ces responsabilités**.
 
-#### IaaS – Infrastructure as a Service
+### IaaS – Infrastructure as a Service
+
+![IaaS](/420-414/images/1-introduction/1-06-iaas.png?width=700px)
 
 Le modèle **IaaS** fournit des ressources informatiques de base sous forme de services.
-##### Répartition des responsabilités
+#### Répartition des responsabilités
 **Responsabilités de l’utilisateur :**
 + Applications
 + Données
@@ -63,32 +66,34 @@ Google Cloud Platform (GCP)
 Microsoft Azure
 
 
-#### PaaS Platform as a Service
+### PaaS – Platform as a Service
 
 ![PaaS](/420-414/images/1-introduction/1-04-paas.png?width=700px)
 
 Le modèle **PaaS** fournit une plateforme complète permettant de développer, tester et déployer des applications sans se soucier de l’infrastructure sous-jacente.
 
-##### Principe
+#### Principe
 Le fournisseur gère le matériel, le système d’exploitation et les environnements d’exécution. L’utilisateur se concentre sur le **code et la logique applicative**.
 
 Ce modèle est particulièrement adapté aux **développeurs et équipes de programmation**.
-##### Avantages
+
+#### Avantages
 + Réduction de la complexité opérationnelle
 + Déploiement rapide des applications
 + Moins de maintenance et de mises à jour à gérer
-##### Exemples de services PaaS
+
+#### Exemples de services PaaS
 + **Amazon Elastic Beanstalk (AWS)** : service d’orchestration et de déploiement d’applications
 + **Google App Engine (GCP)** : plateforme de développement et d’hébergement d’applications web
 
 
-#### SaaS
-
+### SaaS – Software as a Service
 
 ![SaaS](/420-414/images/1-introduction/1-05-saas.png?width=700px)
 
 Le modèle **SaaS** correspond à des applications prêtes à l’emploi, accessibles directement via Internet.
-##### Caractéristiques
+
+#### Caractéristiques
 Dans ce modèle, **tout est géré par le fournisseur** :
 + Application
 + Données
@@ -107,13 +112,13 @@ L’utilisateur se contente d’utiliser le logiciel, généralement via un navi
 + Slack (messagerie et collaboration)
 + Mailchimp (marketing par courriel)
 
-#### Comparaison des modèles de services
+### Comparaison des modèles de services
 Plus on se rapproche du SaaS, plus la **simplicité d’utilisation augmente**, mais plus le **niveau de contrôle diminue**.
 
 À l’inverse, le modèle IaaS offre davantage de flexibilité et de contrôle, au prix d’une gestion plus complexe.
 
 
-#### Modèles de déploiement
+## Modèles de déploiement
 
 ![Modèles de déploiement](/420-414/images/1-introduction/1-08-modele-deploiement.png?width=700px)
 
@@ -121,27 +126,29 @@ Plus on se rapproche du SaaS, plus la **simplicité d’utilisation augmente**, 
 Les modèles de déploiement
 En plus des modèles de services, le cloud se décline selon différents modèles de déploiement.
 
-##### Cloud privé (Private Cloud)
+### Cloud privé (Private Cloud)
 Le **cloud privé** est une infrastructure dédiée à une seule organisation.
-###### Caractéristiques
+#### Caractéristiques
 + Les ressources ne sont pas partagées avec d’autres organisations.
 + L’infrastructure est généralement hébergée sur site (on-premise).
 + Offre un niveau élevé de contrôle et de sécurité.
-###### Limites
+#### Limites
 + Peu ou pas d’avantages liés à l’élasticité et aux économies d’échelle du cloud public.
 + Coûts élevés de mise en place et de maintenance.
 
-##### Cloud public (Public Cloud)
+### Cloud public (Public Cloud)
 Le cloud public repose sur une infrastructure appartenant à un fournisseur de services cloud (CSP).
-###### Caractéristiques
+
+##### Caractéristiques
 + Les ressources sont mutualisées entre plusieurs clients.
 + Aucun matériel à gérer pour l’utilisateur.
 + Paiement à l’utilisation.
 + Ce modèle est le plus répandu et constitue la base de services comme AWS, Azure et GCP.
 
-##### Cloud hybride (Hybrid Cloud)
+### Cloud hybride (Hybrid Cloud)
 Le cloud hybride combine un cloud privé et un cloud public.
-##### Principe
+
+#### Principe
 + Les données sensibles ou critiques restent hébergées localement.
 + Les autres charges de travail sont déployées dans le cloud public.
 + La connexion entre les deux environnements se fait généralement via un VPN ou une liaison dédiée.

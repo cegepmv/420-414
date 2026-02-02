@@ -54,10 +54,11 @@ Les services cloud sont conçus pour être hautement disponibles. Les pannes son
 Les données sont stockées de manière redondante sur plusieurs systèmes, ce qui réduit les risques de perte ou de corruption à long terme.
 
 ### Les inconvénients et limites du Cloud
-Malgré ses nombreux avantages, l’infonuagique comporte également des défis et des inconvénients qu’il est essentiel de comprendre.
+Malgré ses nombreux avantages, l’infonuagique présente aussi des inconvénients et des défis importants qu'il est essentiel de comprendre.
 
 #### Gouvernance et contrôle
 L’un des principaux enjeux du Cloud est la perte de contrôle direct sur l’infrastructure. Les organisations doivent mettre en place des règles claires concernant :
+
 + la gestion des accès,
 + la création des ressources,
 + le suivi des coûts,
@@ -67,6 +68,7 @@ Sans une gouvernance adéquate, le Cloud peut rapidement devenir complexe et dif
 
 #### Coûts imprévus
 Le modèle pay-as-you-go est flexible, mais il peut entraîner des dépassements de budget si les ressources ne sont pas surveillées correctement (services oubliés, surdimensionnement, trafic réseau élevé).
+
 #### Dépendance au fournisseur (*Vendor Lock-in*)
 Chaque fournisseur cloud propose ses propres services, outils et technologies. Migrer d’un fournisseur à un autre peut être complexe, coûteux et chronophage.
 #### Sécurité et responsabilité partagée
@@ -77,6 +79,32 @@ Contrairement à une idée répandue, le Cloud n’élimine pas les risques de s
 Une mauvaise configuration peut entraîner des failles importantes.
 #### Conformité et localisation des données
 Certaines organisations doivent respecter des réglementations strictes (ex. données de santé, données personnelles). La localisation des données et la conformité légale peuvent représenter un défi dans le Cloud.
+
+
+#### Gouvernance des données (*Data Governance*)
+
+La gouvernance des données est l’un des enjeux majeurs du cloud.
+
+Lorsque vous utilisez des services infonuagiques, **vos données ne sont plus hébergées physiquement dans vos propres locaux**, mais dans les centres de données d’un fournisseur externe. Cela soulève plusieurs questions critiques :
+
++ **Localisation des données:**
+Où les données sont-elles stockées (pays, région) ? Certaines lois exigent que les données demeurent dans une zone géographique précise.
+
++ **Conformité réglementaire:**
+Respect des lois et normes comme le RGPD, les lois canadiennes sur la protection des renseignements personnels, ou les exigences sectorielles (santé, finance, éducation).
+
++ **Contrôle et accès aux données:**
+Qui peut accéder aux données ? Comment sont gérés les droits d’accès, les journaux (logs) et les audits ?
+
++ **Responsabilité en cas d’incident:**
+En cas de fuite, de perte ou de corruption des données, **le client demeure responsable**, même si l’infrastructure appartient au fournisseur.
+
++ **Cycle de vie des données:**
+Gestion de la création, de la conservation, de l’archivage et de la suppression des données.
+
+Bien que les fournisseurs cloud offrent des outils pour gérer ces aspects, **la responsabilité de la gouvernance des données incombe toujours à l’organisation cliente**.
+
+
 #### Dépendance à la connectivité Internet
 L’accès aux services cloud dépend fortement d’une connexion Internet fiable. Une interruption réseau peut rendre les services temporairement inaccessibles.
 

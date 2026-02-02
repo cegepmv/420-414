@@ -5,8 +5,8 @@ draft = false
 weight = "200"
 +++
 
-Les services réseau constituent la base de toute architecture AWS. Ils permettent de définir comment les ressources communiquent entre elles, avec Internet et avec des réseaux externes.
-Dans ce chapitre, nous introduisons les principaux composants réseau d’AWS, en commençant par le Virtual Private Cloud (VPC), puis les sous-réseaux, l’adressage IP, le routage, les les passerelles réseau et enfin les mécanismes de sécurité.
+Les services réseau constituent la **base de toute architecture AWS**. Ils permettent de définir comment les ressources communiquent entre elles, avec Internet et avec des réseaux externes.
+Dans ce chapitre, nous introduisons les principaux composants réseau d’AWS, en commençant par le **Virtual Private Cloud (*VPC*)**, puis les sous-réseaux, l’adressage IP, le routage, les passerelles réseau et enfin les mécanismes de sécurité.
 
 <!-- 
 ### VPC
