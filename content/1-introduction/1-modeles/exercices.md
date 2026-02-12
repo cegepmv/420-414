@@ -23,7 +23,7 @@ Pour chacun des éléments suivants, indiquez :
 Expliquez pourquoi un développeur pourrait préférer un modèle PaaS plutôt qu’un modèle IaaS pour un projet à court terme.
 
 
-<!-- {{% expand title="Solutions" %}}
+{{% expand title="Solutions" %}}
 #### Exercice 1
 
 1. IaaS
@@ -36,7 +36,7 @@ Expliquez pourquoi un développeur pourrait préférer un modèle PaaS plutôt q
 
 3. IaaS (principalement)
 
-**Justification :** Azure est un fournisseur cloud proposant de l’IaaS, du PaaS et du SaaS. Dans le cadre de l’exercice, il est classé comme IaaS.
+**Justification :** Azure est un fournisseur cloud proposant de l’IaaS, du PaaS et du SaaS. S'il fallait choisir qu'une réponse, ce serait IaaS.
 
 4. SaaS
 
@@ -63,4 +63,4 @@ Expliquez pourquoi un développeur pourrait préférer un modèle PaaS plutôt q
 + Moins de configuration et de maintenance
 + Réduction du temps consacré à l’infrastructure
 + Concentration sur le développement et les fonctionnalités
-{{% /expand %}} -->
+{{% /expand %}}

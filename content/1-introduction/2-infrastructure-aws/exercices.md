@@ -20,16 +20,14 @@ Une entreprise souhaite déployer une application web destinée à des utilisate
 
 Expliquez vos choix en vous appuyant sur les concepts de régions, zones de disponibilité et Edge Locations.
 
-<!-- {{% expand title="Solutions" %}}
+{{% expand title="Solutions" %}}
 
 
 1. Idéalement **deux régions** : une en Amérique du Nord et une en Europe.
-    
-    **Justification :** Réduction de la latence pour les utilisateurs des deux continents et amélioration de la résilience globale en cas de panne majeure affectant une région entière.
++ **Justification :** Réduction de la latence pour les utilisateurs des deux continents, amélioration de la résilience globale, données gardées dans la région (plus adéquat pour la conformité et le respect de la gouvernance).
 
 2. Au minimum **deux zones de disponibilité par région**.
-
-    **Justification :** Respect des bonnes pratiques AWS et tolérance aux pannes (si une zone tombe en panne, l’application reste disponible).
++ **Justification :** Respect des bonnes pratiques AWS et tolérance aux pannes (si une zone tombe en panne, l’application reste disponible).
 
 
 3. 
@@ -41,4 +39,4 @@ Expliquez vos choix en vous appuyant sur les concepts de régions, zones de disp
 4. Les ressources déployées dans les autres zones de disponibilité continuent de fonctionner.
 L’application reste accessible si elle est correctement architecturée (multi-AZ).
 
-{{% /expand %}} -->
+{{% /expand %}}
