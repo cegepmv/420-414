@@ -1,9 +1,10 @@
 +++
+pre = '<b>4. </b>'
 title = 'Conteneurisation'
-draft = true
-weight = "320"
+draft = false
+weight = "400"
 +++
-
+---------------
 Comme la virtualisation, la conteneurisation permet aussi d'exécuter de nombreuses instances sur un seul hôte physique, mais sans que l'hyperviseur ne joue le rôle d'intermédiaire. 
 
 Au lieu de cela, la fonctionnalité du noyau du système hôte est utilisée pour isoler plusieurs instances indépendantes appelées **conteneurs**. 
@@ -17,8 +18,13 @@ Il existe deux principaux types de conteneurs :
 ![Conteneuurs](/420-414/images/3-vm-conteneur/3-03-conteneurisation.png)
 
 
-+ **Conteneurs d'application** *(Docker)* : Empaquettent et exécutent un "processus" (ou service) unique par conteneur. Ils sont emballés (ou *conteneurisé*) avec toutes les bibliothèques, dépendances et fichiers de configuration dont ils ont besoin pour fonctionner, ce qui facilite leur portabilité dans différents environnements. 
-+ **Conteneurs système** *(LXC)* : Similaires à une machine virtuelle. Ils exécutent un système d'exploitation complet et ont le même comportement et la même facilité de gestion que les machines virtuelles tout en étant plus légers, avec en plus les avantages de densité et d'efficacité qu'offrent les conteneurs.
+**Conteneurs d'application** *(Docker)* : 
++ Empaquettent et exécutent un "processus" (ou service) unique par conteneur. 
++ *Conteneurisé* avec toutes les bibliothèques, dépendances et fichiers de configuration dont ils ont besoin pour fonctionner (facilite leur portabilité dans différents environnements). 
+
+**Conteneurs système** *(LXC)* : 
++ Similaires à une machine virtuelle légère.
++ Exécutent un système d'exploitation complet et ont le même comportement et la même facilité de gestion que les machines virtuelles tout en étant plus légers.
 
 ##### Avantages
 + **Densité :** Il est possible de faire fonctionner plusieurs conteneurs tout en bénéficiant des performances d'un système *"bare-metal"*. 

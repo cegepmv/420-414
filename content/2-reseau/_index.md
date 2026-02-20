@@ -1,6 +1,6 @@
 +++
 pre = '<b>2. </b>'
-title = 'Réseau Infonuagique'
+title = 'Réseau'
 draft = false
 weight = "200"
 +++

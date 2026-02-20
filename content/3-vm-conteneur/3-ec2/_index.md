@@ -1,6 +1,6 @@
 +++
 title = 'Amazon EC2'
-draft = false
+draft = true
 weight = "330"
 +++
 

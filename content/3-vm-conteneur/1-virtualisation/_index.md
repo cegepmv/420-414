@@ -1,6 +1,6 @@
 +++
 title = 'Virtualisation'
-draft = false
+draft = true
 weight = "310"
 +++
 

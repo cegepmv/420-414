@@ -1,6 +1,6 @@
 +++
 title = 'Introduction'
-draft = false
+draft = true
 weight = "341"
 +++
 
@@ -22,14 +22,14 @@ Plusieurs enjeux se posent :
 
 + Ce problème de matrice de compatibilité est appelé "la matrice de l'enfer" (*Matrix From Hell*).
 
-+ Chaque fois qu'un nouveau développeur rentre dans une équipe, il est difficile de configurer un nouvel environnement pour lui qui satisfait toutes les dépendances nécessaires à faire rouler l'application : Il doit s'assurer d'avoir le bon OS, les bonnes versions de chacun des composants. Chaque développeur devait tout configurer lui-même à chaque fois. Il était donc impossible de garantir que l'application fonctionnerait de la même manière dans des environnements différents, ce qui rend notre vie dans le développement, le build et le shipping de l'application très difficile. 
++ Chaque fois qu'un nouveau développeur rentre dans une équipe, il est difficile de configurer un nouvel environnement pour lui qui satisfait toutes les dépendances nécessaires à faire rouler l'application (avoir le bon OS, les bonnes versions de chacun des composants). Chaque développeur devait tout configurer lui-même à chaque fois. Il était donc impossible de garantir que l'application fonctionnerait de la même manière dans des environnements différents.
 
 Il faut donc trouver quelque chose qui pourrait aider avec ce problème de compatibilité, qui permettrait de modifier ou changer une composant sans affecter les autres et même modifier le système d'exploitation si nécessaire. C'est dans cette situation que Docker prend tout son sens.
 
 ![Conteneurs](/420-414/images/3-vm-conteneur/docker-libs-deps.png)
 
 
-Avec Docker, il est possible d'exécuter chaque composant dans un conteneur séparé avec ses propres dépendances et ses propres bibliothèques, le tout sur la même VM et le même OS ! Une fois que Docker est installé, tous les développeurs peuvent lancer l'application avec une simple commande `docker run`, peu importe quel OS ils utilisent.
+Avec Docker, il est possible d'exécuter chaque composant dans un **conteneur séparé avec ses propres dépendances et ses propres bibliothèques**, le tout sur la même VM et le même OS ! Une fois que Docker est installé, tous les développeurs peuvent lancer l'application avec une simple commande `docker run`, peu importe quel OS ils utilisent.
 
 
 #### Fonctionnement
