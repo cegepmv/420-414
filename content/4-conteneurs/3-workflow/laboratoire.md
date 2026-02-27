@@ -54,3 +54,52 @@ Cette commande télécharge une image de test et l'exécute dans un conteneur. L
 
 ## 2 - Premier workflow Docker
 *Suivez les étapes montrées par votre enseignant pour simuler un premier "workflow" docker. Votre enseignant se charge des étapes de build et de push. Vous pourrez par la suite pull l'image créee et la rouler dans votre propre environnement.*
+
+**Étapes de l'enseignant :**
+
+1. Cloner le code de l'application (git)
+```bash
+git clone https://github.com/gbenachour/e-portfolio.git
+```
+2. Build l'application
+```bash
+docker build -t e-portfolio:1.0 .
+```
+3. Lui donner le bon tag (format `<docker-username>/<registry>:<version>`)
+```bash
+docker tag e-portfolio:1.0 cmvghazi/e-portfolio:1.0
+```
+4. Se connecter à [Docker Hub](https://hub.docker.com/)
+```bash
+docker login -u cmvghazi 
+# Puis fournir le mot de passe
+```
+5. Push l'image 
+```bash
+docker push cmvghazi/e-portfolio:1.0
+```
+
+**Étapes pour tout le monde:**
+1. Pull l'image localement : 
+```bash
+docker pull cmvghazi/e-portfolio:1.0
+docker images # vérifier le téléchargement de l'image 
+```
+2. Exécuter un conteneur 
+```bash
+docker run -d -p 8080:80 --name e-portfolio cmvghazi/e-portfolio:1.0
+docker ps # vérifier que le conteneur a été exécuté
+```
++ `-d` : exécution en mode détaché
++ `-p <port-hote>:<port-conteneur>`: mappage d'un port de l'hôte au port d'écoute du conteneur
++ `--name` : nom donné au conteneur
++ `<image>` : image à partir de laquelle on crée le conteneur
+
+3. Vérifier que l'application est accessible (`http://<IP de l'hôte>:8080` sur un navigateur)
+4. Nettoyage
+```bash
+docker stop <id-conteneur>
+docker rm <id-conteneur>
+docker rmi <id-image>
+docker system prune
+```
