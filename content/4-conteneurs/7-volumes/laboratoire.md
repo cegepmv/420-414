@@ -5,11 +5,7 @@ weight = "451"
 +++
 -------------------
 
-Laboratoire guidé – Tester la persistance avec un volume
-
-## Objectif
-
-Comprendre que :
+Ce laboratoire a pour but de tester la persistance des données d'un conteneur et comprendre que :
 + Les données d’un conteneur sont perdues si on ne persiste rien
 + Un volume Docker permet de conserver les données même après suppression du conteneur
 

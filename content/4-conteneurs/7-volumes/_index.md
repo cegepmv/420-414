@@ -3,8 +3,8 @@ title = 'Volumes'
 draft = false
 weight = "470"
 +++
+------------
 
-Pourquoi les volumes sont-ils nécessaires ?
 
 Par défaut, les données d’un conteneur sont éphémères :
 

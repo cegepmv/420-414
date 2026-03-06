@@ -20,13 +20,12 @@ docker network ls
 ```
 ## Le pilote bridge (défaut)
 
-C’est le pilote par défaut et le plus utilisé, particulièrement dans les environnements d’apprentissage et les projets locaux.
+C’est le pilote par défaut et le plus utilisé.
 
 ### Fonctionnement
 
 + Chaque conteneur reçoit une adresse IP privée interne
 + Les conteneurs sur le même réseau peuvent communiquer entre eux
-+ Docker gère la traduction d’adresses (NAT)
 + L’exposition vers l’extérieur se fait via `-p` (*port mapping*)
 
 C’est le pilote à utiliser pour :
@@ -36,10 +35,7 @@ C’est le pilote à utiliser pour :
 
 **Pourquoi créer un bridge personnalisé ?**
 
-Même si un réseau bridge par défaut existe, il est fortement recommandé de créer son propre réseau.
-
-Cela permet :
-
+Même si un réseau bridge par défaut existe, il est fortement recommandé de créer son propre réseau. Cela permet :
 + Une meilleure isolation
 + Une résolution DNS automatique par nom de conteneur
 + Une meilleure organisation des projets
