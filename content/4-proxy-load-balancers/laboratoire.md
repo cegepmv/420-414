@@ -1,68 +1,104 @@
 +++
 title = 'Laboratoire'
 draft = false
-weight = "400"
+weight = "410"
 +++
+--------------
 
-Dans ce laboratoire, nous allons implémenter trois services ainsi qu'un reverse proxy avec Docker, puis implémenter le chiffrement SSL/TLS pour avoir une communication HTTPS vers les services déployés. Les services vont être déployés sur une machine EC2 (AWS)
+Dans ce laboratoire, nous allons déployer plusieurs services Docker sur une instance EC2 (AWS), puis mettre en place un **reverse proxy avec HTTPS**.
 
-### Services
-Voici la liste des services que nous allons déployer :
+## Services déployés
 
-+ [Portainer](https://www.portainer.io/) : Un service permettant d'avoir un tableau de bord centralisé pour *monitorer* notre infrastructure *Docker*.
++ [Portainer](https://www.portainer.io/) : Interface de gestion Docker. Permet d'avoir un tableau de bord centralisé pour *monitorer* l'infrastructure *Docker*.
 
-+ [Jellyfin](https://jellyfin.org/) : Un *media server* (similaire à *Plex*), permettant d'avoir une bibliothèque pour vos films, musique et séries.
++ [Jellyfin](https://jellyfin.org/) : Serveur multimédia (similaire à *Plex*), permettant de gérer des bibliothèques de films, séries et musiques.
 
 + [Nextcloud](https://fr.wikipedia.org/wiki/Nextcloud) : Logiciel libre d'hébergement de fichiers et une plateforme de travail collaboratif (de type *OneDrive* et *Office365*). 
 
 + [Traefik](https://traefik.io/traefik/) : Un *reverse proxy* facile à implémenter.
 
-### Infrastructure
+## Infrastructure
 L'infrastructure finale est la suivante :
 ![Infrastructure atelier](../images/4-01.png)
 
 L'infrastructure Docker est la suivante : 
 ![Infrastructure atelier Docker](../images/4-02.png)
 
+## Étapes d'implémentation
+### 0 – Création du groupe de sécurité (AWS)
 
-### Étape 1 - Déploiement d'une machine EC2
+Avant de créer l’instance, vous devez configurer un **Security Group** pour permettre l’accès aux services **AVANT** l’ajout du *reverse proxy*.
+
+### Règles à ajouter
+|Type|Port|Description|
+|----|----|-----------|
+|SSH	|22|	Accès à la machine|
+|HTTP	|80|	Accès web|
+|HTTPS|	443|	Accès sécurisé|
+|Custom TCP|	9000|	Portainer|
+|Custom TCP|	8081|	Nextcloud|
+|Custom TCP|	8096|	Jellyfin|
+
+### 1 – Déploiement d'une instance EC2
 Déployez une instance EC2 avec les spécificité suivantes : 
-+ AMI : *Ubuntu 24.04 LTS*
-+ Type de l'instance : `t2.large`
-+ Groupe de sécurité : Autorise HTTP, HTTPS, SSH et tous les ports TCP.
-+ Espace : 64GB
++ **AMI :** *Ubuntu 24.04 LTS*
++ **Type de l'instance :** `t2.large`
++ **Groupe de sécurité :** Le groupe de sécurité crée à l'étape précédente.
++ **Espace :** 64GB
+
+### 2 – Configuration du domaine (DuckDNS)
+Pour pouvoir implémenter le HTTPS, il est nécessaire de posséder **un nom de domaine**.
+
+Plusieurs fournisseurs existent, parmi les plus connus :
++ *Cloudflare*
++ *GoDaddy*
++ *NameCheap*
++ *DuckDNS* 
+
+Dans ce laboratoire, nous allons utiliser *DuckDNS*, car :
++ il est gratuit
++ il est simple à configurer
++ il permet une intégration facile avec des outils comme *Traefik*
+
+1. Créez un compte sur [DuckDNS](https://www.duckdns.org/)
+2. Choisissez un nom de domaine (ex : `monprojet.duckdns.org`)
+3. Dans le tableau de bord, ajoutez l’**IP publique** de votre instance EC2
 
 
-### Étape 2 - Déploiement des services
+### Étape 3 – Installation de Docker sur EC2
 
-Maintenant que notre VM EC2 est déployée, nous pouvons commencer à la configurer.  
+Maintenant que notre instance EC2 est déployée et le domaine est configuré, nous pouvons commencer à déployer notre infrastructure *Docker*.  
 
-#### 1- Connexion
-Connectez-vous par SSH à votre instance EC2 en utilisant votre éditeur préféré. 
+#### 3.1- Connexion
+Connectez-vous par SSH à votre instance EC2 en utilisant un éditeur/terminal. 
 
-#### 2- Installation de Docker
-Installez Docker en utilisant le script disponible dans [la documentation Docker](https://docs.docker.com/engine/install/ubuntu/) : 
+#### 3.2- Installation de Docker
+Installez *Docker* en utilisant le script disponible dans [la documentation Docker](https://docs.docker.com/engine/install/ubuntu/) : 
 ```bash
-# Add Docker's official GPG key:
-sudo apt-get update
-sudo apt-get install ca-certificates curl
+# Ajouter la clé GPG Docker officielle:
+sudo apt update
+sudo apt install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-# Add the repository to Apt sources:
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-```
-```bash
+# Ajouter le dépôt aux sources de apt:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
 
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+# Mise à jour de la BD locales des paquets
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-#### 3- Déploiement de *Portainer*
+### 4 – Déploiement des services
+
+#### 4.1- *Portainer*
 Nous allons déployer un service à la fois. Commençons par *Portainer*.
 
 Créez le fichier `compose.yml` suivant : 
@@ -108,7 +144,7 @@ Vous serez en mesure d'accéder à la page d'accueil de *Portainer*.
 
 Créez un compte administrateur, puis commencez à explorer les différentes fonctionnalités qu'offre ce service.
 
-#### 4- Déploiement de Nextcloud
+#### 4.2- Déploiement de *Nextcloud*
 Maintenant, ajoutons un nouveau service à notre stack : *Nextcloud*
 
 Dans le fichier `compose.yml` créé précédemment, ajoutez les définition suivantes dans la section `services` :
@@ -164,18 +200,19 @@ Dans le fichier `compose.yml` créé précédemment, ajoutez les définition sui
       - ./data:/var/www/html/data
     # Variables d'environnement passés au conteneur lors de son lancement
     environment:
-      - PUID=1000 # The user ids. Most likely both should be 1000. Incorrectly setting these will led to file permission issues
-      - PGID=1000 # Set these to whatever your user is.
-      # Timezone
-      - TZ=America/Montreal
+      - PUID=1000 # ID de l'utilisateur (dans le conteneur)
+      - PGID=1000 # ID du groupe (dans le conteneur)
+      - TZ=America/Montreal # Timezone
       # Indentifiants, mots de passe de la base de données
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=${DB_USER}
 ```
+{{%notice style="info" title="À noter"%}}
 *Nextcloud* a besoin d'une base de données *MariaDB* pour entreposer ces données. Il faut donc configurer une BD *MariaDB* en plus de *Nextcloud*.
+{{%/notice%}}
 
-Dans la section `volumes`, ajoutez un volume pour la base de données pour faire persister les données :
+Dans la section `volumes`, ajoutez un volume pour la base de données de nextcloud pour faire persister les données :
 ```yaml
 volumes:
     portainer_data:
@@ -183,7 +220,7 @@ volumes:
     nextclouddb:
 ```
 
-La configuration *Nextcloud* ci-dessus nécessite des variables d'environnement (pour les identifiants de la base de données).
+La configuration *Nextcloud* ci-dessus nécessite aussi des variables d'environnement (pour les identifiants de la base de données).
 
 Créez un fichier `.env` contenant les informations suivantes : 
 ```bash
@@ -206,10 +243,10 @@ Vous serez en mesure d'accéder à la page d'accueil de *Nextcloud*.
 
 Créez un compte et installez les fonctionnalités désirées.
 
-#### 5- Monitoring avec Portainer
+#### 4.3- Monitoring avec Portainer
 Allez de nouveau sur *Portainer* et observez les nouveaux conteneurs disponibles sur votre tableau de bord. 
 
-#### 6- Déploiement de Jellyfin
+#### 4.4- Déploiement de Jellyfin
 Déployons maintenant *Jellyfin*, de la même façon que *Nextcloud*, ajoutez la définition suivante dans la section `services` :
 ```yaml
   jellyfin:
@@ -251,22 +288,15 @@ Dans un navigateur, allez sur `<adresse IP de l'instance EC2>:8096`
 Vous serez en mesure d'accéder à la page d'accueil de *Jellyfin*. Nous n'allons par rentrer dans les détails de configuration de ce service (en dehors du *scope* du cours, mais si vous voulez avoir plus d'informations sur comment configurer *Jellyfin*, vous pouvez vous réferer à cette vidéo)
 
 
-### Étape 3 - Déploiement du *reverse proxy (Traefik)*
+#### 5 – Déploiement du *reverse proxy (Traefik)*
 Une fois que tous nos services sont maintenant déployés, le dernier service à déployer est le *reverse proxy*. 
 
-#### 1- Obtention d'un nom de domaine (DuckDNS)
-Avant de déployer notre proxy inverse, il nous faut obtenir un nom de domaine.
-
-*DuckDNS* est un site sur lequel il est possible d'avoir un nom de domaine gratuit. Allez sur [le site de DuckDNS](http://duckdns.org/), inscrivez vous et choisissez le nom de domaine de votre choix.
-
-Dans le tableau d'enregistrement, insérez l'adresse IP publique de votre instance EC2.
-
-#### 2- Configuration des services et variables d'environnement
+#### 3.1- Configuration des services et variables d'environnement
 Dans votre instance EC2, modifiez le fichier `.env` et ajoutez les variables d'environnements suivantes : 
 
 ```bash
-MY_DOMAIN=votre-domaine-duck-dns.duckdns.org
-DUCKDNS_TOKEN=le token de votre compte duckDNS
+MY_DOMAIN=<votre-domaine-duck-dns>.duckdns.org
+DUCKDNS_TOKEN=<le token de votre compte duckDNS>
 ```
 
 Dans votre fichier de configuration `compose.yml`, commentez la section `ports` (mappage de port) de chaque services puis ajoutez les labels suivants : 
@@ -306,6 +336,14 @@ Ces `labels` vont permettre à *Traefik* d'automatiquement configurer les règle
 + Faire passer les requêtes à *Nextcloud* lorsqu'il reçoit une requête `https://nextcloud.<votre_nom_de_domaine>` 
 
 Nous n'avons plus à exposer les ports des services déployés, ce qui ajoute une couche de sécurité à notre architecture.
+
+##### Comprendre les labels Traefik
++ `traefik.enable=true` - Active Traefik pour ce service
++ `routers.portainer.rule=Host(...)` - URL d’accès (ex : portainer.mondomaine.duckdns.org)
++ `entryPoints=websecure` - Utilise HTTPS (port 443)
++ `loadbalancer.server.port=9000` = Port interne du conteneur
+
+#### 3.2- Configuration de Traefik
 
 Enfin, ajoutez la configuration de *Traefik* dans votre  `compose.yml` (sections `services`) :
 ```yaml
@@ -348,6 +386,20 @@ Enfin, ajoutez la configuration de *Traefik* dans votre  `compose.yml` (sections
     environment:
       - "DUCKDNS_TOKEN=${DUCKDNS_TOKEN}"
 ```
+**Points importants :**  
++ `providers.docker=true`: Traefik lit les labels Docker
++ `exposedbydefault=false`: Seuls les services avec label sont exposés
++ `entrypoints` :
+  + `web` → HTTP
+  + `websecure` → HTTPS
++ `certificatesresolvers`: Génération automatique de certificats avec `Let's Encrypt`
++ `dnschallenge`: Méthode de validation du domaine (via DuckDNS)
+
+{{%notice style="info" title="HTTPS automatique"%}}
+Traefik va détecter les domaines, demander un certificat puis configurer HTTPS automatiquement. 
+
+Pour plus de détails concernant la configuration HTTPS et l'obtention du certificat, naviguez à la section "Pour aller plus loin"
+{{%/notice%}}
 
 Lancez la commande suivante pour déployer *Traefik* : 
 ```bash
@@ -356,7 +408,7 @@ sudo docker compose up -d
 
 Attendez quelques minutes (le temps que *Traefik* puisse récupérer les labels de chaque service et demander un certificat SSL/TLS à *Let's Encrypt*). Vous pouvez aller voir dans les *logs* du conteneur `proxy` pour valider l'acquisition du certificat (sur *Portainer*).
 
-Naviguez aux adresses `jellyfin.votredomaine.duckdns.org`, `portainer.votredomaine.duckdns.org` et `nextcloud.votredomaine.duckdns.org`, vous serez en mesure d'accéder aux services.
+Naviguez aux adresses `jellyfin.<votredomaine>.duckdns.org`, `portainer.<votredomaine>.duckdns.org` et `nextcloud.<votredomaine>.duckdns.org`, vous serez en mesure d'accéder aux services.
 
 {{% expand title="compose.yml final" %}}
 ```yaml
@@ -525,8 +577,13 @@ networks:
 ```
 {{% /expand%}}
 
-### Challenge
-Ajoutez l'application *fullstack [Movies-Gold](https://github.com/gbenachour/movies-gold/tree/main)* à vos services. Celle-ci doit être accessible via `https://movies-gold.<votre-domaine>.duckdns.org` 
+## Challenges
+### 1- Déploiement de l'application E-commerce
+Ajoutez l'application *fullstack* `e-commerce` (construite dans les laboratoires précédents) à vos services. Celle-ci doit être accessible via `https://nest-shop.<votre-domaine>.duckdns.org` 
+
+### 2- Déploiement d'autres services
+
+
 <!-- 
 services:
   portainer:

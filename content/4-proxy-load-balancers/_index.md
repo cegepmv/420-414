@@ -4,36 +4,95 @@ title = 'Proxy et Load Balancer'
 draft = false
 weight = "400"
 +++
+--------------
 
-Le maintien d'une infrastructure web fiable est un élément essentiel de toute entreprise désirant mettre à disposition leur services sur internet. Compte tenu de la quantité d'informations qui transitent entre les utilisateurs/clients et les serveurs, les entreprises doivent veiller à ce que leur infrastructure soit sûre, sécurisé et rapide. Pour atteindre ces objectifs, de nombreuses entreprises cherchent à optimiser leurs infrastructures en utilisant des proxys (*forward proxies*), des proxys inverses (*reverse proxies*) ou des répartiteurs de charge (*load balancers*).
+Le maintien d’une infrastructure web fiable est essentiel pour toute entreprise souhaitant offrir ses services sur Internet. Étant donné la quantité importante de données échangées entre les utilisateurs et les serveurs, il est crucial de garantir une infrastructure sécurisée, performante et disponible.
 
-Dans ce chapitre, nous allons explorer ces composants plus en détail afin d'aider les futures ingénieurs réseau/cloud à mieux comprendre ce que chaque technologie signifie exactement pour l'infrastructure cloud dans son ensemble. 
+Pour atteindre ces objectifs, les entreprises utilisent différents composants réseau tels que :
 
-À la fin de ce chapitre, vous devriez avoir une compréhension de base de trois éléments importants de l'infrastructure web - les *forward proxies*, les *reverse proxiess* et les *load balancers* - et être en mesure de sélectionner les bonnes combinaisons d'outils pour vos propres projets !
++ ***les forward proxies*** (proxys directs)
++ ***les reverse proxies*** (proxys inverses)
++ ***les load balancers*** (répartiteurs de charge)
 
-### Forward proxy
+Dans ce chapitre, nous allons explorer ces technologies afin de mieux comprendre leur rôle dans une infrastructure web moderne.
+
+## Forward Proxy (Proxy direct)
+
 Un proxy (ou *forward proxy*) agit comme un intermédiaire entre un utilisateur et internet. Il masque l'adresse IP d'un utilisateur et réachemine son trafic internet via sa propre adresse IP publique. Cela permet non seulement de rendre anonyme l'activité en ligne d'un utilisateur, mais aussi d'empêcher toute cyberattaque ou tentative de piratage de son appareil.
-
-Chaque personne possédant un routeur/modem/box internet fournie par son fournisseur de service internet possède déjà un *forward proxy* implémenté chez lui. 
 
 ![Exemple forward proxy](./images/4-03.png)
 
+### Fonctionnement
 
-### Reverse Proxy
+1. L’utilisateur envoie sa requête au proxy
+2. Le proxy transmet la requête vers Internet
+3. Le serveur distant répond au proxy
+4. Le proxy renvoie la réponse à l’utilisateur
 
-Alors qu'un *forward proxy* contrôle le trafic sortant d'un réseau privé, un *reverse proxy* (ou proxy inverse) dirige le trafic entrant vers le serveur approprié.
+### Rôles principaux
+
++ Masquer l’adresse IP de l’utilisateur
++ Contrôler l’accès à Internet (filtrage, restrictions)
++ Améliorer la sécurité du réseau interne
++ **Exemple :** Dans un réseau d’entreprise, un forward proxy peut :
+  + bloquer certains sites web
+  + enregistrer les accès des utilisateurs
+  + protéger les machines internes
+
+{{%notice style="info" title="À noter"%}}
++ Les routeurs/modems fournis par les fournisseurs Internet peuvent intégrer des fonctionnalités similaires à un proxy.
++ Outils permettant d'implémenter un forward proxy : *PfSense*
+{{%/notice%}}
+
+## Reverse Proxy (Proxy inverse)
+Alors qu'un *forward proxy* contrôle le trafic sortant d'un réseau privé, un *reverse proxy* (ou proxy inverse) dirige le trafic entrant vers le serveur approprié. Un reverse proxy agit du côté des serveurs. Il sert d’intermédiaire entre les utilisateurs et un ou plusieurs serveurs backend.
 
 ![Exemple forward proxy](./images/4-04.png)
 
-
-#### Avantages 
-+ **Équilibrage de la charge (*Load Balancing*) -** Un site web populaire qui reçoit des millions d'utilisateurs chaque jour peut ne pas être en mesure de gérer l'ensemble de son trafic entrant avec un seul serveur. Au lieu de cela, le site peut être réparti sur un ensemble de serveurs différents, qui traitent tous les demandes pour le même site. Dans ce cas, un proxy inverse peut fournir une solution d'équilibrage de la charge qui répartira le trafic entrant de manière égale entre les différents serveurs afin d'éviter qu'un seul d'entre eux ne soit surchargé. En cas de défaillance d'un serveur, d'autres serveurs peuvent prendre le relais pour gérer le trafic.
-
-![Exemple Load balancer](./images/4-05.png)
-
-
-+ **Protection contre les attaques -** Avec un proxy inverse en place, un site web ou un service n'a jamais besoin de révéler l'adresse IP de son (ses) serveur(s) d'origine. Il est donc beaucoup plus difficile pour les attaquants de tirer parti d'une attaque ciblée contre eux, telle qu'une attaque DDoS.
-
-+ **Cryptage SSL (HTTPS) -** Un proxy inverse peut être configuré pour déchiffrer toutes les requêtes entrantes et chiffrer toutes les requêtes sortantes, en mettant en place un chiffrement des communications SSL (ou TLS) et assurer le protocole HTTPS pour tous les services et serveurs qu'il protège.
+### Fonctionnement
+1. L’utilisateur envoie une requête au serveur (via Internet)
+2. Le reverse proxy reçoit la requête
+3. Il redirige la requête vers le bon serveur
+4. Il renvoie la réponse à l’utilisateur
 
 
+### Avantages 
+#### Équilibrage de charge (Load Balancing) 
+Un site à fort trafic peut utiliser plusieurs serveurs. Le reverse proxy permet de :
+
++ répartir les requêtes entre plusieurs serveurs
++ éviter la surcharge d’un seul serveur
++ assurer une meilleure disponibilité
+
+En cas de panne d’un serveur, les autres prennent le relais.
+
+#### Sécurité
++ Les serveurs backend restent cachés
++ Leur adresse IP n’est pas exposée
++ Réduction des risques d’attaques (ex : DDoS)
+
+#### Gestion du chiffrement (SSL/TLS)
+
+Le reverse proxy peut :
+
++ gérer le HTTPS
++ déchiffrer les requêtes entrantes
++ chiffrer les réponses sortantes
+
+Cela simplifie la gestion des certificats pour les serveurs internes.
+
+## Load Balancer (Répartiteur de charge)
+
+Un load balancer est un composant (souvent intégré au reverse proxy) qui distribue le trafic entre plusieurs serveurs. Cela permet de :
+
++ Améliorer la performance
++ Assurer la haute disponibilité
++ Éviter les surcharges
+
+![Exemple LB](./images/4-05.png)
+
+
+### Méthodes de répartition
++ **Round Robin** (tour à tour)
++ **Least Connections** (serveur le moins occupé)
++ **IP Hash** (selon l’utilisateur)
