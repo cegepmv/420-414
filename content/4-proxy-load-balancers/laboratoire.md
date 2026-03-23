@@ -117,7 +117,7 @@ services:
         - cloud
     # Mappage de port (du port 9000 du conteneur vers le port 9000 de la machine hôte)
     ports:
-      - 9000:9000
+     - 9000:9000
     # Volumes 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -152,7 +152,7 @@ Dans le fichier `compose.yml` créé précédemment, ajoutez les définition sui
 ```yaml
   nextclouddb:
     # Image mariadb officielle pour entreposer les données de nextcloud
-    image: mariadb
+    image: mysql:8.0
     # Nom donné au conteneur 
     container_name: nextcloud-db 
     # Dans le cas où le conteneur s'arrête/crash, il est automatiquement relancé 
@@ -175,7 +175,6 @@ Dans le fichier `compose.yml` créé précédemment, ajoutez les définition sui
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=${DB_USER}
-
   nextcloud:
     # Image nextcloud officielle 
     image: nextcloud
@@ -190,8 +189,8 @@ Dans le fichier `compose.yml` créé précédemment, ajoutez les définition sui
     depends_on:
       - nextclouddb 
     # Mappage de port (du port 80 du conteneur vers le port 8081 de la machine hôte)
-    ports:
-      - 8081:80
+    # ports:
+    #  - 8081:80
     # Volumes du conteneur: mappe un répertoire du conteneur vers un répertoire de la machine hôte
     volumes:
       - ./html:/var/www/html 
@@ -207,6 +206,12 @@ Dans le fichier `compose.yml` créé précédemment, ajoutez les définition sui
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=${DB_USER}
+      - MYSQL_HOST=nextclouddb
+    labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.nextcloud.rule=Host(`nextcloud.${MY_DOMAIN}`)'
+        - 'traefik.http.routers.nextcloud.entryPoints=websecure'
+
 ```
 {{%notice style="info" title="À noter"%}}
 *Nextcloud* a besoin d'une base de données *MariaDB* pour entreposer ces données. Il faut donc configurer une BD *MariaDB* en plus de *Nextcloud*.
@@ -295,6 +300,7 @@ Une fois que tous nos services sont maintenant déployés, le dernier service à
 Dans votre instance EC2, modifiez le fichier `.env` et ajoutez les variables d'environnements suivantes : 
 
 ```bash
+MY_EMAIL=<votre-adresse-courriel>
 MY_DOMAIN=<votre-domaine-duck-dns>.duckdns.org
 DUCKDNS_TOKEN=<le token de votre compte duckDNS>
 ```
@@ -304,27 +310,27 @@ Dans votre fichier de configuration `compose.yml`, commentez la section `ports` 
 *Portainer :*
 ```yaml
 labels:
-    - 'traefik.enable=true'
-    - 'traefik.http.routers.portainer.rule=Host(`portainer.${MY_DOMAIN}`)'
-    - 'traefik.http.routers.portainer.entryPoints=websecure'
-    - "traefik.http.services.frontend.loadbalancer.server.port=9000"
-    - "traefik.http.routers.frontend.service=frontend"
+  - 'traefik.enable=true'
+  - 'traefik.http.routers.portainer.rule=Host(`portainer.${MY_DOMAIN}`)'
+  - 'traefik.http.routers.portainer.entryPoints=websecure'
+  - 'traefik.http.services.portainer.loadbalancer.server.port=9000'
+  - 'traefik.http.routers.portainer.service=portainer'
 ```
 
 *Nextcloud :*
 ```yaml
 labels:
-    - 'traefik.enable=true'
-    - 'traefik.http.routers.nextcloud.rule=Host(`nextcloud.${MY_DOMAIN}`)'
-    - 'traefik.http.routers.nextcloud.entryPoints=websecure'
+  - 'traefik.enable=true'
+  - 'traefik.http.routers.nextcloud.rule=Host(`nextcloud.${MY_DOMAIN}`)'
+  - 'traefik.http.routers.nextcloud.entryPoints=websecure'
 ```
 
 *Jellyfin :*
 ```yaml
 labels:
-    - 'traefik.enable=true'
-    - 'traefik.http.routers.jellyfin.rule=Host(`jellyfin.${MY_DOMAIN}`)'
-    - 'traefik.http.routers.jellyfin.entryPoints=websecure'
+  - 'traefik.enable=true'
+  - 'traefik.http.routers.jellyfin.rule=Host(`jellyfin.${MY_DOMAIN}`)'
+  - 'traefik.http.routers.jellyfin.entryPoints=websecure'
 ```
 
 Ces `labels` vont permettre à *Traefik* d'automatiquement configurer les règles de son *reverse proxy* lorsque nous allons le déployer. Ces labels vont "dire" à *Traefik* de :
@@ -348,43 +354,43 @@ Nous n'avons plus à exposer les ports des services déployés, ce qui ajoute un
 Enfin, ajoutez la configuration de *Traefik* dans votre  `compose.yml` (sections `services`) :
 ```yaml
   proxy:
-    image: traefik
-    container_name: traefik
-    restart: unless-stopped
-    networks: 
-        - cloud
-    command:
-      - "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns"
-      - "--certificatesresolvers.letsencrypt.acme.email=mail@mail.com"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.disablePropagationCheck=true"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-      - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.websecure.http.tls=true"
-      - "--entrypoints.websecure.http.tls.certResolver=letsencrypt"
-      - "--entrypoints.websecure.http.tls.domains[0].main=${MY_DOMAIN}"
-      - "--entrypoints.websecure.http.tls.domains[0].sans=*.${MY_DOMAIN}"
-    volumes:
-      - "../data/traefik/letsencrypt:/letsencrypt"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.api.rule=Host(`${MY_DOMAIN}`)'
-      - 'traefik.http.routers.api.entryPoints=websecure'
-      - 'traefik.http.routers.api.service=api@internal'
-    ports:
-      - "443:443"
-      - "80:80"
-    environment:
-      - "DUCKDNS_TOKEN=${DUCKDNS_TOKEN}"
+      image: traefik
+      container_name: traefik
+      restart: unless-stopped
+      networks: 
+          - cloud
+      command:
+        - '--log.level=DEBUG'
+        - '--api.insecure=true'
+        - '--providers.docker=true'
+        - '--providers.docker.exposedbydefault=false'
+        - '--certificatesresolvers.letsencrypt.acme.dnschallenge=true'
+        - '--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns'
+        - '--certificatesresolvers.letsencrypt.acme.email=${MY_EMAIL}'
+        - '--certificatesresolvers.letsencrypt.acme.dnschallenge.disablePropagationCheck=true'
+        - '--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53'
+        - '--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json'
+        - '--entrypoints.web.address=:80'
+        - '--entrypoints.web.http.redirections.entrypoint.to=websecure'
+        - '--entrypoints.web.http.redirections.entrypoint.scheme=https'
+        - '--entrypoints.websecure.address=:443'
+        - '--entrypoints.websecure.http.tls=true'
+        - '--entrypoints.websecure.http.tls.certResolver=letsencrypt'
+        - '--entrypoints.websecure.http.tls.domains[0].main=${MY_DOMAIN}'
+        - '--entrypoints.websecure.http.tls.domains[0].sans=*.${MY_DOMAIN}'
+      volumes:
+        - '../data/traefik/letsencrypt:/letsencrypt'
+        - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      labels:
+        - 'traefik.enable=true'
+        - 'traefik.http.routers.api.rule=Host(`${MY_DOMAIN}`)'
+        - 'traefik.http.routers.api.entryPoints=websecure'
+        - 'traefik.http.routers.api.service=api@internal'
+      ports:
+        - '443:443'
+        - '80:80'
+      environment:
+        - 'DUCKDNS_TOKEN=${DUCKDNS_TOKEN}'
 ```
 **Points importants :**  
 + `providers.docker=true`: Traefik lit les labels Docker
@@ -434,13 +440,13 @@ services:
         - 'traefik.enable=true'
         - 'traefik.http.routers.portainer.rule=Host(`portainer.${MY_DOMAIN}`)'
         - 'traefik.http.routers.portainer.entryPoints=websecure'
-        - "traefik.http.services.frontend.loadbalancer.server.port=9000"
-        - "traefik.http.routers.frontend.service=frontend"
+        - 'traefik.http.services.portainer.loadbalancer.server.port=9000'
+        - 'traefik.http.routers.portainer.service=portainer'
 
 
   nextclouddb:
     # Image mariadb officielle pour entreposer les données de nextcloud
-    image: mariadb
+    image: mysql:8.0
     # Nom donné au conteneur 
     container_name: nextcloud-db 
     # Dans le cas où le conteneur s'arrête/crash, il est automatiquement relancé 
@@ -496,6 +502,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=${DB_USER}
+      - MYSQL_HOST=nextclouddb
     labels:
         - 'traefik.enable=true'
         - 'traefik.http.routers.nextcloud.rule=Host(`nextcloud.${MY_DOMAIN}`)'
@@ -533,37 +540,37 @@ services:
       networks: 
           - cloud
       command:
-        - "--log.level=DEBUG"
-        - "--api.insecure=true"
-        - "--providers.docker=true"
-        - "--providers.docker.exposedbydefault=false"
-        - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
-        - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns"
-        - "--certificatesresolvers.letsencrypt.acme.email=mail@mail.com"
-        - "--certificatesresolvers.letsencrypt.acme.dnschallenge.disablePropagationCheck=true"
-        - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
-        - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-        - "--entrypoints.web.address=:80"
-        - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-        - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-        - "--entrypoints.websecure.address=:443"
-        - "--entrypoints.websecure.http.tls=true"
-        - "--entrypoints.websecure.http.tls.certResolver=letsencrypt"
-        - "--entrypoints.websecure.http.tls.domains[0].main=${MY_DOMAIN}"
-        - "--entrypoints.websecure.http.tls.domains[0].sans=*.${MY_DOMAIN}"
+        - '--log.level=DEBUG'
+        - '--api.insecure=true'
+        - '--providers.docker=true'
+        - '--providers.docker.exposedbydefault=false'
+        - '--certificatesresolvers.letsencrypt.acme.dnschallenge=true'
+        - '--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns'
+        - '--certificatesresolvers.letsencrypt.acme.email=${MY_EMAIL}'
+        - '--certificatesresolvers.letsencrypt.acme.dnschallenge.disablePropagationCheck=true'
+        - '--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53'
+        - '--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json'
+        - '--entrypoints.web.address=:80'
+        - '--entrypoints.web.http.redirections.entrypoint.to=websecure'
+        - '--entrypoints.web.http.redirections.entrypoint.scheme=https'
+        - '--entrypoints.websecure.address=:443'
+        - '--entrypoints.websecure.http.tls=true'
+        - '--entrypoints.websecure.http.tls.certResolver=letsencrypt'
+        - '--entrypoints.websecure.http.tls.domains[0].main=${MY_DOMAIN}'
+        - '--entrypoints.websecure.http.tls.domains[0].sans=*.${MY_DOMAIN}'
       volumes:
-        - "../data/traefik/letsencrypt:/letsencrypt"
-        - "/var/run/docker.sock:/var/run/docker.sock:ro"
+        - '../data/traefik/letsencrypt:/letsencrypt'
+        - '/var/run/docker.sock:/var/run/docker.sock:ro'
       labels:
         - 'traefik.enable=true'
         - 'traefik.http.routers.api.rule=Host(`${MY_DOMAIN}`)'
         - 'traefik.http.routers.api.entryPoints=websecure'
         - 'traefik.http.routers.api.service=api@internal'
       ports:
-        - "443:443"
-        - "80:80"
+        - '443:443'
+        - '80:80'
       environment:
-        - "DUCKDNS_TOKEN=${DUCKDNS_TOKEN}"
+        - 'DUCKDNS_TOKEN=${DUCKDNS_TOKEN}'
 
 # Définition des volumes des conteneurs (portainer et bd)
 volumes:
