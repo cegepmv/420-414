@@ -99,8 +99,7 @@ compose.yaml
 services:
 
   db:
-    image: mysql:8.0
-    container_name: ecommerce_db
+    image: mysql
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -109,8 +108,6 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     networks:
       - ecommerce-network
-    ports:
-      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
@@ -124,16 +121,14 @@ services:
     build:
       context: ./ecommerce-backend
       dockerfile: Dockerfile
-    container_name: backend
     restart: unless-stopped
     environment:
       DB_HOST: db
       DB_PORT: 3306
       DB_NAME: ${MYSQL_DATABASE}
-      DB_USER: root
-      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
       PORT: ${BACKEND_PORT:-3000}
-      NODE_ENV: production
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
     networks:
@@ -151,7 +146,6 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_URL: ${VITE_API_URL}
-    container_name: frontend
     restart: unless-stopped
     networks:
       - ecommerce-network
@@ -179,7 +173,6 @@ Le fichier définit également :
 
 Chaque service possède des propriétés : 
 + `image`: image Docker utilisée pour créer le conteneur.
-+ `container_name`: nom du conteneur.
 + `restart`: politique de redémarrage du conteneur. `unless-stopped` signifie que Docker redémarrera automatiquement le conteneur si celui-ci s’arrête ou si le serveur redémarre. Il ne sera pas redémarré seulement si l’utilisateur l’arrête manuellement.
 + `environment`: variables d’environnement dans le conteneur (les valeurs proviendront du fichier `.env`).
 + `networks`: Connecte le conteneur à un réseau Docker (dans notre cas `ecommerce-network`).
@@ -201,14 +194,14 @@ MYSQL_USER=ecommerce_user
 MYSQL_PASSWORD=ecommerce_password  
 
 # ─── BACKEND ───
-BACKEND_VERSION=1.2
+BACKEND_VERSION=1.1
 BACKEND_PORT=3000
 
 JWT_SECRET=your-super-secret-jwt-key-change-in-production
 JWT_EXPIRES_IN=7d
 
 # ─── FRONTEND ───
-FRONTEND_VERSION=1.2
+FRONTEND_VERSION=1.1
 FRONTEND_PORT=8080
 ```
 Créer un fichier `.gitignore` :
@@ -303,5 +296,5 @@ git commit -m "Ajout seed base de données"
 git push
 ```
 
-### Déploiement sur une instance EC2
+### 2 – Déploiement sur une instance EC2
 *En vous basant sur ce laboratoire et les laboratoires précédents, déployez le stack sur une instance EC2.*

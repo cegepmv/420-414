@@ -189,8 +189,8 @@ Dans le fichier `compose.yml` créé précédemment, ajoutez les définition sui
     depends_on:
       - nextclouddb 
     # Mappage de port (du port 80 du conteneur vers le port 8081 de la machine hôte)
-    # ports:
-    #  - 8081:80
+    ports:
+     - 8081:80
     # Volumes du conteneur: mappe un répertoire du conteneur vers un répertoire de la machine hôte
     volumes:
       - ./html:/var/www/html 
@@ -207,11 +207,6 @@ Dans le fichier `compose.yml` créé précédemment, ajoutez les définition sui
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=${DB_USER}
       - MYSQL_HOST=nextclouddb
-    labels:
-        - 'traefik.enable=true'
-        - 'traefik.http.routers.nextcloud.rule=Host(`nextcloud.${MY_DOMAIN}`)'
-        - 'traefik.http.routers.nextcloud.entryPoints=websecure'
-
 ```
 {{%notice style="info" title="À noter"%}}
 *Nextcloud* a besoin d'une base de données *MariaDB* pour entreposer ces données. Il faut donc configurer une BD *MariaDB* en plus de *Nextcloud*.
@@ -292,7 +287,6 @@ Dans un navigateur, allez sur `<adresse IP de l'instance EC2>:8096`
 
 Vous serez en mesure d'accéder à la page d'accueil de *Jellyfin*. Nous n'allons par rentrer dans les détails de configuration de ce service (en dehors du *scope* du cours, mais si vous voulez avoir plus d'informations sur comment configurer *Jellyfin*, vous pouvez vous réferer à cette vidéo)
 
-
 #### 5 – Déploiement du *reverse proxy (Traefik)*
 Une fois que tous nos services sont maintenant déployés, le dernier service à déployer est le *reverse proxy*. 
 
@@ -345,7 +339,7 @@ Nous n'avons plus à exposer les ports des services déployés, ce qui ajoute un
 
 ##### Comprendre les labels Traefik
 + `traefik.enable=true` - Active Traefik pour ce service
-+ `routers.portainer.rule=Host(...)` - URL d’accès (ex : portainer.mondomaine.duckdns.org)
++ `routers.portainer.rule=Host(...)` - URL d’accès (ex : `portainer.<mondomaine>.duckdns.org`)
 + `entryPoints=websecure` - Utilise HTTPS (port 443)
 + `loadbalancer.server.port=9000` = Port interne du conteneur
 

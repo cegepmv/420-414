@@ -1,8 +1,8 @@
 +++
-pre = '<b>5. </b>'
+pre = '<b>6. </b>'
 title = 'DevOps et IaC'
 draft = false
-weight = "500"
+weight = "600"
 +++
 
 Le DevOps est une pratique qui vise à améliorer la collaboration entre les équipes de développement de logiciels (Dev) et les équipes chargées des opérations informatiques (Ops). Elle a pour but de *raccourcir le cycle de vie de développement des applications* et de *livrer continuellement des logiciels* de haute qualité. Les équipes DevOps *intègrent les activités opérationnelles aux outils de développement et aux validations de code*, de sorte que les applications suivent des cycles de publication rapides et efficaces.
