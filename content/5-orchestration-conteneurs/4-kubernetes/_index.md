@@ -1,7 +1,7 @@
 +++
 title = 'Kubernetes'
 draft = true
-weight = "560"
+weight = "540"
 +++
 --------------
 Après avoir exploré *Amazon ECS*, nous allons maintenant introduire une plateforme beaucoup plus répandue dans l’industrie : **Kubernetes**.
