@@ -1,17 +1,17 @@
 +++
 title = 'Kubernetes'
-draft = true
+draft = false
 weight = "540"
 +++
 --------------
 Après avoir exploré *Amazon ECS*, nous allons maintenant introduire une plateforme beaucoup plus répandue dans l’industrie : **Kubernetes**.
 
-**Kubernetes** est une plateforme open source d’orchestration de conteneurs conçue pour automatiser le déploiement, gérer et mettre à l’échelle des applications conteneurisées. Développée par Google et maintenant gérée par la **Cloud Native Computing Foundation**, elle est devenue la norme mondiale pour l’exécution d’applications natives du cloud.
+**Kubernetes** est une plateforme open source d’orchestration de conteneurs conçue pour automatiser le déploiement, gérer et mettre à l’échelle des applications conteneurisées. Développée par Google et maintenant gérée par la **Cloud Native Computing Foundation**, elle est devenue la norme mondiale pour l’exécution d’applications conteneurisées dans le cloud.
 
 Kubernetes est aujourd’hui la solution d’orchestration de conteneurs la plus utilisée. Elle est extrêmement puissante, mais aussi réputée pour sa complexité et sa courbe d’apprentissage élevée.
 
 {{%notice style="info" title="Note"%}}
-Cette réputation est justifiée. Cependant, l’investissement en vaut largement la peine.
+Cette réputation est justifiée. Cependant, l’investissement en vaut largement la peine !
 {{%/notice%}}
 
 ## Faits clés
@@ -26,33 +26,36 @@ Cette réputation est justifiée. Cependant, l’investissement en vaut largemen
 
 Kubernetes offre un avantage majeur : la **portabilité**.
 
-Comme pour *Docker*, Une application déployée sur Kubernetes peut fonctionner de la même manière sur votre machine locale, dans le cloud (AWS, Azure, GCP) ou dans un centre de données
+Comme pour *Docker*, une application déployée sur Kubernetes peut fonctionner de la même manière sur votre machine locale, dans le cloud (AWS, Azure, GCP) ou dans un centre de données.
 
 Contrairement à ECS (spécifique à AWS), Kubernetes est **open-source**, **standardisé** et **supporté par tous les grands fournisseurs cloud**.
 
-## Kubernetes : un orchestrateur de conteneurs
+## K8s - Orchestrateur
 Comme *ECS*, *Kubernetes* est un **orchestrateur de conteneurs**. Son rôle est de déployer des conteneurs, les maintenir en fonctionnement, gérer la scalabilité (*high availability*) et assurer la résilience (*self-healing*).
 
-## Architecture d’un cluster Kubernetes
-Un cluster Kubernetes est composé de plusieurs machines (appelées nodes), organisées en deux grandes parties :
+## Architecture
 
-### 1. Control Plane (plan de contrôle)
-Le **Control Plane** est le “cerveau” du cluster. Il est responsable de gérer l’état global du cluster, décider où lancer les conteneurs, surveiller les applications et réagir aux pannes.
+![Architecture K8s simplifiée](./images/5-01.png)
 
-### 2. Worker Nodes (nœuds de travail)
-Les **Worker Nodes** sont les machines qui exécutent réellement les conteneurs. Chaque nœud exécute un moteur de conteneurs (ex : Docker), héberge les applications et communique avec le *Control Plane*
+Un cluster Kubernetes est composé de plusieurs machines (appelées *nodes*), organisées en deux grandes parties :
 
-### Communication continue
++ **Control Plane (plan de contrôle) :** c'est le “cerveau” du cluster. Il est responsable de gérer l’état global du cluster, décider où lancer les conteneurs, surveiller les applications et réagir aux pannes.
+
++ **Worker Nodes (nœuds de travail) :** Ce sont les machines qui exécutent réellement les conteneurs. Chaque nœud exécute un moteur de conteneurs (ex : Docker), héberge les applications et communique avec le *Control Plane*
+
+{{%notice style="tip" title="Communication continue"%}}
 
 Le *Control Plane* et les *Worker Nodes* communiquent en permanence :
-+ envoi d’instructions (déploiement, scaling)
-+ remontée d’état (*health checks*)
-+ synchronisation de l’état réel vs désiré
++ Envoi d’instructions (déploiement, *scaling*)
++ Remontée d’état (*health checks*)
++ Synchronisation de l’état réel vs désiré
 
-Cela permet à Kubernetes de maintenir automatiquement le système en bon état (**desired state**).
+Cela permet à Kubernetes de maintenir automatiquement le système en bon état (*desired state*).
+{{%/notice%}}
 
-## L’API Kubernetes : le point central
-Toutes les interactions avec Kubernetes passent par une API centrale.
+
+## API Kubernetes : le point central
+Toutes les interactions avec *Kubernetes* passent par une API centrale.
 
 Cette API permet de :
 + déployer des applications
@@ -60,21 +63,24 @@ Cette API permet de :
 + modifier la configuration
 
 ### kubectl : l’outil en ligne de commande
-L’outil principal pour interagir avec Kubernetes est `kubectl`
+
+L’outil principal pour interagir avec l'API de  Kubernetes est `kubectl`
 
 **Exemple :**
 ```bash
 kubectl apply -f app.yaml
 ```
 
-Cette commande permet de lire un fichier de configuration YAML et appliquer l’état désiré au cluster
+Cette commande permet de lire un fichier de configuration YAML et **appliquer l’état désiré** (décrit dans le fichier) au cluster.
 
 ## Approche déclarative
-Comme avec Docker Compose, Kubernetes adopte une approche déclarative.
+Comme avec *Docker Compose*, Kubernetes adopte une **approche déclarative**.
 
-+ On décrit : “Voici ce que je veux”
++ On décrit : “Voici ce que je veux” (dans un/des fichier YAML)
 + Kubernetes s’occupe de créer les ressources, maintenir leur état et corriger les écarts automatiquement.
 
+
+<!--
 ## Modélisation des applications
 Même si Kubernetes utilise les mêmes images Docker, la manière de décrire une application est différente
 
@@ -86,7 +92,7 @@ C’est ici que la complexité apparaît :
 + beaucoup de fichiers YAML
 + beaucoup de possibilités
 
-## Un comportement uniforme partout
+ ## Un comportement uniforme partout
 Un des plus grands avantages de Kubernetes : Le même fonctionnement, peu importe l’environnement
 
 **Exemples :**
@@ -95,7 +101,7 @@ Un des plus grands avantages de Kubernetes : Le même fonctionnement, peu import
 
 On utilise :
 + les mêmes fichiers YAML
-+ les mêmes commandes (`kubectl`)
++ les mêmes commandes (`kubectl`) -->
 
 ## Kubernetes dans le cloud
 Tous les grands fournisseurs proposent une version managée :
@@ -103,12 +109,28 @@ Tous les grands fournisseurs proposent une version managée :
 + Azure → *Azure Kubernetes Service (AKS)*
 + Google Cloud → *Google Kubernetes Engine (GKE)*
 
-Cela permet de déléguer la gestion de l’infrastructure et se concentrer sur les applications
+Cela permet de déléguer la gestion de l’infrastructure et se concentrer sur les applications.
 
+## Cluster du département
+
+Un cluster *Kubernetes* fonctionnel est hebergé sur nos propres serveurs/réseau du département. C'est dans ce cluster que nous allons déployer les ressources vues dans les laboratoires. 
+
+L'architecture du cluster du département est la suivante : 
+
+![Architecture cluster départemental](./images/5-02.png)
+
+Il est composé de 5 noeuds : 
++ **Control Node -** `10.10.0.60`
++ **Worker Nodes :** 
+  1. `10.10.0.61`
+  2. `10.10.0.62`
+  3. `10.10.0.63`
+  4. `10.10.0.64`
+<!-- 
 ## Conclusion
 *Kubernetes* est plus complexe que *ECS* mais plus flexible, plus puissant et plus universel (*open-source*). C’est un standard incontournable pour les applications modernes.
 
-<!-- 🔜 Prochaine étape
+🔜 Prochaine étape
 
 Maintenant que nous comprenons son fonctionnement global, nous allons voir :
 

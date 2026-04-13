@@ -27,12 +27,12 @@ Dans cette étape, nous allons créer un VPC pour y déployer nos services. Les 
 + **CIDR du VPC :** `10.0.0.0/16`
 + Sous-réseau 1 (public)
   + **Nom:** `lab-ecs-subnet-public1`
-  + **CIDR:** `10.0.1.0/24`
-+ Sous-réseau 2 (privé)
-  + **Nom:** `lab-ecs-subnet-private1`
-  + **CIDR:** `10.0.1.0/24`
-+ Sous-réseau 3 (public)
+  + **CIDR:** `10.0.0.0/24`
++ Sous-réseau 2 (public)
   + **Nom:** `lab-ecs-subnet-public2`
+  + **CIDR:** `10.0.1.0/24`
++ Sous-réseau 3 (privé)
+  + **Nom:** `lab-ecs-subnet-private1`
   + **CIDR:** `10.0.2.0/24`
 + Sous-réseau 4 (privé)
   + **Nom:** `lab-ecs-subnet-private2`
