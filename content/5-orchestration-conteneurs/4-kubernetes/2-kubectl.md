@@ -90,7 +90,7 @@ kubectl apply -f nginx-svc.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-pod
+  name: nginx
   labels:
     app: nginx
 spec:
@@ -106,14 +106,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-svc
-  labels:
-    app: nginx
+  name: nginx
 spec:
   type: NodePort
   ports:
-    - port: 80
-      targetPort: 80
+    - targetPort: 80
   selector:
     app: nginx
 ```
