@@ -5,6 +5,110 @@ draft = false
 weight = "700"
 +++
 
+Le DevOps est une approche qui vise à améliorer la collaboration entre les équipes de développement logiciel (*Dev*) et les équipes d’exploitation (*Ops*). Son objectif est de **raccourcir le cycle de vie de développement** et de **livrer des applications de façon continue, fiable et automatisée**.
+
+Dans une démarche DevOps, les équipes intègrent les pratiques de développement, de test, de déploiement et d’exploitation dans un processus unifié, souvent automatisé via des outils.
+
+## Pratiques DevOps
+
+### Communication et collaboration
+
+DevOps repose fortement sur la **collaboration entre équipes**. Cela inclut le partage de responsabilités, l'utilisation d'outils collaboratifs (Git, gestion de tickets, chat) et la mise en place d'une culture de transparence
+
+**Objectif :** briser les silos entre Dev et Ops.
+
+### Intégration continue (*CI*)
+
+L’intégration continue (*Continuous Integration* ou *CI*) est une pratique où les développeurs intègrent fréquemment leur code dans un dépôt centralisé. À chaque modification :
+
++ une **compilation (build)** est déclenchée automatiquement
++ des **tests automatisés** sont exécutés
+
+**Objectifs :** détecter rapidement les erreurs, améliorer la qualité du code et éviter les conflits d’intégration.
+
+### Déploiement continu (*CD*)
+
+Le déploiement continu (*Continuous Deployment*) consiste à **déployer automatiquement les modifications validées en production**.
+
+**Objectifs :** accélérer la mise en production, réduire les risques liés aux déploiements manuels et assurer une livraison fréquente et fiable
+
+### Pipeline CI/CD
+![CI/CD](./images/5-02-ci-cd.webp)
+
+Un pipeline CI/CD est une chaîne qui permet d'**automatiser complètement le cycle de vie d’une application** et orchestre les différentes étapes :
+
+1. Intégration du code
+2. Tests
+3. Build
+4. Déploiement
+
+### Architecture microservices
+![architecture micro-service](./images/5-01-micro-services.png)
+
+![architecture micro-service](./images/5-04-micro-service.webp)
+L’architecture de microservices consiste à diviser une application en **petits services indépendants**, chacun responsable d’une fonctionnalité spécifique.
+
+Chaque microservice s’exécute dans son propre processus, communique via des API (souvent HTTP/REST) et peut être développé et déployé indépendamment.
+
+**Avantages :** meilleure scalabilité, déploiements indépendants et résilience accrue.
+
+
+### Surveillance (*Monitoring*) et journalisation (*Logging*)
+
+La surveillance et la journalisation permettent de **suivre l’état et le comportement des systèmes en production**.
+
+- **Monitoring :** collecte de métriques (CPU, mémoire, latence, etc.)
+- **Logging :** enregistrement des événements et erreurs
+
+**Objectifs :** détecter rapidement les incidents, comprendre les problèmes et améliorer les performances
+
+### Automatisation (*automation*)
+
+L’automatisation est au cœur du DevOps. Elle s’applique aux tests, aux déploiements, au provisionnement d’infrastructure et à la gestion des configurations
+
+**Objectif :** réduire les tâches manuelles répétitives et améliorer la fiabilité (*automate everything*)
+
+<!-- ### Gestion de configuration
+
+La gestion de configuration consiste à **maintenir la cohérence des systèmes** (serveurs, applications). Elle permet d’**appliquer des configurations standardisées** et d’**éviter les dérives entre environnements**. -->
+
+### Infrastructure en tant que code (*IaC*)
+
+L’infrastructure en tant que code (*Infrastructure as Code*) consiste à **gérer et provisionner l’infrastructure à l’aide de fichiers de configuration**, plutôt que manuellement.
+
+Tout comme le code logiciel décrit une application, **l’IaC décrit l’infrastructure et son état souhaité** (*desired state*). Les ressources concernées incluent serveurs, réseaux, stockage, systèmes d’exploitation, etc...
+
+{{%notice style="tip" title="Approche déclarative"%}}
+L’IaC repose généralement sur une **approche déclarative** (on décrit *ce que l’on veut* plutôt que *comment l’obtenir*).
+{{%/notice%}}
+#### Avantages de l’IaC
+
++ **Automatisation :** Permet de créer et configurer des environnements automatiquement.
++ **Reproductibilité :** Un même environnement peut être recréé à l’identique.
+    + **Exemple :** La succursale régionale d'une entreprise emploie l'IaC pour décrire l'ensemble de l'environnement d'entreprise de la succursale, y compris les serveurs, le réseau et les configurations personnalisées. Si l'entreprise ouvrait une nouvelle succursale régionale, elle pourrait utiliser l'IaC pour reproduire à l'identique le même environnement, mettre rapidement en réseau la succursale et la rendre vite opérationnelle. L'IaC élimine les étapes manuelles et répétitives ainsi que les listes de contrôle autrefois indispensables.
++ **Réduction des erreurs :** Moins d’interventions manuelles → moins d’erreurs humaines.
++ **Versionnement :**  L’infrastructure est versionnée comme du code, facilitant les retours en arrière (*rollback*), la collaboration et les audits
+
+
+## Exemples d’outils IaC
+
++ **Déclaratifs :**
+    + *[AWS CloudFormation](https://docs.aws.amazon.com/cloudformation/)* 
+    + *[Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview)*
+    + *[Terraform](https://developer.hashicorp.com/terraform/docs)*
++ **Impératifs :**
+  + SDK AWS (ex : boto3 en Python)  
+  + Scripts bash (awscli)  
+
+
+
+<!-- +++
+pre = '<b>7. </b>'
+title = 'DevOps et IaC'
+draft = false
+weight = "700"
++++
+
 Le DevOps est une pratique qui vise à améliorer la collaboration entre les équipes de développement de logiciels (Dev) et les équipes chargées des opérations informatiques (Ops). Elle a pour but de *raccourcir le cycle de vie de développement des applications* et de *livrer continuellement des logiciels* de haute qualité. Les équipes DevOps *intègrent les activités opérationnelles aux outils de développement et aux validations de code*, de sorte que les applications suivent des cycles de publication rapides et efficaces.
 
 ### Pratiques DevOps
@@ -38,7 +142,7 @@ Les équipes DevOps utilisent l'infrastructure en tant que code à de nombreuses
 + Garantir la reproductibilité constante des configurations entre les environnements
 + Intégrer facilement les fournisseurs de cloud et mettre efficacement à l'échelle les ressources d'infrastructure en fonction de la demande
 
-L'IaC met un langage commun à la disposition des développeurs comme des équipes responsables des opérations. Les modifications peuvent être examinées de manière transparente (en analysant du code) pour une meilleure collaboration dans un environnement DevOps. -->
+L'IaC met un langage commun à la disposition des développeurs comme des équipes responsables des opérations. Les modifications peuvent être examinées de manière transparente (en analysant du code) pour une meilleure collaboration dans un environnement DevOps.
 
 L'infrastructure en tant que code est une pratique qui implique la mise en service et la gestion de l'infrastructure en utilisant du code et des techniques de développement de logiciels, (contrôle des versions et intégration continue) au lieu de devoir installer et configurer manuellement chaque ressource.
 
@@ -69,3 +173,5 @@ L'*IaC* permet de définir l'état souhaité d'une infrastructure sans inclure t
 + Impératifs :
     + SDK d'AWS (boto3 en python)
     + Scripts bash (awscli)
+ -->
+

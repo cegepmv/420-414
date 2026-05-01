@@ -6,15 +6,13 @@ weight = "520"
 
 Dans ce laboratoire, nous allons mettre en place l'infrastructure du TP1 avec Terraform.
 
-### Architecture 
-![Architecture TP1](../images/5-06-architecture-tp1.png)
 
-#### Liste des ressources
+## Ressources
 + **1 VPC**
     + **Plage d’adresse IPv4 :**  `10.0.0.0/16`
     + **Région :** us-east-1
-+ **6 Sous-réseaux**
-    + **3 sous-réseaux publics :**
++ **4 Sous-réseaux**
+    + **2 sous-réseaux publics :**
         + `tp1-public-1` 
             + **CIDR :** `10.0.0.0/24`
             + **Type :** public
@@ -23,11 +21,7 @@ Dans ce laboratoire, nous allons mettre en place l'infrastructure du TP1 avec Te
             + **CIDR :** `10.0.2.0/24`
             + **Type :** public
             + **AZ :** us-east-1b
-        + `tp1-public-3` : 
-            + **CIDR :** `10.0.4.0/24`
-            + **Type :** public
-            + **AZ :** us-east-1c
-    + **3 sous-réseaux privés :**
+    + **2 sous-réseaux privés :**
         + `tp1-private-1`
             + **CIDR :** `10.0.1.0/24`
             + **Type :** privé
@@ -36,10 +30,6 @@ Dans ce laboratoire, nous allons mettre en place l'infrastructure du TP1 avec Te
             + **CIDR :** `10.0.3.0/24`
             + **Type :** privé
             + **AZ :** us-east-1b
-        + `tp1-private-3` 
-            + **CIDR :** `10.0.5.0/24`
-            + **Type :** privé
-            + **AZ :** us-east-1c
 + **2 Tables de routage**
     + `rtb-tp1-public` : table de routage pour les sous-réseaux publics
     + `rtb-tp1-private` : table de routage pour les sous-réseaux privés
@@ -48,34 +38,33 @@ Dans ce laboratoire, nous allons mettre en place l'infrastructure du TP1 avec Te
     + `http-access` : Autorise le trafic HTTP
     + `ssh-access` : Autorise le trafic SSH
 + **2 Instances EC2**
-    + `web-server` 
+    + `pokedex-instance` 
         + **AMI :** *Ubuntu 24.04 LTS*
         + **Sous-réseau :** `tp1-public-1`
         + **Groupe de sécurité :** `http-access`
-        + *Cette instance héberge un serveur Web Nginx*
-    + `public-instance`
+        + *Cette instance va héberger le pokedex*
+    + `ssh-instance`
         + **AMI :** *Ubuntu 24.04 LTS*
         + **Sous-réseau :** `tp1-public-2`
         + **Groupe de sécurité :** `ssh-access`
 
-#### Étape 0 - Mise en place du projet terraform
-
-##### Pré-requis 
+## Étapes d'implémentation
+### 0 - Mise en place du projet terraform
+#### Pré-requis 
 + AWS CLI installé
 + Terraform installé
-
-##### Étapes préliminaires
+#### Étapes préliminaires
 
 1. Copiez les *credentials* de votre compte AWS dans le fichier `~/.aws/credentials`
 2. Créez un répertoire `tp1-terraform`
 3. Entrez dans le répertoire (`cd tp1-terraform`) et créez le fichier de configuration du provider (`providers.tf`).
 
-```hcl
+```terraform
 terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.95.0"
+      version = "6.43.0"
     }
   }
 }
@@ -89,9 +78,9 @@ provider "aws" {
 terraform init
 ```
 
-#### Étape 1 - Création du VPC
+### 1 - Création du VPC
 
-```hcl
+```terraform
 resource "aws_vpc" "tp1" {
   cidr_block = var.vpc_cidr
 
@@ -103,33 +92,33 @@ resource "aws_vpc" "tp1" {
 variable "vpc_cidr" {
   type        = string
   description = "Plages d'adresses du VPC"
-  default     = ["10.0.0.0/16"]
+  default     = "10.0.0.0/16"
 }
 ```
 
-#### Étape 2 - Création des sous-réseaux
+### Étape 2 - Création des sous-réseaux
 
-```hcl
+```terraform
 variable "public_subnet_cidrs" {
   type        = list(string)
   description = "Plages d'adresses des sous-réseaux publics"
-  default     = ["10.0.0.0/24", "10.0.2.0/24", "10.0.4.0/24"]
+  default     = ["10.0.0.0/24", "10.0.2.0/24"]
 }
 
 variable "private_subnet_cidrs" {
   type        = list(string)
   description = "Plages d'adresses des sous-réseaux privés"
-  default     = ["10.0.1.0/24", "10.0.3.0/24", "10.0.5.0/24"]
+  default     = ["10.0.1.0/24", "10.0.3.0/24"]
 }
 
 variable "azs" {
   type        = list(string)
   description = "Availability Zones"
-  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  default     = ["us-east-1a", "us-east-1b"]
 }
 ```
 
-```hcl
+```terraform
 resource "aws_subnet" "public_subnets" {
   count             = length(var.public_subnet_cidrs)
   vpc_id            = aws_vpc.tp1.id
@@ -155,9 +144,9 @@ resource "aws_subnet" "private_subnets" {
 }
 ```
 
-#### Étape 3 - Création d'une passerelle internet
+### Étape 3 - Création d'une passerelle internet
 
-```hcl
+```terraform
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.tp1.id
 
@@ -167,9 +156,9 @@ resource "aws_internet_gateway" "gw" {
 }
 ```
 
-#### Étape 4 - Créer des tables de routage
+### Étape 4 - Créer des tables de routage
 
-```hcl
+```terraform
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.tp1.id
 
@@ -200,9 +189,9 @@ resource "aws_route_table" "private_rt" {
   }
 }
 ```
-#### Étape 5 - Association sous-réseaux/tables de routage
+### Étape 5 - Association sous-réseaux/tables de routage
 
-```hcl
+```terraform
 resource "aws_route_table_association" "public_subnet_association" {
   count          = length(var.public_subnet_cidrs)
   subnet_id      = element(aws_subnet.public_subnets[*].id, count.index)
@@ -216,9 +205,9 @@ resource "aws_route_table_association" "private_subnet_association" {
 }
 ```
 
-#### Étape 6 - Création des groupes de sécurité
+### Étape 6 - Création des groupes de sécurité
 
-```hcl
+```terraform
 resource "aws_security_group" "ssh_access" {
   name        = "ssh-access"
   description = "Allow SSH inbound traffic"
@@ -263,9 +252,9 @@ resource "aws_security_group" "http_access" {
 }
 ```
 
-#### Étape 7 - Création d'une paire de clés
+### Étape 7 - Création d'une paire de clés
 
-```hcl
+```terraform
 resource "aws_key_pair" "tp1_key" {
   key_name   = "tp1-keypair"
   public_key = tls_private_key.rsa.public_key_openssh
@@ -283,9 +272,9 @@ resource "local_file" "cluster_keypair" {
 }
 ```
 
-#### Étape 8 - Création des instances
+### Étape 8 - Création des instances
 
-```hcl
+```terraform
 variable "ami_id" {
   type        = string
   description = "Id de l'AMI de l'instance"
@@ -299,8 +288,8 @@ variable "instance_type" {
 }
 ```
 
-```hcl
-resource "aws_instance" "web_server" {
+```terraform
+resource "aws_instance" "pokedex_instance" {
   ami           = var.ami_id
   instance_type = var.instance_type
 
@@ -311,14 +300,14 @@ resource "aws_instance" "web_server" {
   key_name = aws_key_pair.tp1_key.key_name
 
   tags = {
-    Name = "web-server"
+    Name = "pokedex-instance"
   }
 
   user_data = file("${path.module}/user-data.sh")
 
 }
 
-resource "aws_instance" "public_instance" {
+resource "aws_instance" "ssh_instance" {
   ami           = var.ami_id
   instance_type = var.instance_type
 
@@ -329,20 +318,20 @@ resource "aws_instance" "public_instance" {
   key_name = aws_key_pair.tp1_key.key_name
 
   tags = {
-    Name = "public-instance"
+    Name = "ssh-instance"
   }
 }
 ```
 
-```hcl
-output "web_server_public_ip" {
+```terraform
+output "pokedex_public_ip" {
   description = "Adresse IP publique du serveur web"
-  value       = try(aws_instance.web_server.public_ip, "")
+  value       = try(aws_instance.pokedex_instance.public_ip, "")
 }
 
 output "public_instance_public_ip" {
   description = "Adresse IP publique de l'instance publique"
-  value       = try(aws_instance.public_instance.public_ip, "")
+  value       = try(aws_instance.ssh_instance.public_ip, "")
 }
 ```
 
@@ -350,13 +339,30 @@ output "public_instance_public_ip" {
 ```bash
 #!/bin/bash
 
+sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc | cut -f1)
+
+# Ajouter la clé GPG Docker officielle:
+sudo apt update
+sudo apt install -y ca-certificates curl 
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Ajouter le dépôt aux sources de apt:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+# Mise à jour de la BD locales des paquets
 sudo apt update
 
-sudo apt install nginx -y
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-sudo systemctl enable nginx
-
-sudo systemctl start nginx
+sudo docker run -d -p 80:80 cmvghazi/pokedex:1.0
 ```
 
 ### Challenge
